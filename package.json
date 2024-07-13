@@ -1,0 +1,33 @@
+{
+  "name": "data-geri-proyecto-final-fs",
+  "version": "1.0.0",
+  "description": "App with React frontend and Node / Express backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SergioLM7/data-geri-proyecto-final-FS.git"
+  },
+  "author": "Sergio Lillo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SergioLM7/data-geri-proyecto-final-FS/issues"
+  },
+  "homepage": "https://github.com/SergioLM7/data-geri-proyecto-final-FS#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "express-validator": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "pg": "^8.12.0",
+    "pg-hstore": "^2.3.4"
+  },
+  "devDependencies": {
+    "jsdoc": "^4.0.3",
+    "nodemon": "^3.1.4"
+  }
+}
