@@ -1,0 +1,58 @@
+const database = require('../config/db_sql');
+
+const seedIngresos = async (medicos) => {
+    try {
+        // Conecta a la base de datos
+        const client = await database.getClient();
+
+        try {
+            // Inicia una transacción
+            await client.query('BEGIN');
+
+            // Poblar la tabla ingresos con 10 ingresos por cada medico
+            const ingresosValues = [];
+            const historias = [4324, 4325, 4326, 4327, 4328, 4329, 4330, 4331, 4332, 4333];
+            const nombresPacientes = ['Josefa', 'Luis', 'Ana', 'Miguel', 'Laura', 'Pedro', 'Sofia', 'Carlos', 'Marta', 'Javier'];
+            const apellidosPacientes = ['Valcárcel', 'Gomez', 'Perez', 'Martinez', 'Sanchez', 'Fernandez', 'Lopez', 'Diaz', 'Garcia', 'Ramirez'];
+            const sexos = ['Mujer', 'Hombre', 'Mujer', 'Hombre', 'Mujer', 'Hombre', 'Mujer', 'Hombre', 'Mujer', 'Hombre'];
+            const edades = [81, 72, 75, 90, 75, 77, 88, 85, 89, 73];
+            const diagnosticos = ['ITU', 'neumonia', 'ICC', 'Infección intraabd.', 'otro', 'ICC', 'otro', 'ITU', 'neumonia', 'Infección intraabd.'];
+            const barthel = [2, 3, 4, 5, 2, 1, 3, 4, 5, 2];
+            let currentDate = new Date('2024-07-01');
+
+            for (const medico of medicos) {
+                for (let i = 0; i < 10; i++) {
+                    const fechaIngreso = new Date(currentDate);
+                    const fechaAlta = new Date(currentDate);
+                    fechaAlta.setDate(fechaAlta.getDate() + 2); 
+
+                    ingresosValues.push(`(${medico.medico_id}, ${historias[i]}, '${nombresPacientes[i]}', '${apellidosPacientes[i]}', '${sexos[i]}', ${edades[i]}, '${fechaIngreso.toISOString().split('T')[0]}', '${fechaAlta.toISOString().split('T')[0]}', '${diagnosticos[i]}', ${barthel[i]})`);
+
+                    currentDate.setDate(currentDate.getDate() + 1); 
+                }
+            }
+
+            const ingresosQuery = `
+                INSERT INTO ingresos (medico_id, historia_clinica, nombre_paciente, apellido_paciente, sexo, edad_paciente, fecha_ingreso, fecha_alta, diagnostico_principal, barthel_basal) VALUES
+                ${ingresosValues.join(', ')};
+            `;
+
+            await client.query(ingresosQuery);
+
+            // Confirma la transacción
+            await client.query('COMMIT');
+            console.log('Tabla ingresos poblada exitosamente');
+        } catch (error) {
+            // Revertir la transacción en caso de error
+            await client.query('ROLLBACK');
+            console.error('Error al poblar la tabla ingresos', error);
+        } finally {
+            // Libera el cliente
+            client.release();
+        }
+    } catch (error) {
+        console.error('Error al conectar a la base de datos', error);
+    }
+};
+
+module.exports = seedIngresos;

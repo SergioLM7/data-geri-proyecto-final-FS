@@ -12,4 +12,8 @@ const PoolConfig = new Pool ({
       }
 })
 
-module.exports = PoolConfig;
+//module.exports = PoolConfig;
+module.exports = {
+  query: (text, params) => PoolConfig.query(text, params),
+  getClient: () => PoolConfig.connect()
+};
