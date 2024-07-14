@@ -1,7 +1,7 @@
 /**
  * @author Sergio Lillo <Data Geri> 
  * @exports models
- * @namespace Models 
+ * @namespace Models.medicos 
  */
 
 const { getClient } = require('../config/db_sql');
@@ -9,7 +9,7 @@ const queries = require('../queries/medicos.queries');
 
 /**
  * Descripción: Esta función crea un médico/usuario en la tabla médicos
- * @memberof Models 
+ * @memberof Models.medicos
  * @method createMedico 
  * @async
  * @param {JSON} entry - JSON con todos los campos para crear una fila de médico
@@ -39,7 +39,7 @@ const createMedico = async (entry) => {
 
 /**
  * Descripción: Esta función busca todos los médicos de la BBDD y los muestra en base al limit y al offset pasados como parámetro desde el controlador
- * @memberof Models 
+ * @memberof Models.medicos 
  * @method getAllMedicos 
  * @async
  * @param {JSON} entry - JSON con un objeto con dos key-value (limit y offset)
@@ -65,7 +65,7 @@ const getAllMedicos = async (entry) => {
 
 /**
  * Descripción: Esta función busca en la BBDD un médico en base a su email.
- * @memberof Models 
+ * @memberof Models.medicos 
  * @method getMedicosByEmail 
  * @async
  * @param {string} email - String con el email a buscar.
@@ -90,7 +90,7 @@ const getMedicosByEmail = async (email) => {
 
 /**
  * Descripción: Esta función edita el rol de un médico en base a su email.
- * @memberof Models 
+ * @memberof Models.medicos 
  * @method editRole 
  * @async
  * @param {Object} entry - JSON con un objeto con dos key-value (rol e email).
@@ -116,7 +116,7 @@ const editRole = async(entry) => {
 
 /**
  * Descripción: Esta función edita los campos is_logged y last_time_logged de un médico en base a su email.
- * @memberof Models 
+ * @memberof Models.medicos 
  * @method editLogged 
  * @async
  * @param {Object} entry - JSON con un objeto con tres key-value (is_logged, last_time_logged e email).
@@ -141,7 +141,7 @@ const editLogged = async(entry) => {
 
 /**
  * Descripción: Esta función edita la contraseña de un médico en base a su email.
- * @memberof Models 
+ * @memberof Models.medicos 
  * @method editPassword 
  * @async
  * @param {Object} entry - JSON con un objeto con dos key-value (password_hash e email).
