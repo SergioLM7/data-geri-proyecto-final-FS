@@ -1,0 +1,264 @@
+{
+	"info": {
+		"_postman_id": "ad7d1bdc-3603-4329-bdd1-b53dbc3e02dd",
+		"name": "API_data_geri_final",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "35364824"
+	},
+	"item": [
+		{
+			"name": "Medicos",
+			"item": [
+				{
+					"name": "http://localhost:5001/api/medicos/",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n                \"nombre_medico\": \"Sergio\",\n                \"apellido_medico\": \"Martínez\",\n                \"email\": \"sergio@madrid.com\",\n                \"password_hash\": \"safasfasfa42\",\n                \"id_colegiado\": 7891\n            }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5001/api/medicos/",
+						"description": "Crear un médico"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5001/api/medicos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"limit\": 10,\n     \"offset\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5001/api/medicos",
+						"description": "GET All medicos de 10 en 10"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5001/api/medicos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"email\": \"ana@madrid.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5001/api/medicos",
+						"description": "GET Medico by email"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5001/api/medicos/",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"sergio@madrid.com\",\n    \"rol\": \"user\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5001/api/medicos/",
+						"description": "EDIT is_logged y last_time_logged de un Médico por su email"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5001/api/medicos/",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"sergio@madrid.com\",\n    \"password_hash\": \"asafasfasf8787\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5001/api/medicos/",
+						"description": "EDIT password_hash de un Médico por su email"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5001/api/medicos/",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"sergio@madrid.com\",\n    \"is_logged\":\"false\",\n    \"last_time_logged\":\"2024-08-02 22:00:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5001/api/medicos/",
+						"description": "EDIT Log in del Médico"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5001/api/medicos/",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"sergio@madrid.com\",\n    \"is_active\": \"false\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5001/api/medicos/",
+						"description": "EDIT is_active de un Médico por su email (equivale a eliminarlo)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ingresos",
+			"item": [
+				{
+					"name": "http://localhost:5001/api/ingresos/",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"ana@madrid.com\",\n    \"limit\":10,\n    \"offset\":0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5001/api/ingresos/",
+						"description": "GET Ingresos por el email del médico (offset y limit incluidos)"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5001/api/ingresos/",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"historia_clinica\": 4328,\n    \"offset\": 0,\n    \"limit\": 10\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5001/api/ingresos/",
+						"description": "GET ingresos por el nº de historia clínica (con limit y offset para la paginación)"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5001/api/ingresos/",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"medico_id\":5, \n    \"historia_clinica\":4324, \n    \"nombre_paciente\":\"Julián\", \n    \"apellido_paciente\":\"Camarillo\", \n    \"sexo\":\"Hombre\", \n    \"edad_paciente\":81, \n    \"fecha_ingreso\":\"2024-04-02\",\n    \"fecha_alta\":\"2024-05-03\", \n    \"diagnostico_principal\":\"itu\", \n    \"barthel_basal\":2\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5001/api/ingresos/",
+						"description": "PUT para crear un ingreso (calcula automáticamente la celda duracion_ingreso)"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5001/api/ingresos/",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ingreso_id\":61\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5001/api/ingresos/",
+						"description": "DELETE para eliminar un ingreso de la tabla Ingresos por su ID"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5001/api/ingresos/",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"ingreso_id\": 59,\n        \"fecha_alta\": \"2024-08-11\",\n        \"fecha_ingreso\": \"2024-08-04\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5001/api/ingresos/",
+						"description": "PUT para editar los campos de ingresos en base a su ID (se puede cambiar uno o varios; las fechas tienen que ir siempre de la mano)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Stats",
+			"item": []
+		}
+	]
+}

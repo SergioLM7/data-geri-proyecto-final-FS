@@ -32,6 +32,8 @@ const queriesMedicos = {
         *
     FROM 
         medicos
+    WHERE
+        is_active = true
     ORDER BY 
         medico_id
     LIMIT $1 OFFSET $2;`,

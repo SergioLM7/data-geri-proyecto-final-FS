@@ -1,8 +1,6 @@
 const { DataTypes } = require('sequelize');
-const {sequelize} = require('../config/db_sql');
+const { sequelize } = require('../config/db_sql');
 const Medico = require('./medicos.schema')
-console.log(sequelize.sequelize);
-
 
 const Ingreso = sequelize.define('Ingreso', {
     ingreso_id: {
@@ -61,6 +59,19 @@ const Ingreso = sequelize.define('Ingreso', {
 }, {
     tableName: 'ingresos',
     timestamps: false,
+    hooks: {
+        beforeUpdate: (ingreso, options) => {
+            console.log(ingreso)
+            if (ingreso.changed('fecha_ingreso') || ingreso.changed('fecha_alta')) {
+                const fechaIngreso = new Date(ingreso.fecha_ingreso);
+                const fechaAlta = new Date(ingreso.fecha_alta);
+
+                if (fechaAlta >= fechaIngreso) {
+                    ingreso.setDataValue('duracion_ingreso', Math.floor((fechaAlta - fechaIngreso) / (1000 * 60 * 60 * 24)));
+                }
+            }
+        }
+    },
     /* indexes: [
         {
             unique: true,

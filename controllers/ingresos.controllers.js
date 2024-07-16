@@ -4,7 +4,7 @@
  * @namespace Controllers.ingresos
  */
 
-const ingresosEntry = require('../services/ingresos.services');
+const ingresosService = require('../services/ingresos.services');
 
 /**
  * Descripción: Esta función llama desde la ruta /api/ingresos al modelo createIngreso
@@ -18,40 +18,69 @@ const ingresosEntry = require('../services/ingresos.services');
  */
 const createIngreso = async (req, res) => {
     try {
-        const response = await ingresosEntry.createIngreso(req.body);
+        const response = await ingresosService.createIngreso(req.body);
         res.status(201).json({
-            message: `usuario creado: ${req.body.email}`
+            message: `Ingreso creado para el paciente: ${req.body.nombre_paciente + ' ' + req.body.apellido_paciente}`
         });
     } catch (error) {
-        res.status(500).json({ message: 'Error al crear el usuario', error });
+        res.status(500).json({ message: 'Error al crear el ingreso', error });
     }
 };
 
 
-const getIngresos = (req,res)=> {
-    let ingresos;
+const getIngresos = async (req,res)=> {
     try {
         if (req.body.email) {
             //Meter el validador del GET
             console.log('entrando email por body')
-            ingresos = ingresosEntry.getIngresosByMedico(req.body);
+            const ingresos = await ingresosService.getIngresosByMedico(req.body);
+            res.status(200).json(ingresos);
+            console.log(ingresos)
         } else if (req.query.email) {
             //Meter el validador del GET
             console.log('entrando email por query')
-            ingresos = ingresosEntry.getIngresosByMedico(req.query);
-        } /*else if (req.body.historia_clinica) {
+            const ingresos  = await ingresosService.getIngresosByMedico(req.query);
+            res.status(200).json(ingresos);
+            console.log(ingresos)
+        } else if (req.body.historia_clinica) {
             //Meter el validador del GET
             console.log('entrando historia_clinica por body')
-            ingresos = await ingresosEntry.getIngresosByHistoria(req.body);
-        }*/
-        res.status(200).json(ingresos);
-        console.log(ingresos)
+            const ingresos = await ingresosService.getIngresosByHistoria(req.body);
+            res.status(200).json(ingresos);
+            console.log(ingresos)
+        }
+       
     } catch (error) {
         res.status(500).json({ error: "Error en la BBDD" });
     }
 };
 
+
+const deleteIngreso = async (req, res) => {
+    try {
+        const response = await ingresosService.deleteIngreso(req.body);
+        res.status(201).json({
+            message: `Se ha eliminado el ingreso: ${req.body.ingreso_id}`
+        });
+    } catch (error) {
+        res.status(500).json({ message: 'Error al eliminar el ingreso', error });
+    }
+};
+
+const editIngreso = async (req, res) => {
+    try {
+        const updatedIngreso = await ingresosService.editIngreso(req.body);
+        res.status(200).json({
+            message: `Se ha actualizado el ingreso: ${req.body.ingreso_id}`
+        });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al actualizar el ingreso' });
+    }
+};
+
 module.exports = {
     createIngreso,
-    getIngresos
+    getIngresos,
+    deleteIngreso,
+    editIngreso
 }
