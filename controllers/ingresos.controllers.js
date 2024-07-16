@@ -1,10 +1,10 @@
 /**
  * @author Sergio Lillo <Data Geri> 
  * @exports controllers
- * @namespace IngresosQueriesSQL
+ * @namespace Controllers.ingresos
  */
 
-const ingresosEntry = require('../controllers/ingresos.controllers');
+const ingresosEntry = require('../services/ingresos.services');
 
 /**
  * Descripción: Esta función llama desde la ruta /api/ingresos al modelo createIngreso
@@ -26,3 +26,32 @@ const createIngreso = async (req, res) => {
         res.status(500).json({ message: 'Error al crear el usuario', error });
     }
 };
+
+
+const getIngresos = (req,res)=> {
+    let ingresos;
+    try {
+        if (req.body.email) {
+            //Meter el validador del GET
+            console.log('entrando email por body')
+            ingresos = ingresosEntry.getIngresosByMedico(req.body);
+        } else if (req.query.email) {
+            //Meter el validador del GET
+            console.log('entrando email por query')
+            ingresos = ingresosEntry.getIngresosByMedico(req.query);
+        } /*else if (req.body.historia_clinica) {
+            //Meter el validador del GET
+            console.log('entrando historia_clinica por body')
+            ingresos = await ingresosEntry.getIngresosByHistoria(req.body);
+        }*/
+        res.status(200).json(ingresos);
+        console.log(ingresos)
+    } catch (error) {
+        res.status(500).json({ error: "Error en la BBDD" });
+    }
+};
+
+module.exports = {
+    createIngreso,
+    getIngresos
+}

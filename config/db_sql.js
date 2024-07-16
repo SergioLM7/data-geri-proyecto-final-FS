@@ -1,5 +1,43 @@
-require('dotenv').config();
-const { Pool } = require('pg');
+const { Sequelize } = require('sequelize');
+
+const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, process.env.DB_PASSWORD, {
+  host: process.env.DB_HOST,
+  logging:false,
+  dialect: 'postgres',
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  }
+});
+
+
+const syncDatabase = async () => {
+  try {
+    await sequelize.authenticate().then(() => { console.log("DB Authenticated") });
+
+    if (process.env.NODE_ENV === 'development') {
+      await sequelize.sync(/* { force: true } */);
+      console.log('Base de datos y tablas sincronizadas');
+    } else {
+      await sequelize.sync();
+      console.log('Base de datos y tablas sincronizadas');
+    }
+  } catch (error) {
+    console.error('Error al sincronizar la base de datos:', error);
+  }
+};
+
+
+module.exports = {
+  syncDatabase,
+  sequelize
+};
+
+
+//Sin Sequelize
+/*const { Pool } = require('pg');
 
 const PoolConfig = new Pool ({
     host: process.env.DB_HOST,
@@ -16,4 +54,4 @@ const PoolConfig = new Pool ({
 module.exports = {
   query: (text, params) => PoolConfig.query(text, params),
   getClient: () => PoolConfig.connect()
-};
+};*/

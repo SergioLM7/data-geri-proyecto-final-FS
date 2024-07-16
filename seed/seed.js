@@ -1,12 +1,14 @@
-// seeds/seed.js
 const seedMedicos = require('./medicos-seeds');
 const seedIngresos = require('./ingresos-seed');
 
 const seedDatabase = async () => {
-    const medicos = await seedMedicos();
-    if (medicos) {
+    try {
+        const medicos = await seedMedicos();
+        console.log("******************", medicos);
         await seedIngresos(medicos);
+    } catch (error) {
+        console.error('Error al poblar la base de datos', error);
     }
 };
 
-seedDatabase();
+module.exports = { seedDatabase };

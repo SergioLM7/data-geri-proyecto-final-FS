@@ -31,7 +31,7 @@ const queriesStats = {
     	EXTRACT(YEAR FROM fecha_ingreso)
 	ORDER BY
 		EXTRACT(YEAR FROM fecha_ingreso) ASC;`,
-        statsGeneralesAno: `SELECT 
+    statsGeneralesAno: `SELECT 
         AVG(edad_paciente) AS edadMedia,
         AVG(duracion_ingreso) AS estanciaMedia,
         COUNT(ingreso_id) AS totalIngresos,
