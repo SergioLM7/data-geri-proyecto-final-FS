@@ -6,6 +6,8 @@ const { seedDatabase } = require('./seed/seed');
 const app = express();
 //const host = process.env.DB_HOST || 'localhost'
 const port = process.env.PORT || 5001;
+const cors = require('cors');
+
 
 if (process.env.NODE_ENV === "development") {
     //seedDatabase()
@@ -15,10 +17,6 @@ syncDatabase();
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
-
-
-
-
 
 
 // Middlewares
@@ -34,11 +32,10 @@ app.use(express.json()); // Habilito recepción de JSON en servidor
 //API
 const ingresosAPIRoutes = require("./routes/ingresos.routes");
 const medicosAPIRoutes = require('./routes/medicos.routes');
+app.use(cors());
 
-//WEB
 
-
-// Rutas
+// Usar rutas
 //API
 app.use('/api/ingresos', ingresosAPIRoutes);
 app.use('/api/medicos', medicosAPIRoutes);
@@ -47,7 +44,7 @@ app.use('/api/medicos', medicosAPIRoutes);
 //WEB
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    res.send('Welcome to Data Geri API! Read the Readme for more information on how to use me.')
 });
 
 
