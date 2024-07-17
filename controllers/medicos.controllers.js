@@ -2,7 +2,7 @@ const services = require('../services/medicos.services');
 
 const getMedicos = async (req, res) => {
     try {
-        const { email } = req.params;
+        const { email } = req.query;
         console.log(req.params);
         if (email) {
             const medico = await services.getMedicoByEmail(email);
