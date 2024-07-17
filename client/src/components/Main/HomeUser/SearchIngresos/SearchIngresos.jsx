@@ -27,6 +27,10 @@ const SearchIngresos = () => {
     setIngresoID('');
   };
 
+  const handleDelete = (deletedId) => {
+    setIngresosList(ingresosList.filter(item => item.ingreso_id !== deletedId));
+  };
+
   const renderIngresos = () =>
     ingresosList.map((item, i) => (
       <CardIngresos
@@ -43,6 +47,7 @@ const SearchIngresos = () => {
         duracion_ingreso={item.duracion_ingreso}
         diagnostico={item.diagnostico_principal}
         barthel={item.barthel_basal}
+        onDelete={handleDelete}
       />
     ));
 
@@ -76,6 +81,7 @@ const SearchIngresos = () => {
               <th>Duración Ingreso</th>
               <th>Diagnóstico principal</th>
               <th>Barthel Ingreso</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>

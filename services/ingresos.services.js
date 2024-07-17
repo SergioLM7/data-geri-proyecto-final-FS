@@ -121,7 +121,7 @@ const deleteIngreso = async (entry) => {
 };
 
 const editIngreso = async (entry) => {
-    const { ingreso_id, ...fieldsToUpdate } = entry;
+    const { ingreso_id, fieldsToUpdate } = entry;
     try {
         const ingreso = await Ingreso.findByPk(ingreso_id);
 
