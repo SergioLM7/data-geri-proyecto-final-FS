@@ -1,6 +1,6 @@
 import React from "react";
 
-const Nav = () => {
+const NavUser = ({handleLogout}) => {
   return <nav className="nav">
     <label htmlFor="menu"></label>
     <ul>
@@ -19,11 +19,9 @@ const Nav = () => {
       <li>
         Usuarios
       </li>
-      <li>
-        Log out
-      </li>
+      <li onClick={handleLogout}>Log out</li>
     </ul>
   </nav>
 };
 
-export default Nav;
+export default NavUser;

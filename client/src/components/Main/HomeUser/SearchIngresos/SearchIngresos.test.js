@@ -1,10 +1,10 @@
 import React from "react";
 import { shallow } from "enzyme";
-import Home from "./Home";
+import SearchIngresos from "./SearchIngresos";
 
-describe("Home", () => {
+describe("SearchIngresos", () => {
   test("matches snapshot", () => {
-    const wrapper = shallow(<Home />);
+    const wrapper = shallow(<SearchIngresos />);
     expect(wrapper).toMatchSnapshot();
   });
 });

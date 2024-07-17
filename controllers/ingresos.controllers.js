@@ -42,10 +42,10 @@ const getIngresos = async (req,res)=> {
             const ingresos  = await ingresosService.getIngresosByMedico(req.query);
             res.status(200).json(ingresos);
             console.log(ingresos)
-        } else if (req.body.historia_clinica) {
+        } else if (req.query.historia_clinica) {
             //Meter el validador del GET
             console.log('entrando historia_clinica por body')
-            const ingresos = await ingresosService.getIngresosByHistoria(req.body);
+            const ingresos = await ingresosService.getIngresosByHistoria(req.query);
             res.status(200).json(ingresos);
             console.log(ingresos)
         }

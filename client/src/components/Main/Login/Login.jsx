@@ -1,14 +1,15 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../Header/Header';
+import { MensajeError } from '../../../context/MensajeError';
 
 
-const Login = ({ setAuth }) => {
+const Login = ({ handleLogin}) => {
+  const { error, updateError } = useContext(MensajeError);
 
   const [email, setEmail] = useState('');
   const [password_hash, setPasswordHash] = useState('');
-  const [error, setError] = useState('');
   const navigate = useNavigate();
 
 
@@ -21,16 +22,22 @@ const Login = ({ setAuth }) => {
       });
       console.log(response);
 
-      if (response.data.email === email && response.data.password_hash === password_hash) {
-        //setAuth(true);
-        console.log('Usuario y contraseña correctos')
-        setError('Usuario y contraseña correctos');
+      if (response.data.is_active === false) {
+        const mensaje = 'Este usuario ya no está activo.'
+        updateError(mensaje);
+      } else if (response.data.email === email && response.data.password_hash === password_hash) {
+        console.log('Usuario y contraseña correctos');
+        const mensaje = 'Usuario y contraseña correctos';
+        updateError(mensaje);
+        handleLogin();
         navigate('/home'); 
       } else {
-        setError('Usuario o contraseña incorrectos.');
+        const mensaje = 'Usuario o contraseña incorrectos.';
+        updateError(mensaje);
       }
     } catch (error) {
-      setError('Error al iniciar sesión. Inténtalo de nuevo');
+      const mensaje = 'Error al iniciar sesión. Inténtalo de nuevo';
+      updateError(mensaje);
     }
   };
 
