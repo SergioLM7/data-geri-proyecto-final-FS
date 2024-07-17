@@ -57,10 +57,11 @@ const getIngresos = async (req,res)=> {
 
 
 const deleteIngreso = async (req, res) => {
+    const { ingreso_id } = req.params;
     try {
-        const response = await ingresosService.deleteIngreso(req.body);
+        const response = await ingresosService.deleteIngreso(ingreso_id);
         res.status(201).json({
-            message: `Se ha eliminado el ingreso: ${req.body.ingreso_id}`
+            message: `Se ha eliminado el ingreso: ${ingreso_id}`
         });
     } catch (error) {
         res.status(500).json({ message: 'Error al eliminar el ingreso', error });

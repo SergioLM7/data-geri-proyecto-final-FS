@@ -98,8 +98,7 @@ const createIngreso = async (entry) => {
     }
 };
 
-const deleteIngreso = async (entry) => {
-    const {ingreso_id} = entry;
+const deleteIngreso = async (ingreso_id) => {
     try {
         const ingresoEliminado = await Ingreso.destroy({
             where: {

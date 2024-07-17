@@ -73,9 +73,7 @@ const CardIngresos = ({
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`https://data-geri.onrender.com/api/ingresos`, {
-        body: { ingreso_id }
-      });
+      await axios.delete(`https://data-geri.onrender.com/api/ingresos/${ingreso_id}`);
       onDelete(ingreso_id); // Elimina el ingreso de la lista en el componente padre
     } catch (error) {
       console.error('Error al eliminar el ingreso', error);
