@@ -32,7 +32,10 @@ app.use(express.json()); // Habilito recepción de JSON en servidor
 //API
 const ingresosAPIRoutes = require("./routes/ingresos.routes");
 const medicosAPIRoutes = require('./routes/medicos.routes');
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173', // Permitir solicitudes desde este origen
+    credentials: true // Habilitar el envío de cookies o credenciales en las solicitudes
+  }));
 
 
 // Usar rutas

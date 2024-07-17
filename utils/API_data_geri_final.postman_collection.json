@@ -10,26 +10,26 @@
 			"name": "Medicos",
 			"item": [
 				{
-					"name": "http://localhost:5001/api/medicos/",
+					"name": "/api/medicos/",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": " {\n                \"nombre_medico\": \"Sergio\",\n                \"apellido_medico\": \"Martínez\",\n                \"email\": \"sergio@madrid.com\",\n                \"password_hash\": \"safasfasfa42\",\n                \"id_colegiado\": 7891\n            }",
+							"raw": " {\n                \"nombre_medico\": \"Lucrecia\",\n                \"apellido_medico\": \"Domínguez\",\n                \"email\": \"lucrecia@madrid.com\",\n                \"password_hash\": \"xzzax08908\",\n                \"id_colegiado\": 8450\n            }",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:5001/api/medicos/",
+						"url": "https://data-geri.onrender.com/api/medicos/",
 						"description": "Crear un médico"
 					},
 					"response": []
 				},
 				{
-					"name": "http://localhost:5001/api/medicos",
+					"name": "/api/medicos",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -45,13 +45,13 @@
 								}
 							}
 						},
-						"url": "http://localhost:5001/api/medicos",
+						"url": "https://data-geri.onrender.com/api/medicos",
 						"description": "GET All medicos de 10 en 10"
 					},
 					"response": []
 				},
 				{
-					"name": "http://localhost:5001/api/medicos",
+					"name": "/api/medicos",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -67,13 +67,13 @@
 								}
 							}
 						},
-						"url": "http://localhost:5001/api/medicos",
+						"url": "https://data-geri.onrender.com/api/medicos",
 						"description": "GET Medico by email"
 					},
 					"response": []
 				},
 				{
-					"name": "http://localhost:5001/api/medicos/",
+					"name": "/api/medicos/",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -86,13 +86,13 @@
 								}
 							}
 						},
-						"url": "http://localhost:5001/api/medicos/",
+						"url": "https://data-geri.onrender.com/api/medicos/",
 						"description": "EDIT is_logged y last_time_logged de un Médico por su email"
 					},
 					"response": []
 				},
 				{
-					"name": "http://localhost:5001/api/medicos/",
+					"name": "/api/medicos/",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -105,13 +105,13 @@
 								}
 							}
 						},
-						"url": "http://localhost:5001/api/medicos/",
+						"url": "https://data-geri.onrender.com/api/medicos/",
 						"description": "EDIT password_hash de un Médico por su email"
 					},
 					"response": []
 				},
 				{
-					"name": "http://localhost:5001/api/medicos/",
+					"name": "/api/medicos/",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -124,13 +124,13 @@
 								}
 							}
 						},
-						"url": "http://localhost:5001/api/medicos/",
+						"url": "https://data-geri.onrender.com/api/medicos/",
 						"description": "EDIT Log in del Médico"
 					},
 					"response": []
 				},
 				{
-					"name": "http://localhost:5001/api/medicos/",
+					"name": "/api/medicos/",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -143,7 +143,7 @@
 								}
 							}
 						},
-						"url": "http://localhost:5001/api/medicos/",
+						"url": "https://data-geri.onrender.com/api/medicos/",
 						"description": "EDIT is_active de un Médico por su email (equivale a eliminarlo)"
 					},
 					"response": []
@@ -154,7 +154,7 @@
 			"name": "Ingresos",
 			"item": [
 				{
-					"name": "http://localhost:5001/api/ingresos/",
+					"name": "/api/ingresos/",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -170,13 +170,13 @@
 								}
 							}
 						},
-						"url": "http://localhost:5001/api/ingresos/",
+						"url": "https://data-geri.onrender.com/api/ingresos/",
 						"description": "GET Ingresos por el email del médico (offset y limit incluidos)"
 					},
 					"response": []
 				},
 				{
-					"name": "http://localhost:5001/api/ingresos/",
+					"name": "/api/ingresos/",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -185,20 +185,20 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"historia_clinica\": 4328,\n    \"offset\": 0,\n    \"limit\": 10\n\n}",
+							"raw": "{\n    \"historia_clinica\": 4332,\n    \"offset\": 0,\n    \"limit\": 10\n\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:5001/api/ingresos/",
+						"url": "https://data-geri.onrender.com/api/ingresos/",
 						"description": "GET ingresos por el nº de historia clínica (con limit y offset para la paginación)"
 					},
 					"response": []
 				},
 				{
-					"name": "http://localhost:5001/api/ingresos/",
+					"name": "/api/ingresos/",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -211,32 +211,32 @@
 								}
 							}
 						},
-						"url": "http://localhost:5001/api/ingresos/",
+						"url": "https://data-geri.onrender.com/api/ingresos/",
 						"description": "PUT para crear un ingreso (calcula automáticamente la celda duracion_ingreso)"
 					},
 					"response": []
 				},
 				{
-					"name": "http://localhost:5001/api/ingresos/",
+					"name": "/api/ingresos/",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"ingreso_id\":61\n}",
+							"raw": "{\n    \"ingreso_id\":60\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:5001/api/ingresos/",
+						"url": "https://data-geri.onrender.com/api/ingresos/",
 						"description": "DELETE para eliminar un ingreso de la tabla Ingresos por su ID"
 					},
 					"response": []
 				},
 				{
-					"name": "http://localhost:5001/api/ingresos/",
+					"name": "/api/ingresos/",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -249,7 +249,7 @@
 								}
 							}
 						},
-						"url": "http://localhost:5001/api/ingresos/",
+						"url": "https://data-geri.onrender.com/api/ingresos/",
 						"description": "PUT para editar los campos de ingresos en base a su ID (se puede cambiar uno o varios; las fechas tienen que ir siempre de la mano)"
 					},
 					"response": []

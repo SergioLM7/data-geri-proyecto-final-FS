@@ -8,8 +8,7 @@
     "start": "nodemon index.js",
     "dev": "NODE_ENV=development nodemon index.js",
     "generate-docs": "jsdoc -c ./jsdoc.json",
-    "feed_db": "node seed/seed.js",
-    "build": "npm run build"
+    "feed_db": "node seed/seed.js"
   },
   "repository": {
     "type": "git",
