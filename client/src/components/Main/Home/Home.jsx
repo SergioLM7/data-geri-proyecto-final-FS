@@ -1,9 +1,12 @@
 import React from "react";
-import Login from './Login/Login'
+import Header from '../../Header/Header';
+import Nav from '../../Nav/Nav';
 
 const Home = () => {
   return <section>
-    <Login />
+    <Header />
+    <Nav />
+    <h1>Esta es la home del usuario logueado</h1>
   </section>;
 };
 

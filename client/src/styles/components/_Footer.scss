@@ -1,0 +1,14 @@
+
+
+.footer-box {
+    min-height: 10vh;
+    background-color: rgb(70, 70, 233);
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    gap: 0.5vh;
+
+    &>p {
+        align-items: center;
+    }
+}

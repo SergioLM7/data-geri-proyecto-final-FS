@@ -1,11 +1,16 @@
 import React, {useState} from "react";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import Header from '../../Header/Header';
 
-const Login = () => {
+
+const Login = ({ setAuth }) => {
 
   const [email, setEmail] = useState('');
   const [password_hash, setPasswordHash] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -15,20 +20,24 @@ const Login = () => {
         params: { email: email }
       });
       console.log(response);
-      /*if (response) {
-        localStorage.setItem('token', response.data.token);
-        setAuth(true);
+
+      if (response.data.email === email && response.data.password_hash === password_hash) {
+        //setAuth(true);
+        console.log('Usuario y contraseña correctos')
+        setError('Usuario y contraseña correctos');
+        navigate('/home'); 
       } else {
         setError('Usuario o contraseña incorrectos.');
-      }*/
+      }
     } catch (error) {
       setError('Error al iniciar sesión. Inténtalo de nuevo');
     }
   };
 
 
-  return (
-    <div>
+  return <>
+    <Header />
+    <section className="form-section">
       <h2>Login</h2>
       <form onSubmit={handleSubmit} className="login">
         <div>
@@ -48,10 +57,10 @@ const Login = () => {
           />
         </div>
         {error && <p>{error}</p>}
-        <button type="submit">Iniciar sesión</button>
+        <button type="submit" className="button-login">Iniciar sesión</button>
       </form>
-    </div>
-  );
+    </section>
+    </>;
 };
 
 export default Login;
