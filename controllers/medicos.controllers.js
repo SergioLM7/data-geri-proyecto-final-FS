@@ -2,12 +2,13 @@ const services = require('../services/medicos.services');
 
 const getMedicos = async (req, res) => {
     try {
-        console.log(req.body);
-        if (req.body.email) {
-            const medico = await services.getMedicoByEmail(req.body.email);
+        const { email } = req.params;
+        console.log(req.params);
+        if (email) {
+            const medico = await services.getMedicoByEmail(email);
             res.status(200).json(medico);
         } else {
-            const allMedicos = await services.getAllMedicos(req.body);
+            const allMedicos = await services.getAllMedicos(req.query);
             res.status(200).json(allMedicos);
         }
     } catch (error) {

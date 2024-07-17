@@ -9,8 +9,11 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log(email);
     try {
-      const response = await axios.get('https://data-geri.onrender.com/api/medicos', { email, password_hash });
+      const response = await axios.get('https://data-geri.onrender.com/api/medicos',  {
+        params: { email: email }
+      });
       console.log(response);
       /*if (response) {
         localStorage.setItem('token', response.data.token);

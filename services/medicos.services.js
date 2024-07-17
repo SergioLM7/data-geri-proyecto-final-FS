@@ -49,7 +49,6 @@ const getMedicoByEmail = async (email) => {
         console.error('El médico no ha sido encontrado', error);
         throw error;
     }
-
 };
 
 const editRole = async (entry) => {
