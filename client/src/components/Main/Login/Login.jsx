@@ -5,14 +5,13 @@ import Header from '../../Header/Header';
 import { MensajeError } from '../../../context/MensajeError';
 
 
-const Login = ({ handleLogin}) => {
+const Login = ({ handleLogin, handleLogout}) => {
   const { error, updateError } = useContext(MensajeError);
 
   const [email, setEmail] = useState('');
   const [password_hash, setPasswordHash] = useState('');
   const navigate = useNavigate();
-
-
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(email);
@@ -52,6 +51,8 @@ const Login = ({ handleLogin}) => {
           <input
             type="text"
             value={email}
+            name='email'
+            id='email'
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
@@ -59,6 +60,8 @@ const Login = ({ handleLogin}) => {
           <label>Contraseña:</label>
           <input
             type="password"
+            name='password_hash'
+            id='password_hash'
             value={password_hash}
             onChange={(e) => setPasswordHash(e.target.value)}
           />

@@ -1,8 +1,7 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Login from './Login/Login';
 import HomeUser from './HomeUser/HomeUser';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
-
 
 const Main = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -26,20 +25,21 @@ const Main = () => {
     navigate('/');
   };
 
-
-  return <main>
-    <Routes>
-      <Route
-        path="/"
-        element={<Login handleLogin={handleLogin} />}
-      />
-      <Route
-        path="/home"
-        element={isLoggedIn ? <HomeUser handleLogout={handleLogout} /> : <Navigate to="/" />}
-      />
-      <Route path='/*' element={<Navigate to={'/'} />} />
-    </Routes>
-  </main>
+  return (
+    <main>
+      <Routes>
+        <Route
+          path="/"
+          element={<Login handleLogin={handleLogin} handleLogout={handleLogout} />}
+        />
+        <Route
+          path="/home"
+          element={isLoggedIn ? <HomeUser handleLogout={handleLogout} /> : <Navigate to="/" />}
+        />
+        <Route path='/*' element={<Navigate to={'/'} />} />
+      </Routes>
+    </main>
+  );
 };
 
 export default Main;
