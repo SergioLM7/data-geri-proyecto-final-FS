@@ -3,33 +3,34 @@ import axios from "axios";
 
 const CardIngresos = ({
   ingreso_id,
-  medico,
-  historia,
-  nombre,
-  apellido,
+  medico_id,
+  historia_clinica,
+  nombre_paciente,
+  apellido_paciente,
   sexo,
-  edad,
+  edad_paciente,
   fecha_ingreso,
   fecha_alta,
   duracion_ingreso,
-  diagnostico,
-  barthel,
+  diagnostico_principal,
+  barthel_basal,
   onDelete,
   onEdit
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editFields, setEditFields] = useState({
-    medico,
-    historia,
-    nombre,
-    apellido,
+    ingreso_id,
+    medico_id,
+    historia_clinica,
+    nombre_paciente,
+    apellido_paciente,
     sexo,
-    edad,
+    edad_paciente,
     fecha_ingreso,
     fecha_alta,
     duracion_ingreso,
-    diagnostico,
-    barthel
+    diagnostico_principal,
+    barthel_basal,
   });
 
   const handleInputChange = (e) => {
@@ -44,28 +45,37 @@ const CardIngresos = ({
   const handleCancel = () => {
     setIsEditing(false);
     setEditFields({
-      medico,
-      historia,
-      nombre,
-      apellido,
+      ingreso_id,
+      medico_id,
+      historia_clinica,
+      nombre_paciente,
+      apellido_paciente,
       sexo,
-      edad,
+      edad_paciente,
       fecha_ingreso,
       fecha_alta,
       duracion_ingreso,
-      diagnostico,
-      barthel
+      diagnostico_principal,
+      barthel_basal,
     });
   };
 
   const handleSave = async () => {
+    const updatedFields = {
+      ...editFields,
+      medico_id: parseInt(editFields.medico_id, 10),
+      historia_clinica: parseInt(editFields.historia_clinica, 10),
+      edad_paciente: parseInt(editFields.edad_paciente, 10),
+      duracion_ingreso: parseInt(editFields.duracion_ingreso, 10),
+      barthel_basal: parseInt(editFields.barthel_basal, 10)
+    };
     try {
-      await axios.put(`https://data-geri.onrender.com/api/ingresos`, {
+      const response = await axios.put(`https://data-geri.onrender.com/api/ingresos`, {
         ingreso_id,
-        fieldsToUpdate: editFields
+        fieldsToUpdate: updatedFields
       });
       setIsEditing(false);
-      onEdit(ingreso_id, editFields); // Actualiza la lista en el componente padre
+      onEdit(updatedFields); // Actualiza la lista en el componente padre
     } catch (error) {
       console.error('Error al actualizar el ingreso', error);
     }
@@ -85,17 +95,17 @@ const CardIngresos = ({
       {isEditing ? (
         <>
           <td>{ingreso_id}</td>
-          <td><input name="medico" value={editFields.medico} onChange={handleInputChange} /></td>
-          <td><input name="historia" value={editFields.historia} onChange={handleInputChange} /></td>
-          <td><input name="nombre" value={editFields.nombre} onChange={handleInputChange} /></td>
-          <td><input name="apellido" value={editFields.apellido} onChange={handleInputChange} /></td>
-          <td><input name="sexo" value={editFields.sexo} onChange={handleInputChange} /></td>
-          <td><input name="edad" value={editFields.edad} onChange={handleInputChange} /></td>
-          <td><input name="fecha_ingreso" value={editFields.fecha_ingreso} onChange={handleInputChange} /></td>
-          <td><input name="fecha_alta" value={editFields.fecha_alta} onChange={handleInputChange} /></td>
-          <td><input name="duracion_ingreso" value={editFields.duracion_ingreso} onChange={handleInputChange} /></td>
-          <td><input name="diagnostico" value={editFields.diagnostico} onChange={handleInputChange} /></td>
-          <td><input name="barthel" value={editFields.barthel} onChange={handleInputChange} /></td>
+          <td><input type="number" name="medico_id" value={editFields.medico_id} onChange={handleInputChange} /></td>
+          <td><input type="number" name="historia_clinica" value={editFields.historia_clinica} onChange={handleInputChange} /></td>
+          <td><input type="text" name="nombre_paciente" value={editFields.nombre_paciente} onChange={handleInputChange} /></td>
+          <td><input type="text" name="apellido_paciente" value={editFields.apellido_paciente} onChange={handleInputChange} /></td>
+          <td><input type="text" name="sexo" value={editFields.sexo} onChange={handleInputChange} /></td>
+          <td><input type="number" name="edad_paciente" value={editFields.edad_paciente} onChange={handleInputChange} /></td>
+          <td><input type="text" name="fecha_ingreso" value={editFields.fecha_ingreso} onChange={handleInputChange} /></td>
+          <td><input type="text" name="fecha_alta" value={editFields.fecha_alta} onChange={handleInputChange} /></td>
+          <td><input type="number" name="duracion_ingreso" value={editFields.duracion_ingreso} onChange={handleInputChange} /></td>
+          <td><input type="text" name="diagnostico_principal" value={editFields.diagnostico_principal} onChange={handleInputChange} /></td>
+          <td><input type="number" name="barthel_basal" value={editFields.barthel_basal} onChange={handleInputChange} /></td>
           <td>
             <button onClick={handleSave}>Guardar</button>
             <button onClick={handleCancel}>Cancelar</button>
@@ -104,17 +114,17 @@ const CardIngresos = ({
       ) : (
         <>
           <td>{ingreso_id}</td>
-          <td>{medico}</td>
-          <td>{historia}</td>
-          <td>{nombre}</td>
-          <td>{apellido}</td>
+          <td>{medico_id}</td>
+          <td>{historia_clinica}</td>
+          <td>{nombre_paciente}</td>
+          <td>{apellido_paciente}</td>
           <td>{sexo}</td>
-          <td>{edad}</td>
+          <td>{edad_paciente}</td>
           <td>{fecha_ingreso}</td>
           <td>{fecha_alta}</td>
           <td>{duracion_ingreso}</td>
-          <td>{diagnostico}</td>
-          <td>{barthel}</td>
+          <td>{diagnostico_principal}</td>
+          <td>{barthel_basal}</td>
           <td>
             <button onClick={handleEdit}>Editar</button>
             <button onClick={handleDelete}>Eliminar</button>

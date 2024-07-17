@@ -31,22 +31,31 @@ const SearchIngresos = () => {
     setIngresosList(ingresosList.filter(item => item.ingreso_id !== deletedId));
   };
 
+  const handleEdit = (updatedIngreso) => {
+    setIngresosList((prevList) =>
+      prevList.map((ingreso) =>
+        ingreso.ingreso_id === updatedIngreso.ingreso_id ? updatedIngreso : ingreso
+      )
+    );
+  };
+
   const renderIngresos = () =>
     ingresosList.map((item, i) => (
       <CardIngresos
         key={uuidv4()}
         ingreso_id={item.ingreso_id}
-        medico={item.medico_id}
-        historia={item.historia_clinica}
-        nombre={item.nombre_paciente}
-        apellido={item.apellido_paciente}
+        medico_id={item.medico_id}
+        historia_clinica={item.historia_clinica}
+        nombre_paciente={item.nombre_paciente}
+        apellido_paciente={item.apellido_paciente}
         sexo={item.sexo}
-        edad={item.edad_paciente}
+        edad_paciente={item.edad_paciente}
         fecha_ingreso={item.fecha_ingreso}
         fecha_alta={item.fecha_alta}
         duracion_ingreso={item.duracion_ingreso}
-        diagnostico={item.diagnostico_principal}
-        barthel={item.barthel_basal}
+        diagnostico_principal={item.diagnostico_principal}
+        barthel_basal={item.barthel_basal}
+        onEdit={handleEdit}
         onDelete={handleDelete}
       />
     ));
