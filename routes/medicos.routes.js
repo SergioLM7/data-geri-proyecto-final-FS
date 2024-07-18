@@ -8,7 +8,7 @@ const authorization = require('../middlewares/authorization');
 router.get("/", medicosControllers.getMedicos);
 router.post("/", medicosControllers.postMedicos);
 router.post("/login", medicosControllers.loginMedico);
-router.put("/", authorization, medicosControllers.editMedico);
+router.put("/logout", authorization, medicosControllers.editMedico);
 
 
 module.exports = router;

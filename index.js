@@ -18,14 +18,6 @@ app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
 
-// Middlewares
-const error404 = require('./middlewares/error404');
-const morgan = require('./middlewares/morgan');
-
-// Logger
-app.use(morgan(':method :host :status - :response-time ms :body'));
-
-
 app.use(express.json()); // Habilito recepción de JSON en servidor
 app.use(cookieParser());
 
@@ -35,6 +27,12 @@ app.use(cors({
     credentials: true // Habilitar el envío de cookies o credenciales en las solicitudes
 }));
 
+// Middlewares
+const error404 = require('./middlewares/error404');
+const morgan = require('./middlewares/morgan');
+
+// Logger
+app.use(morgan(':method :host :status - :response-time ms :body'));
 
 // Importar rutas
 //API

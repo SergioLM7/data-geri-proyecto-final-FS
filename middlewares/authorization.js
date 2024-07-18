@@ -5,7 +5,7 @@ require('dotenv').config();
 
 const authenticateToken = async (req, res, next) => {
   const token = req.cookies['access-token'];
-    console.log(token);
+    console.log('Estoy accediendo al middleware. Token:',token);
   if (!token) {
     return res.status(401).json({ message: 'Acceso no autorizado. Token no proporcionado.' });
   }

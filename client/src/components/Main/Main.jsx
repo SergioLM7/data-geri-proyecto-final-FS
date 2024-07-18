@@ -22,7 +22,11 @@ const Main = () => {
 
   const handleLogin = (token) => {
     setIsLoggedIn(true);
-    Cookies.set('access-token', token, { expires: 1 / 24, path: '/' });
+    Cookies.set('access-token', token, {
+      expires: 1 / 24,
+      path: '/',
+      domain: 'localhost' // Asegúrate de que el dominio está correcto
+    });
   };
 
   const handleLogout = async () => {
@@ -33,8 +37,12 @@ const Main = () => {
         const email = decodedToken.email;
         const date = new Date();
 
-        const response = await axios.put('https://data-geri.onrender.com/api/medicos', { is_logged: false, last_time_logged: date }, {
-          withCredentials: true, // Asegura que las cookies se envíen
+        const response = await axios.put('https://data-geri.onrender.com/api/medicos/logout/', {
+          email: email,
+          is_logged: false,
+          last_time_logged: date
+        }, {
+          withCredentials: true,
           headers: {
             'Content-Type': 'application/json'
           }
