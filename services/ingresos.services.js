@@ -24,7 +24,7 @@ const getIngresosByMedico = async (entry) => {
         });
 
         if (!medico) {
-            throw new Error('Medico not found');
+            throw new Error('Este ID médico no existe o no tiene ingresos asociados.');
         }
 
         const ingresosData = await Ingreso.findAll({
@@ -61,7 +61,7 @@ const getIngresosByHistoria = async (entry) => {
         });
 
         if (!historia || historia.length === 0) {
-            throw new Error('No se ha encontrado la historia clínica');
+            throw new Error('Este nº de historia clínica no existe.');
         }
 
         const result = historia.map(element => element.dataValues);
@@ -96,8 +96,6 @@ const createIngreso = async (entry) => {
                 return newIngreso;
             }
         }
-
-
     } catch (error) {
         console.error('Error al crear un nuevo ingreso:', error);
         throw error;
@@ -116,8 +114,10 @@ const deleteIngreso = async (ingreso_id) => {
 
         if (ingresoEliminado === 0) {
             console.log('No se encontró ningún ingreso con ese ID para eliminar.');
+            throw new Error('No se encontró ningún ingreso con ese ID para eliminar.');
         } else if (ingresoEliminado > 0) {
             console.log(`${ingresoEliminado} ingreso eliminado exitosamente.`);
+            return ingresoEliminado;
         }
 
     } catch (error) {

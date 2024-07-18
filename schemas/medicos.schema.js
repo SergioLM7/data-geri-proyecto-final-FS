@@ -9,11 +9,11 @@ const Medico = sequelize.define('Medico', {
         primaryKey: true
     },
     nombre_medico: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(100),
         allowNull: false,
     },
     apellido_medico: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(100),
         allowNull: false,
     },
     email: {
@@ -22,7 +22,7 @@ const Medico = sequelize.define('Medico', {
         unique: true,
     },
     password_hash: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(20),
         allowNull: false,
     },
     id_colegiado: {

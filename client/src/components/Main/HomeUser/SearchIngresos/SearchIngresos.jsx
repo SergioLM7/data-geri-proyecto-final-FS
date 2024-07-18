@@ -8,7 +8,7 @@ import { DNA } from 'react-loader-spinner';
 
 
 const SearchIngresos = () => {
-  const { error, updateError } = useContext(MensajeError);
+  const { error, setError } = useContext(MensajeError);
   const [ingresoID, setIngresoID] = useState('');
   const [ingresosList, setIngresosList] = useState([]);
   const [loading, setLoading] = useState(false); 
@@ -23,11 +23,14 @@ const SearchIngresos = () => {
       });
       const allIngresos = res.data;
       setIngresosList(allIngresos);
-      updateError('');
+      setError('');
     } catch (err) {
       console.error('Error al traer los ingresos de la base de datos', err);
       setIngresosList([]);
-      updateError('Error al traer los ingresos de la base de datos. Inténtalo de nuevo.');
+      setError('Error al traer los ingresos de la base de datos. Inténtalo de nuevo.');
+      setTimeout(() => {
+        setError('');
+      }, 3000);
     } finally {
       setLoading(false);
     }

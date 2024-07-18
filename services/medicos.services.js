@@ -7,6 +7,7 @@ const queries = require('../queries/medicos.queries');
 const Medicos = require('../schemas/medicos.schema');
 const Ingresos = require('../schemas/ingresos.schema');
 const { sequelize } = require('../config/db_sql');
+const bcrypt = require('bcryptjs'); 
 
 
 const getAllMedicos = async (entry) => {
@@ -25,6 +26,9 @@ const getAllMedicos = async (entry) => {
 
 const createMedico = async (entry) => {
     try {
+        const hashedPassword = await bcrypt.hash(entry.password_hash, 10);
+        entry.password_hash = hashedPassword;
+
         const newMedico = await Medicos.create(entry);
         console.log(newMedico)
         if(newMedico) {
@@ -32,7 +36,7 @@ const createMedico = async (entry) => {
         }
     } catch (error) {
         console.error('Error al crear un nuevo médico:', error);
-        throw error;
+        throw new Error('No se ha podido crear este médico. Inténtelo de nuevo.');
     }
 };
 

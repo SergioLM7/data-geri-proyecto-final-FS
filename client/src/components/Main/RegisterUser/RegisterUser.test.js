@@ -1,10 +1,10 @@
 import React from "react";
 import { shallow } from "enzyme";
-import Register from "./Register";
+import RegisterUser from "./RegisterUser";
 
-describe("Register", () => {
+describe("RegisterUser", () => {
   test("matches snapshot", () => {
-    const wrapper = shallow(<Register />);
+    const wrapper = shallow(<RegisterUser />);
     expect(wrapper).toMatchSnapshot();
   });
 });

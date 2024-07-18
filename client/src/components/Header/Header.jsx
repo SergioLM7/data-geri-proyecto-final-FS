@@ -1,8 +1,14 @@
 import React from "react";
+import { Link } from 'react-router-dom';
+
 
 const Header = () => {
   return <header className="header">
-  <div className="background-h1"><h1>Data Geri</h1></div>
+    <div className="background-h1">
+      <Link to="/">
+        <h1>Data Geri</h1>
+      </Link>
+    </div>
   </header>
 };
 

@@ -52,7 +52,8 @@ const getIngresos = async (req,res)=> {
         }
        
     } catch (error) {
-        res.status(500).json({ error: "Error en la BBDD" });
+        console.error('Error al buscar el ingreso', error);
+        res.status(500).json({ message: error.message || 'Error al buscar el ingreso' });
     }
 };
 
@@ -65,7 +66,8 @@ const deleteIngreso = async (req, res) => {
             message: `Se ha eliminado el ingreso: ${ingreso_id}`
         });
     } catch (error) {
-        res.status(500).json({ message: 'Error al eliminar el ingreso', error });
+        res.status(500).json({ message: error.message || 'Error al eliminar el ingreso' });
+
     }
 };
 
