@@ -15,8 +15,10 @@ const RegisterUser = () => {
     setIsSubmitting(true);
     try {
       const response = await axios.post('https://data-geri.onrender.com/api/medicos', data);
+      console.log(response);
       setConfirmationMessage('Médico/Usuario creado');
     } catch (error) {
+      console.log(error)
       if (error.response && error.response.data.message) {
         setConfirmationMessage(`Error: ${error.response.data.message}`);
       } else {
