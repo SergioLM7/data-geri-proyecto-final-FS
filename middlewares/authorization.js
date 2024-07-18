@@ -5,7 +5,7 @@ dotenv.config();
 
 const authenticateToken = async (req, res, next) => {
   const token = req.cookies['access-token'];
-
+    console.log(token);
   if (!token) {
     return res.status(401).json({ message: 'Acceso no autorizado. Token no proporcionado.' });
   }
@@ -13,7 +13,7 @@ const authenticateToken = async (req, res, next) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const medico = await Medicos.findOne({ where: { email: decoded.email } });
-
+    console.log(medico)
     if (!medico) {
       throw new Error('Médico no encontrado.');
     }

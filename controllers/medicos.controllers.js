@@ -13,7 +13,9 @@ const loginMedico = async (req, res) => {
 
 const logoutMedico = async (req, res) => {
     const { is_logged, last_time_logged } = req.body;
-    const { email } = req.medico; 
+    const { email } = req.medico;
+    console.log(req.medico)
+    console.log(req.body)
 
     try {
         const result = await editLogged({ email, is_logged, last_time_logged });

@@ -4,6 +4,8 @@ import HomeUser from './HomeUser/HomeUser';
 import RegisterUser from "./RegisterUser";
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import axios from 'axios';
+
 
 
 const Main = () => {
@@ -19,7 +21,7 @@ const Main = () => {
 
   const handleLogin = (token) => {
     setIsLoggedIn(true);
-    Cookies.set('access-token', token, { expires: 1/24 });
+    Cookies.set('access-token', token, { expires: 1 });
   };
 
   const handleLogout = async () => {
@@ -29,18 +31,23 @@ const Main = () => {
         const decodedToken = JSON.parse(atob(token.split('.')[1]));
         const email = decodedToken.email;
         const date = new Date();
-        console.log(email)
-        console.log(decodedToken)
-        const response = await axios.put('https://data-geri.onrender.com/api/medicos', { email:email, is_logged: true, last_time_logged: date}, {
-          headers: { Authorization: `Bearer ${token}` }
+
+        const response = await axios.put('https://data-geri.onrender.com/api/medicos', { is_logged: false, last_time_logged: date }, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
         });
         console.log(response)
         Cookies.remove('access-token');
         setIsLoggedIn(false);
         navigate('/');
       } catch (error) {
-       throw new Error ('Error al hacer logout:', error);
+        console.error('Error al hacer logout:', error);
+        throw new Error('Error al hacer logout:', error);
       }
+    } else {
+      console.error('No se encontró el token de acceso.');
     }
   };
 
@@ -63,6 +70,7 @@ const Main = () => {
       </Routes>
     </main>
   );
+
 };
 
 export default Main;
