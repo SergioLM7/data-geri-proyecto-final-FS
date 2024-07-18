@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { FaCheckCircle, FaTimes } from 'react-icons/fa';
+import { FaCheckCircle, FaExclamationCircle, FaTimes } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 
 
@@ -40,12 +40,16 @@ const RegistrarIngreso = ({ onClose }) => {
       <div className="modal-content">
         <span className="close" onClick={onClose}> <FaTimes /> </span>
         <h2>Registrar ingreso</h2>
-        {confirmationMessage ? (
+        {confirmationMessage ? (confirmationMessage && (
           <div className="confirmation">
-            <FaCheckCircle color="green" size={24} />
+            {confirmationMessage === 'Ingreso creado' ? (
+              <FaCheckCircle color="green" size={24} />
+            ) : (
+              <FaExclamationCircle color="red" size={24} />
+            )}
             <p>{confirmationMessage}</p>
           </div>
-        ) : (
+        )) : (
           <form onSubmit={handleSubmit(onSubmit)}>
             <input type="number" {...register('medico_id', { required: 'ID Médico es requerido' })} placeholder="ID Médico" />
             {errors.medico_id && <p>{errors.medico_id.message}</p>}

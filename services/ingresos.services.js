@@ -78,7 +78,7 @@ const createIngreso = async (entry) => {
     try {
         const medico = await Medico.findByPk(entry.medico_id);
         if (!medico || medico.is_active === false) {
-            return res.status(400).json({ error: 'El ID del médico no existe o no está activo.' });
+            throw new Error('El ID del médico no existe o no está activo.');
         } else {
             const { fecha_ingreso, fecha_alta } = entry;
             const fechaIngreso = new Date(fecha_ingreso);

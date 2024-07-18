@@ -23,7 +23,8 @@ const createIngreso = async (req, res) => {
             message: `Ingreso creado para el paciente: ${req.body.nombre_paciente + ' ' + req.body.apellido_paciente}`
         });
     } catch (error) {
-        res.status(500).json({ message: 'Error al crear el ingreso', error });
+        console.error('Error al crear el ingreso:', error);
+        res.status(500).json({ message: error.message || 'Error al crear el ingreso' });
     }
 };
 
