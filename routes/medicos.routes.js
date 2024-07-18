@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.get("/", medicosControllers.getMedicos);
 router.post("/", medicosControllers.postMedicos);
+router.post("/login", medicosControllers.loginMedico);
 router.put("/", medicosControllers.editMedico);
 
 

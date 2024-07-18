@@ -1,5 +1,15 @@
 const services = require('../services/medicos.services');
 
+const loginMedico = async (req,res)=> {
+    try {
+        const userLogin = await services.loginMedicos(req.body);
+        res.status(201).json(userLogin);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error.message || 'Error en el login.' });
+    }
+}
+
 const getMedicos = async (req, res) => {
     try {
         const { email } = req.query;
@@ -46,13 +56,11 @@ const editMedico = async (req, res) => {
                 result,
                 message: `Se ha editado su contraseña: ${req.body.email}`
             });
-        } else if (req.body.is_logged) {
-            console.log('voy a editar el logged')
+        } else if (req.body.is_logged && req.body.last_time_logged) {
+            console.log('voy a editar el logged y last_time_logged')
             const result = await services.editLogged(req.body);
             res.status(200).json({
-                result,
-                message: `El usuario ${req.body.email} ha iniciado sesión`
-            });
+                result            });
         } else if (req.body.is_active) {
             console.log('voy a editar el is_active')
             const result = await services.deleteMedico(req.body);
@@ -73,7 +81,8 @@ const editMedico = async (req, res) => {
 const controllers = {
     getMedicos,
     postMedicos,
-    editMedico
+    editMedico,
+    loginMedico
 }
 
 

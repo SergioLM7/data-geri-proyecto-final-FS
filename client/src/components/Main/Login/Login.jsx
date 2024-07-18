@@ -16,27 +16,18 @@ const Login = ({ handleLogin, handleLogout }) => {
     event.preventDefault();
     console.log(email);
     try {
-      const response = await axios.get('https://data-geri.onrender.com/api/medicos', {
-        params: { email: email }
+      const response = await axios.post('https://data-geri.onrender.com/api/medicos/login', {
+        params: { email, password_hash }
       });
       console.log(response);
-
-      if (response.data.is_active === false) {
-        const mensaje = 'Este usuario ya no está activo.'
-        setError(mensaje);
-      } else if (response.data.email === email && response.data.password_hash === password_hash) {
-        console.log('Usuario y contraseña correctos');
-        const mensaje = 'Usuario y contraseña correctos';
-        setError(mensaje);
-        handleLogin();
-        navigate('/home');
-        setError(null);
-      } else {
-        const mensaje = 'Usuario o contraseña incorrectos.';
-        setError(mensaje);
-      }
+      const token = response.data.token;
+      handleLogin(token);
+      setError(null);
+      navigate('/home');
     } catch (error) {
-      const mensaje = 'Error al iniciar sesión. Inténtalo de nuevo';
+      const mensaje = error.response && error.response.data.message
+        ? error.response.data.message
+        : 'Error al iniciar sesión. Inténtalo de nuevo';
       setError(mensaje);
     }
   };

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { ConfirmationMessage } from '../../../context/ConfirmationMessage';
 import { SetIsSubmitting } from '../../../context/SetIsSubmitting';
 import Header from '../../Header/Header';
@@ -10,6 +11,7 @@ const RegisterUser = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const { confirmationMessage, setConfirmationMessage } = useContext(ConfirmationMessage);
   const { isSubmitting, setIsSubmitting } = useContext(SetIsSubmitting);
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
@@ -17,6 +19,11 @@ const RegisterUser = () => {
       const response = await axios.post('https://data-geri.onrender.com/api/medicos', data);
       console.log(response);
       setConfirmationMessage('Médico/Usuario creado');
+      setTimeout(() => {
+        setIsSubmitting(false);
+        setConfirmationMessage('');
+        navigate('/');
+      }, 3000);
     } catch (error) {
       console.log(error)
       if (error.response && error.response.data.message) {

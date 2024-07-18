@@ -7,8 +7,36 @@ const queries = require('../queries/medicos.queries');
 const Medicos = require('../schemas/medicos.schema');
 const Ingresos = require('../schemas/ingresos.schema');
 const { sequelize } = require('../config/db_sql');
-const bcrypt = require('bcryptjs'); 
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
+
+const loginMedicos = async (entry) => {
+    const { email, password_hash } = entry;
+    try {
+        const medicoLogin = await Medicos.findOne({ where: { email } });
+        if (!medicoLogin || !medicoLogin.is_active) {
+            throw new Error('Este usuario ya no está activo.');
+        }
+
+        const isPasswordValid = await bcrypt.compare(password_hash, medicoLogin.password_hash);
+
+        if (!isPasswordValid) {
+            throw new Error('Usuario o contraseña incorrectos.');
+        }
+
+        medicoLogin.is_logged = true;
+        medicoLogin.last_time_logged = new Date();
+        await medicoLogin.save();
+
+        const token = jwt.sign({ rol: medicoLogin.rol, email: medicoLogin.email }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRATION });
+
+        return token;
+    } catch (error) {
+        console.error('El médico no ha sido encontrado', error);
+        throw new Error('Error interno del servidor.');
+    }
+};
 
 const getAllMedicos = async (entry) => {
     const { limit, offset } = entry;
@@ -31,7 +59,7 @@ const createMedico = async (entry) => {
 
         const newMedico = await Medicos.create(entry);
         console.log(newMedico)
-        if(newMedico) {
+        if (newMedico) {
             return newMedico;
         }
     } catch (error) {
@@ -81,7 +109,7 @@ const editLogged = async (entry) => {
         });
 
         if (updatedCount === 0) {
-            throw new Error('No se encontró el médico o no se realizó ningún cambio');
+            throw new Error('No se encontró al médico / no se pudo cerrar sesión.');
         }
         const result = { rowCount: updatedCount, email };
         return result;
@@ -111,7 +139,7 @@ const editPassword = async (entry) => {
 
 
 const deleteMedico = async (entry) => {
-    const {is_active, email} = entry;
+    const { is_active, email } = entry;
     try {
         const [updatedCount] = await Medicos.update({ is_active }, {
             where: { email }
@@ -136,7 +164,8 @@ module.exports = {
     editRole,
     editLogged,
     deleteMedico,
-    editPassword
+    editPassword,
+    loginMedicos
 }
 
 
