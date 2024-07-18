@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const Medicos= require('../schemas/medicos.schema');
-const dotenv = require('dotenv');
-dotenv.config();
+require('dotenv').config();
+
 
 const authenticateToken = async (req, res, next) => {
   const token = req.cookies['access-token'];

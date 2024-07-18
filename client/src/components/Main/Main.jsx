@@ -5,6 +5,7 @@ import RegisterUser from "./RegisterUser";
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+axios.defaults.withCredentials = true;
 
 
 
@@ -35,8 +36,9 @@ const Main = () => {
         const response = await axios.put('https://data-geri.onrender.com/api/medicos', { is_logged: false, last_time_logged: date }, {
             headers: {
               Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json',
+              'Content-Type': 'application/json'
             },
+            withCredentials: true
         });
         console.log(response)
         Cookies.remove('access-token');
