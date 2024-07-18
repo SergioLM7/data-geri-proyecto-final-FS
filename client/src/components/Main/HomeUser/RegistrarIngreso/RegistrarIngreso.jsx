@@ -22,8 +22,9 @@ const RegistrarIngreso = ({ onClose }) => {
         onClose();
       }, 2000);
     } catch (error) {
-      if (error.response && error.response.data.error) {
-        setConfirmationMessage(`Error: ${error.response.data.error}`);
+      console.log(error);
+      if (error.response && error.response.data.message) {
+        setConfirmationMessage(`Error: ${error.response.data.message}`);
       } else {
         setConfirmationMessage('Error al registrar el ingreso.');
       }
