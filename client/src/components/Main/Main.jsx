@@ -19,7 +19,7 @@ const Main = () => {
 
   const handleLogin = (token) => {
     setIsLoggedIn(true);
-    Cookies.set('access-token', token, { expires: '1h' });
+    Cookies.set('access-token', token, { expires: 1/24 });
   };
 
   const handleLogout = async () => {
@@ -29,12 +29,12 @@ const Main = () => {
         const decodedToken = JSON.parse(atob(token.split('.')[1]));
         const email = decodedToken.email;
         const date = new Date();
-        
-        // Llama al endpoint de logout del backend
-        await axios.post('https://data-geri.onrender.com/api/medicos', { email, is_logged: true, last_time_logged: date}, {
+        console.log(email)
+        console.log(decodedToken)
+        const response = await axios.put('https://data-geri.onrender.com/api/medicos', { email:email, is_logged: true, last_time_logged: date}, {
           headers: { Authorization: `Bearer ${token}` }
         });
-
+        console.log(response)
         Cookies.remove('access-token');
         setIsLoggedIn(false);
         navigate('/');

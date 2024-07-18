@@ -1,6 +1,6 @@
 const services = require('../services/medicos.services');
 
-const loginMedico = async (req,res)=> {
+const loginMedico = async (req, res) => {
     try {
         console.log(req.body);
         const userLogin = await services.loginMedicos(req.body);
@@ -8,6 +8,19 @@ const loginMedico = async (req,res)=> {
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: error.message || 'Error en el login.' });
+    }
+};
+
+const logoutMedico = async (req, res) => {
+    const { is_logged, last_time_logged } = req.body;
+    const { email } = req.medico; 
+
+    try {
+        const result = await editLogged({ email, is_logged, last_time_logged });
+        res.status(200).json({ result });
+    } catch (error) {
+        console.error('Error al cerrar sesión del médico:', error);
+        res.status(500).json({ message: error.message || 'Error al cerrar sesión.' });
     }
 };
 
@@ -57,11 +70,6 @@ const editMedico = async (req, res) => {
                 result,
                 message: `Se ha editado su contraseña: ${req.body.email}`
             });
-        } else if (req.body.is_logged && req.body.last_time_logged) {
-            console.log('voy a editar el logged y last_time_logged')
-            const result = await services.editLogged(req.body);
-            res.status(200).json({
-                result            });
         } else if (req.body.is_active) {
             console.log('voy a editar el is_active')
             const result = await services.deleteMedico(req.body);
@@ -70,7 +78,7 @@ const editMedico = async (req, res) => {
                 message: `Se ha desactivo el médico: ${req.body.email}`
             });
         }
-        
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Error al editar los campos del médico' });
@@ -83,7 +91,8 @@ const controllers = {
     getMedicos,
     postMedicos,
     editMedico,
-    loginMedico
+    loginMedico,
+    logoutMedico
 }
 
 

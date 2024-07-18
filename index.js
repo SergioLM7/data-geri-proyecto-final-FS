@@ -4,6 +4,7 @@ require('./schemas/associations');
 const { syncDatabase } = require('./config/db_sql');
 const { seedDatabase } = require('./seed/seed');
 const app = express();
+const cookieParser = require('cookie-parser');
 //const host = process.env.DB_HOST || 'localhost'
 const port = process.env.PORT || 5001;
 const cors = require('cors');
@@ -27,6 +28,7 @@ const morgan = require('./middlewares/morgan');
 app.use(morgan(':method :host :status - :response-time ms :body'));
 
 app.use(express.json()); // Habilito recepción de JSON en servidor
+app.use(cookieParser());
 
 // Importar rutas
 //API

@@ -16,7 +16,7 @@ const Login = ({ handleLogin, handleLogout }) => {
     event.preventDefault();
     try {
       const response = await axios.post('https://data-geri.onrender.com/api/medicos/login/', {
-        email: email, 
+        email: email,
         password_hash: password_hash
       });
       console.log(response);
@@ -25,6 +25,7 @@ const Login = ({ handleLogin, handleLogout }) => {
       setError(null);
       navigate('/home');
     } catch (error) {
+      console.log(error)
       const mensaje = error.response && error.response.data.message
         ? error.response.data.message
         : 'Error al iniciar sesión. Inténtalo de nuevo';

@@ -9,6 +9,7 @@ const Ingresos = require('../schemas/ingresos.schema');
 const { sequelize } = require('../config/db_sql');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 
 const loginMedicos = async (entry) => {
@@ -35,8 +36,7 @@ const loginMedicos = async (entry) => {
 
         return token;
     } catch (error) {
-        console.error('El médico no ha sido encontrado', error);
-        throw new Error('Error interno del servidor.');
+        console.error('No se ha podido iniciar sesión.', error);
     }
 };
 
@@ -103,16 +103,17 @@ const editRole = async (entry) => {
     }
 };
 
-const editLogged = async (entry) => {
-    const { is_logged, last_time_logged, email } = entry;
+const editLogged = async ({ email, is_logged, last_time_logged }) => {
     try {
-        const [updatedCount] = await Medicos.update({ is_logged, last_time_logged }, {
-            where: { email }
-        });
+        const [updatedCount] = await Medicos.update(
+            { is_logged, last_time_logged },
+            { where: { email } }
+        );
 
         if (updatedCount === 0) {
-            throw new Error('No se encontró al médico / no se pudo cerrar sesión.');
+            throw new Error('No se encontró al médico o no se pudo cerrar sesión.');
         }
+
         const result = { rowCount: updatedCount, email };
         return result;
     } catch (error) {
