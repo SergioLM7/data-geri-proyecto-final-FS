@@ -14,13 +14,13 @@ const Login = ({ handleLogin, handleLogout }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(email);
     try {
-      const response = await axios.post('https://data-geri.onrender.com/api/medicos/login', {
-        params: { email, password_hash }
+      const response = await axios.post('https://data-geri.onrender.com/api/medicos/login/', {
+        email: email, 
+        password_hash: password_hash
       });
       console.log(response);
-      const token = response.data.token;
+      const token = response.data;
       handleLogin(token);
       setError(null);
       navigate('/home');

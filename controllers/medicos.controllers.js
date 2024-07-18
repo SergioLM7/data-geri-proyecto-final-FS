@@ -2,13 +2,14 @@ const services = require('../services/medicos.services');
 
 const loginMedico = async (req,res)=> {
     try {
+        console.log(req.body);
         const userLogin = await services.loginMedicos(req.body);
         res.status(201).json(userLogin);
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: error.message || 'Error en el login.' });
     }
-}
+};
 
 const getMedicos = async (req, res) => {
     try {

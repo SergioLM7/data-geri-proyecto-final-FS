@@ -13,8 +13,10 @@ const jwt = require('jsonwebtoken');
 
 const loginMedicos = async (entry) => {
     const { email, password_hash } = entry;
+    console.log(entry)
     try {
         const medicoLogin = await Medicos.findOne({ where: { email } });
+
         if (!medicoLogin || !medicoLogin.is_active) {
             throw new Error('Este usuario ya no está activo.');
         }
