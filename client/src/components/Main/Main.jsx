@@ -36,24 +36,25 @@ const Main = () => {
         const decodedToken = JSON.parse(atob(token.split('.')[1]));
         const email = decodedToken.email;
         const date = new Date();
-
-        const response = await axios.put('https://data-geri.onrender.com/api/medicos/logout/', {
+  
+        const response = await axios.post('https://data-geri.onrender.com/api/medicos/logout/', {
           email: email,
           is_logged: false,
           last_time_logged: date
         }, {
-          withCredentials: true,
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
           }
         });
-        console.log(response)
+        
+        console.log(response);
         Cookies.remove('access-token');
         setIsLoggedIn(false);
         navigate('/');
       } catch (error) {
         console.error('Error al hacer logout:', error);
-        throw new Error('Error al hacer logout:', error);
+        // Considera manejar el error de una manera más amigable para el usuario
       }
     } else {
       console.error('No se encontró el token de acceso.');
