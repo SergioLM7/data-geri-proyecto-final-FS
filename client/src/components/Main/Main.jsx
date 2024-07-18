@@ -22,7 +22,7 @@ const Main = () => {
 
   const handleLogin = (token) => {
     setIsLoggedIn(true);
-    Cookies.set('access-token', token, { expires: 1 });
+    Cookies.set('access-token', token, { expires: 1 / 24, path: '/' });
   };
 
   const handleLogout = async () => {
@@ -34,11 +34,10 @@ const Main = () => {
         const date = new Date();
 
         const response = await axios.put('https://data-geri.onrender.com/api/medicos', { is_logged: false, last_time_logged: date }, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json'
-            },
-            withCredentials: true
+          withCredentials: true, // Asegura que las cookies se envíen
+          headers: {
+            'Content-Type': 'application/json'
+          }
         });
         console.log(response)
         Cookies.remove('access-token');

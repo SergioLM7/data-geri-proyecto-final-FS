@@ -25,14 +25,16 @@ const morgan = require('./middlewares/morgan');
 // Logger
 app.use(morgan(':method :host :status - :response-time ms :body'));
 
+
+app.use(express.json()); // Habilito recepción de JSON en servidor
+app.use(cookieParser());
+
 // Configuración de CORS
 app.use(cors({
     origin: 'http://localhost:5173', // Permitir solicitudes desde este origen
     credentials: true // Habilitar el envío de cookies o credenciales en las solicitudes
 }));
 
-app.use(express.json()); // Habilito recepción de JSON en servidor
-app.use(cookieParser());
 
 // Importar rutas
 //API
