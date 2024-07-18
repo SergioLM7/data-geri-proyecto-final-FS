@@ -76,21 +76,27 @@ const getIngresosByHistoria = async (entry) => {
 
 const createIngreso = async (entry) => {
     try {
-        const { fecha_ingreso, fecha_alta } = entry;
-        const fechaIngreso = new Date(fecha_ingreso);
-        const fechaAlta = new Date(fecha_alta);
-        const duracion_ingreso = Math.floor((fechaAlta - fechaIngreso) / (1000 * 60 * 60 * 24));
+        const medico = await Medico.findByPk(entry.medico_id);
+        if (!medico || medico.is_active === false) {
+            return res.status(400).json({ error: 'El ID del médico no existe o no está activo.' });
+        } else {
+            const { fecha_ingreso, fecha_alta } = entry;
+            const fechaIngreso = new Date(fecha_ingreso);
+            const fechaAlta = new Date(fecha_alta);
+            const duracion_ingreso = Math.floor((fechaAlta - fechaIngreso) / (1000 * 60 * 60 * 24));
 
-        const entryWithDuration = {
-            ...entry,
-            duracion_ingreso
-        };
-        const newIngreso = await Ingreso.create(entryWithDuration);
-        console.log(newIngreso)
+            const entryWithDuration = {
+                ...entry,
+                duracion_ingreso
+            };
+            const newIngreso = await Ingreso.create(entryWithDuration);
+            console.log(newIngreso)
 
-        if (newIngreso) {
-            return newIngreso;
+            if (newIngreso) {
+                return newIngreso;
+            }
         }
+
 
     } catch (error) {
         console.error('Error al crear un nuevo ingreso:', error);
@@ -102,8 +108,9 @@ const deleteIngreso = async (ingreso_id) => {
     try {
         const ingresoEliminado = await Ingreso.destroy({
             where: {
-            ingreso_id,
-          }});
+                ingreso_id,
+            }
+        });
 
         console.log(ingresoEliminado)
 

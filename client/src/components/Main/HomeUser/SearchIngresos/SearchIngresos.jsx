@@ -3,26 +3,33 @@ import { MensajeError } from '../../../../context/MensajeError';
 import axios from 'axios';
 import CardIngresos from "./CardIngresos/CardIngresos";
 import { v4 as uuidv4 } from 'uuid';
+import { DNA } from 'react-loader-spinner';
+
 
 
 const SearchIngresos = () => {
   const { error, updateError } = useContext(MensajeError);
   const [ingresoID, setIngresoID] = useState('');
   const [ingresosList, setIngresosList] = useState([]);
+  const [loading, setLoading] = useState(false); 
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); 
     try {
       const res = await axios.get('https://data-geri.onrender.com/api/ingresos', {
         params: { historia_clinica: ingresoID, limit: 10, offset: 0 }
       });
       const allIngresos = res.data;
       setIngresosList(allIngresos);
-      updateError(''); 
+      updateError('');
     } catch (err) {
       console.error('Error al traer los ingresos de la base de datos', err);
-      setIngresosList([]); 
+      setIngresosList([]);
       updateError('Error al traer los ingresos de la base de datos. Inténtalo de nuevo.');
+    } finally {
+      setLoading(false);
     }
     setIngresoID('');
   };
@@ -94,11 +101,30 @@ const SearchIngresos = () => {
             </tr>
           </thead>
           <tbody>
-            {renderIngresos()}
+          {loading ? (
+            <tr>
+              <td colSpan="12">
+                <DNA
+                  visible={true}
+                  height="100"
+                  width="100"
+                  ariaLabel="dna-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="dna-wrapper"
+                />
+              </td>
+            </tr>
+          ) : (
+            ingresosList.length > 0 ? renderIngresos() : (
+              <tr>
+                <td colSpan="12">No se han solicitado ingresos.</td>
+              </tr>
+            )
+          )}
           </tbody>
         </table>
       ) : (
-        <p>No se han buscado ingresos.</p>
+        <p></p>
       )}
     </article>
   );

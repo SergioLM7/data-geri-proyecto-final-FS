@@ -30,6 +30,7 @@ const Login = ({ handleLogin, handleLogout}) => {
         updateError(mensaje);
         handleLogin();
         navigate('/home'); 
+        updateError(null);
       } else {
         const mensaje = 'Usuario o contraseña incorrectos.';
         updateError(mensaje);
