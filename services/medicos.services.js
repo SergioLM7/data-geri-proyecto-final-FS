@@ -105,17 +105,23 @@ const editRole = async (entry) => {
 
 const editLogged = async ({ email, is_logged, last_time_logged }) => {
     try {
-        const [updatedCount] = await Medicos.update(
+        const [updatedCount, [updatedMedico]] = await Medicos.update(
             { is_logged, last_time_logged },
-            { where: { email } }
+            { where: { email }, returning: true }
         );
 
         if (updatedCount === 0) {
             throw new Error('No se encontró al médico o no se pudo cerrar sesión.');
         }
 
-        const result = { rowCount: updatedCount, email };
-        return result;
+        console.log('Médico actualizado:', updatedMedico.toJSON());
+
+        return {
+            rowCount: updatedCount,
+            email: updatedMedico.email,
+            is_logged: updatedMedico.is_logged,
+            last_time_logged: updatedMedico.last_time_logged
+        };
     } catch (error) {
         console.error('Error al actualizar el inicio de sesión del médico:', error);
         throw error;

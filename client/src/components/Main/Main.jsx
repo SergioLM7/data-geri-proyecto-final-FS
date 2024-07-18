@@ -23,9 +23,7 @@ const Main = () => {
   const handleLogin = (token) => {
     setIsLoggedIn(true);
     Cookies.set('access-token', token, {
-      expires: 1 / 24,
-      path: '/',
-      domain: 'localhost' // Asegúrate de que el dominio está correcto
+      expires: 1 / 24
     });
   };
 
@@ -33,28 +31,24 @@ const Main = () => {
     const token = Cookies.get('access-token');
     if (token) {
       try {
-        const decodedToken = JSON.parse(atob(token.split('.')[1]));
-        const email = decodedToken.email;
-        const date = new Date();
-  
-        const response = await axios.post('https://data-geri.onrender.com/api/medicos/logout/', {
-          email: email,
-          is_logged: false,
-          last_time_logged: date
-        }, {
+        const response = await axios.put('https://data-geri.onrender.com/api/medicos/logout/', {}, {
           headers: {
-            'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
           }
         });
-        
-        console.log(response);
-        Cookies.remove('access-token');
-        setIsLoggedIn(false);
-        navigate('/');
+
+        console.log('Respuesta del servidor:', response.data);
+
+        if (response.status === 200) {
+          Cookies.remove('access-token');
+          setIsLoggedIn(false);
+          navigate('/');
+        } else {
+          console.error('Error en la respuesta del servidor:', response);
+        }
       } catch (error) {
         console.error('Error al hacer logout:', error);
-        // Considera manejar el error de una manera más amigable para el usuario
+        // Maneja el error aquí (por ejemplo, mostrando un mensaje al usuario)
       }
     } else {
       console.error('No se encontró el token de acceso.');

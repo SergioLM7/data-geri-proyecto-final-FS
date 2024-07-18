@@ -12,14 +12,15 @@ const loginMedico = async (req, res) => {
 };
 
 const logoutMedico = async (req, res) => {
-    const { is_logged, last_time_logged } = req.body;
     const { email } = req.medico;
-    console.log(req.medico)
-    console.log(req.body)
+    const is_logged = false;
+    const last_time_logged = new Date();
+
+    console.log('Médico haciendo logout:', req.medico);
 
     try {
         const result = await editLogged({ email, is_logged, last_time_logged });
-        res.status(200).json({ result });
+        res.status(200).json({ message: 'Logout exitoso', result });
     } catch (error) {
         console.error('Error al cerrar sesión del médico:', error);
         res.status(500).json({ message: error.message || 'Error al cerrar sesión.' });
