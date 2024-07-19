@@ -11,6 +11,10 @@
   },
   "proxy": "https://data-geri.onrender.com",
   "dependencies": {
+    "@nivo/bar": "^0.87.0",
+    "@nivo/core": "^0.87.0",
+    "@nivo/line": "^0.87.0",
+    "@nivo/pie": "^0.87.0",
     "axios": "^1.7.2",
     "js-cookie": "^3.0.5",
     "jwt-decode": "^4.0.0",

@@ -1,0 +1,10 @@
+.stats-user {
+    height: 500px;
+    width: 100%;
+  }
+  
+  @media (min-width: 650) {
+    .stats-user {
+      height: 400px;
+    }
+  }
