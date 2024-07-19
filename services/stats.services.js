@@ -10,6 +10,7 @@ const Ingreso = require('../schemas/ingresos.schema');
 
 
 const statsGeneralesMedico = async (email) => {
+    console.log(email);
     try {
       const results = await sequelize.query(queries.statsGeneralesMedico, {
         type: sequelize.QueryTypes.SELECT,
@@ -24,6 +25,7 @@ const statsGeneralesMedico = async (email) => {
   };
 
   const statsGeneralesMedicoAno = async (email, ano) => {
+    console.log(email, ano);
     try {
       const results = await sequelize.query(queries.statsGeneralesMedicoAno, {
         type: sequelize.QueryTypes.SELECT,

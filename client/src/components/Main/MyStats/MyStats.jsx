@@ -40,9 +40,7 @@ const MyStats = () => {
     }
 
     try {
-      const res = await axios.get('https://data-geri.onrender.com/api/stats', {
-        params: { email }
-      });
+      const res = await axios.get(`https://data-geri.onrender.com/api/stats/${email}`);
       console.log(res);
       //setMyStats(res.data);
       setError('');

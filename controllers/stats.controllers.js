@@ -8,6 +8,7 @@ const getStatsGeneralesMedico = async (req, res) => {
         res.status(200).json(stats);
     } else {
         const { email } = req.params;
+        console.log(req.params);
         const stats = await statsServices.statsGeneralesMedico(email);
         res.status(200).json(stats);
     }
