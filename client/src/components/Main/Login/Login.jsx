@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import Header from '../../Header/Header';
 import { MensajeError } from '../../../context/MensajeError';
+import { DNA } from 'react-loader-spinner';
+
 
 
 const Login = ({ handleLogin, handleLogout }) => {
@@ -10,10 +12,12 @@ const Login = ({ handleLogin, handleLogout }) => {
 
   const [email, setEmail] = useState('');
   const [password_hash, setPasswordHash] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
     try {
       const response = await axios.post('https://data-geri.onrender.com/api/medicos/login/', {
         email: email,
@@ -23,12 +27,14 @@ const Login = ({ handleLogin, handleLogout }) => {
       const token = response.data;
       handleLogin(token);
       setError(null);
+      setIsLoading(false);
       navigate('/home');
     } catch (error) {
       console.log(error)
       const mensaje = error.response && error.response.data.message
         ? error.response.data.message
         : 'Error al iniciar sesión. Inténtalo de nuevo';
+      setIsLoading(false);
       setError(mensaje);
     }
   };
@@ -62,9 +68,18 @@ const Login = ({ handleLogin, handleLogout }) => {
         {error && <p>{error}</p>}
         <button type="submit" className="button-login">Iniciar sesión</button>
       </form>
-      <div className="link-register">
+      {isLoading ? (
+        <DNA
+          visible={true}
+          height="100"
+          width="100"
+          ariaLabel="dna-loading"
+          wrapperStyle={{}}
+          wrapperClass="dna-wrapper"
+        />
+      ) : (<div className="link-register">
         <Link to="/register">¿No estás registrado? Haz click aquí</Link>
-      </div>
+      </div>)}
     </section>
   </>;
 };

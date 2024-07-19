@@ -6,17 +6,60 @@ import NavUser from '../../NavUser/NavUser';
 import { DNA } from 'react-loader-spinner';
 import Cookies from 'js-cookie';
 import {jwtDecode} from 'jwt-decode';
-import { ResponsivePie } from '@nivo/pie'
+import { ResponsivePie } from '@nivo/pie';
+import { ResponsiveLine } from '@nivo/line';
+
 
 
 const MyStats = ({ handleLogout }) => {
   const { error, setError } = useContext(MensajeError);
+  const [statsAno, setStatsAno] = useState([]);
   const [myStats, setMyStats] = useState([]);
   const [searching, setSearching] = useState(false);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+
 
   useEffect(() => {
     getStats();
   }, []);
+
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth)
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, []);
+
+  const legendProps = screenWidth <= 460
+    ? {
+        anchor: 'bottom',
+        direction: 'column',
+        justify: false,
+        translateX: 0,
+        translateY: 56,
+        itemsSpacing: 0,
+        itemWidth: 100,
+        itemHeight: 18,
+        itemDirection: 'left-to-right',
+        itemTextColor: '#999',
+        itemOpacity: 1,
+        symbolSize: 18,
+        symbolShape: 'circle',
+      }
+    : {
+        anchor: 'bottom',
+        direction: 'row',
+        justify: false,
+        translateX: 0,
+        translateY: 56,
+        itemsSpacing: 0,
+        itemWidth: 100,
+        itemHeight: 18,
+        itemDirection: 'left-to-right',
+        itemTextColor: '#999',
+        itemOpacity: 1,
+        symbolSize: 18,
+        symbolShape: 'circle',
+      };
 
   const getEmailCookies = () => {
     const token = Cookies.get('access-token');
@@ -47,6 +90,12 @@ const MyStats = ({ handleLogout }) => {
       const res = await axios.get(`https://data-geri.onrender.com/api/stats/${email}`);
       console.log(res);
       setMyStats([res.data[0]]);
+
+      const res2 = await axios.get(`https://data-geri.onrender.com/api/stats/ultimos/${email}`);
+      console.log(res2);
+      //setMyStats([res2.data]);
+
+
       setError('');
     } catch (err) {
       console.error('Error al traer las estadísticas de la base de datos', err);
@@ -84,7 +133,7 @@ const MyStats = ({ handleLogout }) => {
       "color": "hsl(264, 70%, 50%)"
     },
     {
-      "id": "Infección-Abd.",
+      "id": "Infección-Abd",
       "label": "Infección abd.",
       "value": formatNumber(myStats[0].porcentajeinfeccabd),
       "color": "hsl(122, 70%, 50%)"
@@ -97,7 +146,26 @@ const MyStats = ({ handleLogout }) => {
     }
   ] : [] ;
 
-  console.log(data)
+ const dataBars = myStats.length > 0 ? [
+  {
+    "id": "Ingreso medio",
+    "color": "hsl(224, 70%, 50%)",
+    "data": [
+      {
+        "x": "2022",
+        "y": 20,
+      },
+      {
+        "x": "2023",
+        "y": 15,
+      },
+      {
+        "x": "2024",
+        "y": formatNumber(myStats[0].estanciamedia),
+      }
+    ]
+  }
+] : [];
 
   return <>
     <Header />
@@ -114,9 +182,9 @@ const MyStats = ({ handleLogout }) => {
           wrapperClass="dna-wrapper"
         />
       ) : (
-        <article className="stats-user" style={{ height: '400px', width: '100%' }}>
+        <article className="stats-user">
           {myStats.length > 0 ? (
-            <ResponsivePie
+            <><ResponsivePie
             data={data}
             margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
             innerRadius={0.5}
@@ -173,75 +241,106 @@ const MyStats = ({ handleLogout }) => {
             fill={[
                 {
                     match: {
-                        id: 'itu'
+                        id: 'ITU'
                     },
                     id: 'dots'
                 },
                 {
                     match: {
-                        id: 'neumonia'
+                        id: 'Neumonía'
                     },
                     id: 'dots'
                 },
                 {
                     match: {
-                        id: 'otros'
+                        id: 'Otros'
                     },
                     id: 'dots'
                 },
                 {
                     match: {
-                        id: 'icc'
+                        id: 'ICC'
                     },
                     id: 'dots'
                 },
                 {
                     match: {
-                        id: 'infeccion-abd'
+                        id: 'Infección-Abd'
                     },
                     id: 'dots'
                 },
             ]}
             motionConfig="molasses"
-            legends={[
-                {
-                    anchor: 'bottom',
-                    direction: 'row',
-                    justify: false,
-                    translateX: 0,
-                    translateY: 56,
-                    itemsSpacing: 0,
-                    itemWidth: 100,
-                    itemHeight: 18,
-                    itemTextColor: '#999',
-                    itemDirection: 'left-to-right',
-                    itemOpacity: 1,
-                    symbolSize: 18,
-                    symbolShape: 'circle',
-                    effects: [
-                        {
-                            on: 'hover',
-                            style: {
-                                itemTextColor: '#000'
-                            }
-                        }
-                    ]
-                }
-            ]}
+            legends={[legendProps]}
         />
-             /*<ul>
-             <li>Edad media: {formatNumber(myStats[0].edadmedia)} años</li>
-             <li>Estancia media: {formatNumber(myStats[0].estanciamedia)} días</li>
-             <li>Total ingresos: {myStats[0].totalingresos}</li>
-             <li>Porcentaje de hombres: {formatNumber(myStats[0].porcentajehombres)}%</li>
-             <li>Porcentaje de mujeres: {formatNumber(myStats[0].porcentajemujeres)}%</li>
-             <li>Porcentaje ITU: {formatNumber(myStats[0].porcentajeitu)}%</li>
-             <li>Porcentaje neumonía: {formatNumber(myStats[0].porcentajeneumonia)}%</li>
-             <li>Porcentaje ICC: {formatNumber(myStats[0].porcentajeicc)}%</li>
-             <li>Porcentaje infección abdominal: {formatNumber(myStats[0].porcentajeinfeccabd)}%</li>
-             <li>Porcentaje otros: {formatNumber(myStats[0].porcentajeotro)}%</li>
-           </ul>
-           */
+        <ResponsiveLine
+        data={dataBars}
+        margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+        xScale={{ type: 'point' }}
+        yScale={{
+            type: 'linear',
+            min: 'auto',
+            max: 'auto',
+            stacked: true,
+            reverse: false
+        }}
+        yFormat=" >-.2r"
+        axisTop={null}
+        axisRight={null}
+        axisBottom={{
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+            legend: 'Años',
+            legendOffset: 36,
+            legendPosition: 'middle',
+            truncateTickAt: 0
+        }}
+        axisLeft={{
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+            legend: 'Ingreso medio (días)',
+            legendOffset: -40,
+            legendPosition: 'middle',
+            truncateTickAt: 0
+        }}
+        pointSize={10}
+        pointColor={{ theme: 'background' }}
+        pointBorderWidth={2}
+        pointBorderColor={{ from: 'serieColor' }}
+        pointLabel="data.yFormatted"
+        pointLabelYOffset={-12}
+        enableTouchCrosshair={true}
+        useMesh={true}
+        legends={[
+            {
+                anchor: 'bottom-right',
+                direction: 'column',
+                justify: false,
+                translateX: 100,
+                translateY: 0,
+                itemsSpacing: 0,
+                itemDirection: 'left-to-right',
+                itemWidth: 80,
+                itemHeight: 20,
+                itemOpacity: 0.75,
+                symbolSize: 12,
+                symbolShape: 'circle',
+                symbolBorderColor: 'rgba(0, 0, 0, .5)',
+                effects: [
+                    {
+                        on: 'hover',
+                        style: {
+                            itemBackground: 'rgba(0, 0, 0, .03)',
+                            itemOpacity: 1
+                        }
+                    }
+                ]
+            }
+        ]}
+    />
+        </>
           ) : (
             <p>No hay estadísticas disponibles.</p>
           )}

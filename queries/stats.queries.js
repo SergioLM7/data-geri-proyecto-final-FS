@@ -8,7 +8,7 @@ const queriesStats = {
         SUM(CASE WHEN LOWER(diagnostico_principal) = 'itu' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeITU,
         SUM(CASE WHEN LOWER(diagnostico_principal) = 'neumonia' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeNeumonia,
         SUM(CASE WHEN LOWER(diagnostico_principal) = 'icc' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeICC,
-        SUM(CASE WHEN LOWER(diagnostico_principal) = 'Infeccion intraabd.' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeInfeccAbd,
+        SUM(CASE WHEN LOWER(diagnostico_principal) = 'infeccion intraabd.' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeInfeccAbd,
         SUM(CASE WHEN LOWER(diagnostico_principal) = 'otro' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeOtro
     FROM 
         ingresos`,
@@ -21,7 +21,7 @@ const queriesStats = {
         SUM(CASE WHEN LOWER(diagnostico_principal) = 'itu' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeITU,
         SUM(CASE WHEN LOWER(diagnostico_principal) = 'neumonia' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeNeumonia,
         SUM(CASE WHEN LOWER(diagnostico_principal) = 'icc' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeICC,
-        SUM(CASE WHEN LOWER(diagnostico_principal) = 'Infeccion intraabd.' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeInfeccAbd,
+        SUM(CASE WHEN LOWER(diagnostico_principal) = 'infeccion intraabd.' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeInfeccAbd,
         SUM(CASE WHEN LOWER(diagnostico_principal) = 'otro' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeOtro
     FROM 
         ingresos
@@ -40,7 +40,7 @@ const queriesStats = {
         SUM(CASE WHEN LOWER(diagnostico_principal) = 'itu' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeITU,
         SUM(CASE WHEN LOWER(diagnostico_principal) = 'neumonia' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeNeumonia,
         SUM(CASE WHEN LOWER(diagnostico_principal) = 'icc' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeICC,
-        SUM(CASE WHEN LOWER(diagnostico_principal) = 'Infeccion intraabd.' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeInfeccAbd,
+        SUM(CASE WHEN LOWER(diagnostico_principal) = 'infeccion intraabd.' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeInfeccAbd,
         SUM(CASE WHEN LOWER(diagnostico_principal) = 'otro' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeOtro
     FROM 
         ingresos
@@ -55,7 +55,7 @@ const queriesStats = {
         SUM(CASE WHEN LOWER(diagnostico_principal) = 'itu' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeITU,
         SUM(CASE WHEN LOWER(diagnostico_principal) = 'neumonia' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeNeumonia,
         SUM(CASE WHEN LOWER(diagnostico_principal) = 'icc' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeICC,
-        SUM(CASE WHEN LOWER(diagnostico_principal) = 'Infeccion intraabd.' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeInfeccAbd,
+        SUM(CASE WHEN LOWER(diagnostico_principal) = 'infeccion intraabd.' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeInfeccAbd,
         SUM(CASE WHEN LOWER(diagnostico_principal) = 'otro' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeOtro
     FROM 
         ingresos AS ing
@@ -75,7 +75,7 @@ const queriesStats = {
         SUM(CASE WHEN LOWER(diagnostico_principal) = 'itu' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeITU,
         SUM(CASE WHEN LOWER(diagnostico_principal) = 'neumonia' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeNeumonia,
         SUM(CASE WHEN LOWER(diagnostico_principal) = 'icc' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeICC,
-        SUM(CASE WHEN LOWER(diagnostico_principal) = 'Infeccion intraabd.' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeInfeccAbd,
+        SUM(CASE WHEN LOWER(diagnostico_principal) = 'infeccion intraabd.' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeInfeccAbd,
         SUM(CASE WHEN LOWER(diagnostico_principal) = 'otro' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeOtro
     FROM 
         ingresos AS ing
@@ -97,7 +97,7 @@ const queriesStats = {
             SUM(CASE WHEN LOWER(diagnostico_principal) = 'itu' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeITU,
             SUM(CASE WHEN LOWER(diagnostico_principal) = 'neumonia' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeNeumonia,
             SUM(CASE WHEN LOWER(diagnostico_principal) = 'icc' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeICC,
-            SUM(CASE WHEN LOWER(diagnostico_principal) = 'Infeccion intraabd.' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeInfeccAbd,
+            SUM(CASE WHEN LOWER(diagnostico_principal) = 'infeccion intraabd.' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeInfeccAbd,
             SUM(CASE WHEN LOWER(diagnostico_principal) = 'otro' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeOtro
         FROM 
             ingresos AS ing
@@ -107,9 +107,9 @@ const queriesStats = {
                 FROM 
                     medicos AS m
                 WHERE 
-                    m.email=$1)
+                    m.email= :email)
         AND 
-            EXTRACT(YEAR FROM fecha_ingreso) IN ($1, $2, $3)
+            EXTRACT(YEAR FROM fecha_ingreso) IN (2022, 2023, 2024)
 	    GROUP BY
     	    EXTRACT(YEAR FROM fecha_ingreso)
 	    ORDER BY

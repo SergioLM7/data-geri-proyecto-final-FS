@@ -38,10 +38,27 @@ const statsGeneralesMedico = async (email) => {
       throw error;
     }
   };
+
+
+  const statsMedicoUltimosTres = async (email) => {
+    console.log(email);
+    try {
+      const results = await sequelize.query(queries.statsGeneralesMedicoUltimosAnos, {
+        type: sequelize.QueryTypes.SELECT,
+        replacements: {email}
+      });
+      console.log(results)
+      return results;
+    } catch (error) {
+      console.error('Error executing query:', error);
+      throw error;
+    }
+  };
   
   module.exports = {
     statsGeneralesMedico,
-    statsGeneralesMedicoAno
+    statsGeneralesMedicoAno,
+    statsMedicoUltimosTres
   };
 
 
