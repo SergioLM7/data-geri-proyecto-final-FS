@@ -89,17 +89,22 @@ const MyStats = ({ handleLogout }) => {
     try {
       const res = await axios.get(`https://data-geri.onrender.com/api/stats/${email}`);
       console.log(res);
-      setMyStats([res.data[0]]);
 
-      const res2 = await axios.get(`https://data-geri.onrender.com/api/stats/ultimos/${email}`);
-      console.log(res2);
-      //setMyStats([res2.data]);
+      if (res) {
+        setMyStats([res.data[0]]);
+        setError('');
+        const res2 = await axios.get(`https://data-geri.onrender.com/api/stats/ultimos/${email}`);
+        console.log(res2);
+        //setStatsAno([res2.data]);
 
+      }
+      
 
       setError('');
     } catch (err) {
       console.error('Error al traer las estadísticas de la base de datos', err);
       setMyStats([]);
+      setStatsAno([]);
       setError('Error al traer las estadísticas de la base de datos. Inténtalo de nuevo.');
       setTimeout(() => {
         setError('');
