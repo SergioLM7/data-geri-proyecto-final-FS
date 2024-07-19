@@ -107,8 +107,11 @@ const editLogged = async ({ email, is_logged, last_time_logged }) => {
     try {
         const [updatedCount, [updatedMedico]] = await Medicos.update(
             { is_logged, last_time_logged },
-            { where: { email }, returning: true }
+            { where: { email } }
         );
+
+        console.log(updatedMedico);
+        console.log(updatedCount);
 
         if (updatedCount === 0) {
             throw new Error('No se encontró al médico o no se pudo cerrar sesión.');

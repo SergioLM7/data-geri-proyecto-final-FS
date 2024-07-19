@@ -14,9 +14,10 @@ const authenticateToken = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    console.log('Este es el JWT decodificado', decoded)
     const medico = await Medicos.findOne({ where: { email: decoded.email } });
     
-    console.log(medico);
+    console.log('El medico encontrado', medico);
     
     if (!medico) {
       return res.status(404).json({ message: 'Médico no encontrado.' });

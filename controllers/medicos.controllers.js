@@ -13,6 +13,7 @@ const loginMedico = async (req, res) => {
 
 const logoutMedico = async (req, res) => {
     const { email } = req.medico;
+    console.log('Esto es lo que llega al controller', req.medico)
     const is_logged = false;
     const last_time_logged = new Date();
 
