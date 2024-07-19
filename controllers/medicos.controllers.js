@@ -21,7 +21,7 @@ const logoutMedico = async (req, res) => {
     console.log(email, is_logged, last_time_logged);
 
     try {
-        const result = await services.editLogged({ email, is_logged, last_time_logged });
+        const result = await services.editLogged(email, is_logged, last_time_logged);
         res.status(200).json({ message: 'Logout exitoso', result });
     } catch (error) {
         console.error('Error al cerrar sesión del médico:', error);
