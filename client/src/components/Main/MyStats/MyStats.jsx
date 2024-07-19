@@ -151,7 +151,17 @@ const MyStats = ({ handleLogout }) => {
     }
   ] : [] ;
 
- const dataBars = myStats.length > 0 ? [
+  const dataBars = statsAno.length > 0 ? (statsAno.map(stat => ({
+    id: stat.ano,
+    color: 'hsl(224, 70%, 50%)',
+    data: [
+      {
+        x: stat.ano.toString(),
+        y: formatNumber(stat.estanciaMedia)
+      }
+    ]
+  }))) : [];
+ /*const dataBars = myStats.length > 0 ? [
   {
     "id": "Ingreso medio",
     "color": "hsl(224, 70%, 50%)",
@@ -170,7 +180,7 @@ const MyStats = ({ handleLogout }) => {
       }
     ]
   }
-] : [];
+] : [];*/
 
   return <>
     <Header />
@@ -310,6 +320,7 @@ const MyStats = ({ handleLogout }) => {
             legendPosition: 'middle',
             truncateTickAt: 0
         }}
+        colors={{ scheme: 'blues' }}
         pointSize={10}
         pointColor={{ theme: 'background' }}
         pointBorderWidth={2}

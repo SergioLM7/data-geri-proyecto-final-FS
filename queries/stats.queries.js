@@ -89,33 +89,32 @@ const queriesStats = {
             AND  
                 EXTRACT(YEAR FROM fecha_ingreso) = :ano;`,
     statsGeneralesMedicoUltimosAnos: `SELECT 
-        EXTRACT(YEAR FROM fecha_ingreso) AS ano,
-        AVG(edad_paciente) AS edadMedia,
-        AVG(duracion_ingreso) AS estanciaMedia,
-        COUNT(ingreso_id) AS totalIngresos,
-        SUM(CASE WHEN LOWER(sexo) = 'hombre' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeHombres,
-        SUM(CASE WHEN LOWER(sexo) = 'mujer' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeMujeres,
-        SUM(CASE WHEN LOWER(diagnostico_principal) = 'itu' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeITU,
-        SUM(CASE WHEN LOWER(diagnostico_principal) = 'neumonia' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeNeumonia,
-        SUM(CASE WHEN LOWER(diagnostico_principal) = 'icc' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeICC,
-        SUM(CASE WHEN LOWER(diagnostico_principal) = 'infeccion intraabd.' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeInfeccAbd,
-        SUM(CASE WHEN LOWER(diagnostico_principal) = 'otro' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeOtro
-    FROM 
-        ingresos AS ing
-    WHERE
-        ing.medico_id = (
-            SELECT 
-                m.medico_id
-            FROM 
-                medicos AS m
-            WHERE 
-                m.email = :email
-        )
-        AND EXTRACT(YEAR FROM fecha_ingreso) IN (2022, 2023, 2024)
-    GROUP BY
-        EXTRACT(YEAR FROM fecha_ingreso)
-    ORDER BY
-        EXTRACT(YEAR FROM fecha_ingreso) ASC;`,
+    EXTRACT(YEAR FROM fecha_ingreso) AS ano,
+    AVG(edad_paciente) AS edadMedia,
+    AVG(duracion_ingreso) AS estanciaMedia,
+    COUNT(ingreso_id) AS totalIngresos,
+    SUM(CASE WHEN LOWER(sexo) = 'hombre' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeHombres,
+    SUM(CASE WHEN LOWER(sexo) = 'mujer' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeMujeres,
+    SUM(CASE WHEN LOWER(diagnostico_principal) = 'itu' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeITU,
+    SUM(CASE WHEN LOWER(diagnostico_principal) = 'neumonia' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeNeumonia,
+    SUM(CASE WHEN LOWER(diagnostico_principal) = 'icc' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeICC,
+    SUM(CASE WHEN LOWER(diagnostico_principal) = 'infeccion intraabd.' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeInfeccAbd,
+    SUM(CASE WHEN LOWER(diagnostico_principal) = 'otro' THEN 1 ELSE 0 END) * 100.0 / COUNT(ingreso_id) AS porcentajeOtro
+FROM 
+    ingresos AS ing
+WHERE
+    ing.medico_id=(SELECT 
+            m.medico_id
+        FROM 
+            medicos AS m
+        WHERE 
+            m.email= :email)
+AND 
+    EXTRACT(YEAR FROM fecha_ingreso) IN (2022, 2023, 2024)
+GROUP BY
+    EXTRACT(YEAR FROM fecha_ingreso)
+ORDER BY
+    EXTRACT(YEAR FROM fecha_ingreso) ASC;`,
 };
 
 module.exports = queriesStats;
