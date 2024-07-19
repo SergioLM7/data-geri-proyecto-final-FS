@@ -23,7 +23,7 @@ const authenticateToken = async (req, res, next) => {
       return res.status(404).json({ message: 'Médico no encontrado.' });
     }
 
-    req.medico = medico;
+    req.medico = medico.dataValues;
     next();
   } catch (error) {
     console.error('Error de autenticación:', error);
