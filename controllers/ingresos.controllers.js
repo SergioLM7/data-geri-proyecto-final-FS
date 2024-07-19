@@ -78,7 +78,7 @@ const editIngreso = async (req, res) => {
             message: `Se ha actualizado el ingreso: ${req.body.ingreso_id}`
         });
     } catch (error) {
-        res.status(500).json({ error: 'Error al actualizar el ingreso' });
+        res.status(500).json({ message: error.message || 'Error al editar el ingreso' });
     }
 };
 

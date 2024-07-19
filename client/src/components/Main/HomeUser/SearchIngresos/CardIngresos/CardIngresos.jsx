@@ -75,7 +75,7 @@ const CardIngresos = ({
         fieldsToUpdate: updatedFields
       });
       setIsEditing(false);
-      onEdit(updatedFields); // Actualiza la lista en el componente padre
+      onEdit(updatedFields); 
     } catch (error) {
       console.error('Error al actualizar el ingreso', error);
     }
@@ -84,7 +84,7 @@ const CardIngresos = ({
   const handleDelete = async () => {
     try {
       await axios.delete(`https://data-geri.onrender.com/api/ingresos/${ingreso_id}`);
-      onDelete(ingreso_id); // Elimina el ingreso de la lista en el componente padre
+      onDelete(ingreso_id); 
     } catch (error) {
       console.error('Error al eliminar el ingreso', error);
     }

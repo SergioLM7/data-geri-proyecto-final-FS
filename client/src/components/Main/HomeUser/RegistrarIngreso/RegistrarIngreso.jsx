@@ -58,9 +58,9 @@ const RegistrarIngreso = ({ onClose }) => {
             {errors.medico_id && <p>{errors.medico_id.message}</p>}
             <input type="number" {...register('historia_clinica', { required: 'Historia Clínica es requerida' })} placeholder="Historia Clínica" />
             {errors.historia_clinica && <p>{errors.historia_clinica.message}</p>}
-            <input type="text" {...register('nombre_paciente', { required: 'Nombre paciente es requerido', pattern: /^[A-Za-z]+$/i, minLength: 2, maxLength: 50 })} placeholder="Nombre paciente" />
+            <input type="text" {...register('nombre_paciente', { required: 'Nombre paciente es requerido', pattern: /^[A-Za-zÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÄËÏÖÜäëïöüÿÇçÑñ]+$/i, minLength: 2, maxLength: 50 })} placeholder="Nombre paciente" />
             {errors.nombre_paciente && <p>{errors.nombre_paciente.message}</p>}
-            <input type="text" {...register('apellido_paciente', { required: 'Apellido paciente es requerido', pattern: /^[A-Za-z]+$/i, minLength: 3, maxLength: 50 })} placeholder="Apellido paciente" />
+            <input type="text" {...register('apellido_paciente', { required: 'Apellido paciente es requerido', pattern: /^[A-Za-zÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÄËÏÖÜäëïöüÿÇçÑñ]+$/i, minLength: 3, maxLength: 50 })} placeholder="Apellido paciente" />
             {errors.apellido_paciente && <p>{errors.apellido_paciente.message}</p>}
             <select {...register('sexo', { required: 'Sexo es requerido' })}>
               <option value="">--Selecciona--</option>

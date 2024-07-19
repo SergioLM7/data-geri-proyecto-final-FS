@@ -135,7 +135,6 @@ const editIngreso = async (entry) => {
             throw new Error('No se encontró ningún ingreso con ese ID para actualizar.');
         }
 
-        // Actualizar los campos en la instancia del ingreso (para poder cambiar duracion_ingreso)
         Object.keys(fieldsToUpdate).forEach(field => {
             ingreso[field] = fieldsToUpdate[field];
         });
