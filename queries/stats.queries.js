@@ -65,7 +65,7 @@ const queriesStats = {
             FROM 
                 medicos AS m
             WHERE 
-                m.email=$1)`,
+                m.email= :email)`,
     statsGeneralesMedicoAno: `SELECT 
         AVG(edad_paciente) AS edadMedia,
         AVG(duracion_ingreso) AS estanciaMedia,
@@ -85,9 +85,9 @@ const queriesStats = {
             FROM 
                 medicos AS m
             WHERE 
-                m.email=$1)
+                m.email= :email)
             AND  
-                EXTRACT(YEAR FROM fecha_ingreso) = $2;`,
+                EXTRACT(YEAR FROM fecha_ingreso) = :ano;`,
     statsGeneralesMedicoUltimosAnos: `SELECT 
             AVG(edad_paciente) AS edadMedia,
             AVG(duracion_ingreso) AS estanciaMedia,

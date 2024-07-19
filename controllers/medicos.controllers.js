@@ -1,5 +1,22 @@
+/**
+ * @author Sergio Lillo <Data Geri> 
+ * @exports controllers
+ * @namespace Controllers.medicos
+ */
+
 const services = require('../services/medicos.services');
 
+
+/**
+ * Descripción: Esta función llama desde la ruta /api/medicos/login al service loginMedicos
+ * y devuelve el token o un mensaje de error.
+ * @memberof Controllers.medicos 
+ * @method loginMedico
+ * @async 
+ * @param {Object} req objeto de petición HTTP de Express.
+ * @param {Object} res objeto de respuesta HTTP de Express.
+ * @throws {Error} Error al iniciar sesión.
+ */
 const loginMedico = async (req, res) => {
     try {
         console.log(req.body);
@@ -11,6 +28,17 @@ const loginMedico = async (req, res) => {
     }
 };
 
+
+/**
+ * Descripción: Esta función llama desde la ruta /api/medicos/logout al service editLogged
+ * y devuelve un objeto con el número de filas editadas (1 o 0) y un mensaje o un mensaje de error
+ * @memberof Controllers.medicos 
+ * @method logoutMedico
+ * @async 
+ * @param {Object} req objeto de petición HTTP de Express.
+ * @param {Object} res objeto de respuesta HTTP de Express.
+ * @throws {Error} Error al cerrar sesión.
+ */
 const logoutMedico = async (req, res) => {
     const { email } = req.medico;
     console.log('Esto es lo que llega al controller', req.medico)
@@ -29,6 +57,17 @@ const logoutMedico = async (req, res) => {
     }
 };
 
+
+/**
+ * Descripción: Esta función llama desde la ruta /api/medicos al service getMedicoByEmail si en req.query está el campo email
+ * si no, llmará a getAllMedicos. Devuelve en ambos casos el objeto/objetos encontrados, o un error. 
+ * @memberof Controllers.medicos 
+ * @method getMedicos
+ * @async 
+ * @param {Object} req objeto de petición HTTP de Express.
+ * @param {Object} res objeto de respuesta HTTP de Express.
+ * @throws {Error} Error en la BBDD.
+ */
 const getMedicos = async (req, res) => {
     try {
         const { email } = req.query;
@@ -45,7 +84,16 @@ const getMedicos = async (req, res) => {
     }
 };
 
-
+/**
+ * Descripción: Esta función llama desde la ruta /api/medicos al service createMedico
+ * y devuelve un objeto con el nuevo médico creado y un mensaje, o un error.
+ * @memberof Controllers.medicos 
+ * @method postMedicos
+ * @async 
+ * @param {Object} req objeto de petición HTTP de Express.
+ * @param {Object} res objeto de respuesta HTTP de Express.
+ * @throws {Error} Error al crear el médico.
+ */
 const postMedicos = async (req, res) => {
     try {
         const newMedicos = await services.createMedico(req.body);
@@ -59,6 +107,18 @@ const postMedicos = async (req, res) => {
     }
 }
 
+
+/**
+ * Descripción: Esta función llama al service editRole si en req.query está el campo rol o a editPassword,
+ * si está el campo password_hash, o a deleteMedico, si está el campo is_active.
+ * Devuelve en todos los casos el objeto editado y un mensaje, o un error. 
+ * @memberof Controllers.medicos 
+ * @method editMedico
+ * @async 
+ * @param {Object} req objeto de petición HTTP de Express.
+ * @param {Object} res objeto de respuesta HTTP de Express.
+ * @throws {Error} Error al editar los campos del médico.
+ */
 const editMedico = async (req, res) => {
     try {
         if (req.body.rol) {

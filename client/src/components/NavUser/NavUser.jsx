@@ -1,11 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 
 const NavUser = ({handleLogout}) => {
   return <nav className="nav">
     <label htmlFor="menu"></label>
     <ul>
       <li>
-        Home
+       <Link to="/home">Home</Link>
       </li>
       <li>
         Mi perfil
@@ -14,10 +16,7 @@ const NavUser = ({handleLogout}) => {
         Mis ingresos
       </li>
       <li>
-        Mis stats
-      </li>
-      <li>
-        Usuarios
+      <Link to="/mystats">Mis stats</Link>
       </li>
       <li onClick={handleLogout}>Log out</li>
     </ul>

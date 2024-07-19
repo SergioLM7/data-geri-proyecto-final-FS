@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Login from './Login/Login';
 import HomeUser from './HomeUser/HomeUser';
 import RegisterUser from "./RegisterUser";
+import MyStats from "./MyStats/MyStats";
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import axios from 'axios';
@@ -65,6 +66,10 @@ const Main = () => {
         <Route
           path="/home"
           element={isLoggedIn ? <HomeUser handleLogout={handleLogout} /> : <Navigate to="/" />}
+        />
+         <Route
+          path="/mystats"
+          element={isLoggedIn ? <MyStats handleLogout={handleLogout} /> : <Navigate to="/" />}
         />
         <Route
           path="/register"

@@ -40,11 +40,15 @@ app.use(morgan(':method :host :status - :response-time ms :body'));
 //API
 const ingresosAPIRoutes = require("./routes/ingresos.routes");
 const medicosAPIRoutes = require('./routes/medicos.routes');
+const statsAPIRoutes = require('./routes/stats.routes');
+
 
 // Usar rutas
 //API
 app.use('/api/ingresos', ingresosAPIRoutes);
 app.use('/api/medicos', medicosAPIRoutes);
+app.use('/api/stats', statsAPIRoutes);
+
 
 //WEB
 app.get('/', (req, res) => {
