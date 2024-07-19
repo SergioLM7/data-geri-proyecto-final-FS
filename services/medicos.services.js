@@ -105,7 +105,7 @@ const editRole = async (entry) => {
 
 const editLogged = async (email, is_logged, last_time_logged) => {
     try {
-        const [updatedCount, [updatedMedico]] = await Medicos.update(
+        const [updatedCount] = await Medicos.update(
             { is_logged, last_time_logged },
             { where: { email } }
         );

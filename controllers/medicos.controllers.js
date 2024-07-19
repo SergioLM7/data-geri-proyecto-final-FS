@@ -18,6 +18,7 @@ const logoutMedico = async (req, res) => {
     const last_time_logged = new Date();
 
     console.log('Médico haciendo logout:', req.medico);
+    console.log(email, is_logged, last_time_logged);
 
     try {
         const result = await services.editLogged({ email, is_logged, last_time_logged });
