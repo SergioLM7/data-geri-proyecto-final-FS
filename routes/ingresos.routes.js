@@ -1,6 +1,6 @@
 const express = require('express');
 const ingresosControllers = require("../controllers/ingresos.controllers");
-const ingresosValidators = require('../utils/ingresos.validators');
+const ingresosValidators = require('../middlewares/ingresos.validators');
 const router = express.Router();
 
 router.get('/', ingresosControllers.getIngresos);
