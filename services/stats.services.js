@@ -70,7 +70,7 @@ const statsGeneralesMedico = async (email) => {
 
   const statsGeneralesUltimosTres = async () => {
     try {
-      const results = await sequelize.query(queries.statsGeneralesUltimosTres, {
+      const results = await sequelize.query(queries.statsGeneralesUltimosAnos, {
         type: sequelize.QueryTypes.SELECT
       });
       console.log(results)
