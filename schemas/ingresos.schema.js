@@ -79,26 +79,10 @@ const Ingreso = sequelize.define('Ingreso', {
     fecha_ingreso: {
         type: DataTypes.DATEONLY,
         allowNull: false,
-        validate: {
-            isDate: { msg: 'Fecha de ingreso debe ser una fecha válida' },
-            notNull: { msg: 'Fecha de ingreso es necesaria' },
-            isBefore: {
-                args: [new Date().toISOString().split('T')[0]],
-                msg: 'Fecha de ingreso no puede ser futura'
-            }
-        }
     },
     fecha_alta: {
         type: DataTypes.DATEONLY,
         allowNull: false,
-        validate: {
-            isDate: { msg: 'Fecha de alta debe ser una fecha válida' },
-            notNull: { msg: 'Fecha de alta es necesaria' },
-            isBefore: {
-                args: [new Date().toISOString().split('T')[0]],
-                msg: 'Fecha de alta no puede ser futura'
-            }
-        }
     },
     duracion_ingreso: {
         type: DataTypes.INTEGER,

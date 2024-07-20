@@ -86,14 +86,6 @@ const Medico = sequelize.define('Medico', {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.NOW,
-        validate: {
-            isDate: { msg: 'Fecha de alta debe ser una fecha válida' },
-            notNull: { msg: 'Fecha de alta es necesaria' },
-            isBefore: {
-                args: [new Date().toISOString().split('T')[0]],
-                msg: 'Fecha de alta no puede ser futura'
-            }
-        }
     },
 }, {
     tableName: 'medicos',
