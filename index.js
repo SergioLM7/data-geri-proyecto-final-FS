@@ -8,6 +8,8 @@ const app = express();
 const cookieParser = require('cookie-parser');
 //const host = process.env.DB_HOST || 'localhost'
 const port = process.env.PORT || 5001;
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 if (process.env.NODE_ENV === "development") {
     //seedDatabase()
@@ -54,6 +56,8 @@ app.use('/api/stats', statsAPIRoutes);
 app.get('/', (req, res) => {
     res.send('Welcome to Data Geri API! Read the Readme for more information on how to use me.')
 });
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Para rutas no existentes
 app.use('*', error404);

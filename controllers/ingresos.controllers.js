@@ -62,7 +62,7 @@ const deleteIngreso = async (req, res) => {
     const { ingreso_id } = req.params;
     try {
         const response = await ingresosService.deleteIngreso(ingreso_id);
-        res.status(201).json({
+        res.status(200).json({
             message: `Se ha eliminado el ingreso: ${ingreso_id}`
         });
     } catch (error) {

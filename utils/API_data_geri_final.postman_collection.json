@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": " {\n                \"nombre_medico\": \"Lucrecia\",\n                \"apellido_medico\": \"Domínguez\",\n                \"email\": \"lucrecia@madrid.com\",\n                \"password_hash\": \"xzzax08908\",\n                \"id_colegiado\": 8450\n            }",
+							"raw": " {\n                \"nombre_medico\": \"Jacinta\",\n                \"apellido_medico\": \"Domínguez\",\n                \"email\": \"jacinta@madrid.com\",\n                \"password_hash\": \"xzzax08908\",\n                \"id_colegiado\": 9878\n            }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -30,56 +30,89 @@
 				},
 				{
 					"name": "/api/medicos",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n     \"limit\": 10,\n     \"offset\": 0\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+						"url": {
+							"raw": "https://data-geri.onrender.com/api/medicos/?email=juana@sevilla.com",
+							"protocol": "https",
+							"host": [
+								"data-geri",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"medicos",
+								""
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "juana@sevilla.com"
 								}
-							}
+							]
 						},
-						"url": "https://data-geri.onrender.com/api/medicos",
-						"description": "GET All medicos de 10 en 10"
+						"description": "GET para obtener todos los datos de un médico en base a su email (incluidos sus ingresos). Recibe el email por query."
 					},
 					"response": []
 				},
 				{
-					"name": "/api/medicos",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
+					"name": "/api/medicos?limit=?offset=",
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n     \"email\": \"ana@madrid.com\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+						"url": {
+							"raw": "https://data-geri.onrender.com/api/medicos?limit=10&offset=0",
+							"protocol": "https",
+							"host": [
+								"data-geri",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"medicos"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
 								}
-							}
+							]
 						},
-						"url": "https://data-geri.onrender.com/api/medicos",
-						"description": "GET Medico by email"
+						"description": "GET para obtener a todos los médicos del servicio. Recibe por query el limit (nº de médicos a mostrar) y el offset (para permitir la paginación desde el frontend)."
+					},
+					"response": []
+				},
+				{
+					"name": "/api/medicos/logout",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": "https://data-geri.onrender.com/api/medicos/logout",
+						"description": "PUT para el logout del usuario/médico. Primero pasará por un middleware de authorization, que extraerá del token el email y se lo pasará al controlador. Este editará los campos is_logged y last_time_logged del médico y propiciará el cierre de la sesión."
 					},
 					"response": []
 				},
 				{
 					"name": "/api/medicos/",
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"sergio@madrid.com\",\n    \"rol\": \"user\"\n}",
+							"raw": "{\n    \"nombre_medico\": \"Rodolfo\",\n    \"apellido_medico\": \"Sancho\",\n    \"email\": \"rodolfo@asturias.com\",\n    \"password_hash\": \"sadasdas567\",\n    \"id_colegiado\": 9000\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -87,64 +120,26 @@
 							}
 						},
 						"url": "https://data-geri.onrender.com/api/medicos/",
-						"description": "EDIT is_logged y last_time_logged de un Médico por su email"
+						"description": "POST para crear un nuevo médico desde la opción de registro de la web. Recibe por body todos los campos necesarios."
 					},
 					"response": []
 				},
 				{
-					"name": "/api/medicos/",
+					"name": "/api/medicos/login",
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"sergio@madrid.com\",\n    \"password_hash\": \"asafasfasf8787\"\n}",
+							"raw": "{\n    \"email\": \"rodolfo@asturias.com\",\n    \"password_hash\": \"asfasfas78\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "https://data-geri.onrender.com/api/medicos/",
-						"description": "EDIT password_hash de un Médico por su email"
-					},
-					"response": []
-				},
-				{
-					"name": "/api/medicos/",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"email\": \"sergio@madrid.com\",\n    \"is_logged\":\"false\",\n    \"last_time_logged\":\"2024-08-02 22:00:00\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "https://data-geri.onrender.com/api/medicos/",
-						"description": "EDIT Log in del Médico"
-					},
-					"response": []
-				},
-				{
-					"name": "/api/medicos/",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"email\": \"sergio@madrid.com\",\n    \"is_active\": \"false\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "https://data-geri.onrender.com/api/medicos/",
-						"description": "EDIT is_active de un Médico por su email (equivale a eliminarlo)"
+						"url": "https://data-geri.onrender.com/api/medicos/login",
+						"description": "POST para desencadenar el Login del usuario. Recibe el email y la contraseña. El controlador se encargará de buscar al usuario, comprobar que está activo en la BBDD y proceder a comparar la contraseña con el hash almacenado."
 					},
 					"response": []
 				}
@@ -177,22 +172,36 @@
 				},
 				{
 					"name": "/api/ingresos/",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"historia_clinica\": 4332,\n    \"offset\": 0,\n    \"limit\": 10\n\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+						"url": {
+							"raw": "https://data-geri.onrender.com/api/ingresos?limit=10&offset=0&historia_clinica=4324",
+							"protocol": "https",
+							"host": [
+								"data-geri",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"ingresos"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "historia_clinica",
+									"value": "4324"
 								}
-							}
+							]
 						},
-						"url": "https://data-geri.onrender.com/api/ingresos/",
 						"description": "GET ingresos por el nº de historia clínica (con limit y offset para la paginación)"
 					},
 					"response": []
@@ -204,7 +213,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"medico_id\":5, \n    \"historia_clinica\":4324, \n    \"nombre_paciente\":\"Julián\", \n    \"apellido_paciente\":\"Camarillo\", \n    \"sexo\":\"Hombre\", \n    \"edad_paciente\":81, \n    \"fecha_ingreso\":\"2024-04-02\",\n    \"fecha_alta\":\"2024-05-03\", \n    \"diagnostico_principal\":\"itu\", \n    \"barthel_basal\":2\n\n}",
+							"raw": "{\n    \"medico_id\":17, \n    \"historia_clinica\":4323, \n    \"nombre_paciente\":\"Julián\", \n    \"apellido_paciente\":\"Camarillo\", \n    \"sexo\":\"Hombre\", \n    \"edad_paciente\":81, \n    \"fecha_ingreso\":\"2022-04-02\",\n    \"fecha_alta\":\"2022-05-03\", \n    \"diagnostico_principal\":\"itu\", \n    \"barthel_basal\":15\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -212,7 +221,7 @@
 							}
 						},
 						"url": "https://data-geri.onrender.com/api/ingresos/",
-						"description": "PUT para crear un ingreso (calcula automáticamente la celda duracion_ingreso)"
+						"description": "PUT para crear un ingreso (calcula automáticamente la celda duracion_ingreso). Recibe los datos por body."
 					},
 					"response": []
 				},
@@ -221,17 +230,8 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"ingreso_id\":60\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "https://data-geri.onrender.com/api/ingresos/",
-						"description": "DELETE para eliminar un ingreso de la tabla Ingresos por su ID"
+						"url": "https://data-geri.onrender.com/api/ingresos/21",
+						"description": "DELETE para eliminar un ingreso de la tabla Ingresos por su ID. Recibe el ID por param."
 					},
 					"response": []
 				},
@@ -242,15 +242,15 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"ingreso_id\": 59,\n        \"fecha_alta\": \"2024-08-11\",\n        \"fecha_ingreso\": \"2024-08-04\"\n\n}",
+							"raw": "{\"ingreso_id\":21,\"fieldsToUpdate\":{\"medico_id\":17,\"historia_clinica\":4324,\"nombre_paciente\":\"Josefa\",\"apellido_paciente\":\"Valcárcel\",\"sexo\":\"Mujer\",\"edad_paciente\":81,\"fecha_ingreso\":\"2024-07-21\",\"fecha_alta\":\"2024-07-23\",\"duracion_ingreso\":2,\"diagnostico_principal\":\"ITU\",\"barthel_basal\":\"20\"}}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "https://data-geri.onrender.com/api/ingresos/",
-						"description": "PUT para editar los campos de ingresos en base a su ID (se puede cambiar uno o varios; las fechas tienen que ir siempre de la mano)"
+						"url": "https://data-geri.onrender.com/api/ingresos",
+						"description": "PUT para editar los campos de un ingreso en base a su ID (acepta que se pueda cambiar un solo campo o varios). Recibe ID y campos a editar por body."
 					},
 					"response": []
 				}
@@ -258,7 +258,48 @@
 		},
 		{
 			"name": "Stats",
-			"item": []
+			"item": [
+				{
+					"name": "/api/stats/ultimosservicio/",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://data-geri.onrender.com/api/stats/ultimosservicio/",
+						"description": "GET para obtener todas las estadísticas del servicio de geriatría del hospital de los último 3 años (2022-2024)"
+					},
+					"response": []
+				},
+				{
+					"name": "/api/stats/statsservicio/",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://data-geri.onrender.com/api/stats/statsservicio/",
+						"description": "GET para obtener las estadísticas generales del servicio de geriatría."
+					},
+					"response": []
+				},
+				{
+					"name": "/api/stats/:email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://data-geri.onrender.com/api/stats/juana@sevilla.com",
+						"description": "GET para obtener las estadísticas generales de un médico concreto por su email. Lo recibe por param."
+					},
+					"response": []
+				},
+				{
+					"name": "/api/stats/ultimos/:email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://data-geri.onrender.com/api/stats/ultimos/juana@sevilla.com",
+						"description": "GET para obtener las estadísticas de un médico de los tres últimos años por separado en base a su email. Lo recibe por params."
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

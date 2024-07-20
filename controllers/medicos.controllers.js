@@ -21,10 +21,10 @@ const loginMedico = async (req, res) => {
     try {
         console.log(req.body);
         const userLogin = await services.loginMedicos(req.body);
-        res.status(201).json(userLogin);
+        res.status(200).json(userLogin);
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: error.message || 'Error en el login.' });
+        res.status(401).json({ message: error.message || 'Error en el login.' });
     }
 };
 
@@ -71,7 +71,6 @@ const logoutMedico = async (req, res) => {
 const getMedicos = async (req, res) => {
     try {
         const { email } = req.query;
-        console.log(req.params);
         if (email) {
             const medico = await services.getMedicoByEmail(email);
             res.status(200).json(medico);

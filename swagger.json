@@ -1,0 +1,1141 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Data Geri",
+    "description": "API para gestionar médicos, ingresos y estadísticas del servicio de geriatría. Está desarrollada para implementar paginación; autenticar usuarios/médicos; crear, editar, leer y consultar ingresos y médicos. Y, además, permite obtener datos estadísticos de todo el servicio o de cada médico en particular, tanto de siempre, como de los últimos tres años.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://data-geri.onrender.com/api",
+      "description": "V1"
+    }
+  ],
+  "tags": [
+    {
+      "name": "medicos",
+      "description": "Información y solicitudes relativas a médicos/usuarios"
+    },
+    {
+      "name": "ingresos",
+      "description": "Información y solicitudes relativas a los ingresos del servicio"
+    },
+    {
+      "name": "stats",
+      "description": "Solicitudes relativas a las estadísticas del servicio o del médico"
+    }
+  ],
+  "paths": {
+    "/medicos": {
+      "post": {
+        "tags": [
+          "medicos"
+        ],
+        "summary": "Crear un médico",
+        "description": "Crea un nuevo médico.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nombre_medico": {
+                    "type": "string"
+                  },
+                  "apellido_medico": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password_hash": {
+                    "type": "string"
+                  },
+                  "id_colegiado": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "nombre_medico",
+                  "apellido_medico",
+                  "email",
+                  "password_hash",
+                  "id_colegiado"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Médico creado exitosamente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "newMedico": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error al crear el médico.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "medicos"
+        ],
+        "summary": "Obtener médicos",
+        "description": "Obtiene todos los médicos o busca por email.",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de médicos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "nombre_medico": {
+                        "type": "string"
+                      },
+                      "apellido_medico": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "password_hash": {
+                        "type": "string"
+                      },
+                      "id_colegiado": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error al obtener los médicos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/medicos/login": {
+      "post": {
+        "tags": [
+          "medicos"
+        ],
+        "summary": "Iniciar sesión",
+        "description": "Inicia sesión con un médico/usuario.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password_hash": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "email",
+                  "password_hash"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Inicio de sesión exitoso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Credenciales inválidas."
+          }
+        }
+      }
+    },
+    "/medicos/logout": {
+      "put": {
+        "tags": [
+          "medicos"
+        ],
+        "summary": "Cerrar sesión",
+        "description": "Cierra sesión del médico actual. Requiere autenticación mediante token JWT. El token debe ser incluido en el encabezado `Authorization` como un Bearer token.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cierre de sesión exitoso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Logout exitoso"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No autorizado, token inválido o faltante.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Acceso no autorizado. Token no proporcionado."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Token inválido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Token inválido."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno del servidor.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Error interno del servidor."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ingresos": {
+      "get": {
+        "tags": [
+          "ingresos"
+        ],
+        "summary": "Obtener ingresos",
+        "description": "Obtiene ingresos por email del médico o por número de historia clínica.",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "historia_clinica",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de ingresos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "medico_id": {
+                        "type": "integer"
+                      },
+                      "historia_clinica": {
+                        "type": "integer"
+                      },
+                      "nombre_paciente": {
+                        "type": "string"
+                      },
+                      "apellido_paciente": {
+                        "type": "string"
+                      },
+                      "sexo": {
+                        "type": "string"
+                      },
+                      "edad_paciente": {
+                        "type": "integer"
+                      },
+                      "fecha_ingreso": {
+                        "type": "string",
+                        "format": "date"
+                      },
+                      "fecha_alta": {
+                        "type": "string",
+                        "format": "date"
+                      },
+                      "duracion_ingreso": {
+                        "type": "integer"
+                      },
+                      "diagnostico_principal": {
+                        "type": "string"
+                      },
+                      "barthel_basal": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error al obtener los ingresos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Error al buscar el ingreso."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ingresos"
+        ],
+        "summary": "Crear ingreso",
+        "description": "Crea un nuevo ingreso.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "medico_id": {
+                    "type": "integer"
+                  },
+                  "historia_clinica": {
+                    "type": "integer"
+                  },
+                  "nombre_paciente": {
+                    "type": "string"
+                  },
+                  "apellido_paciente": {
+                    "type": "string"
+                  },
+                  "sexo": {
+                    "type": "string"
+                  },
+                  "edad_paciente": {
+                    "type": "integer"
+                  },
+                  "fecha_ingreso": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "fecha_alta": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "diagnostico_principal": {
+                    "type": "string"
+                  },
+                  "barthel_basal": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "medico_id",
+                  "historia_clinica",
+                  "nombre_paciente",
+                  "apellido_paciente",
+                  "sexo",
+                  "edad_paciente",
+                  "fecha_ingreso",
+                  "fecha_alta",
+                  "diagnostico_principal",
+                  "barthel_basal"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Ingreso creado exitosamente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error al crear el ingreso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Error al crear el ingreso."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ingresos"
+        ],
+        "summary": "Editar ingreso",
+        "description": "Edita los campos de un ingreso por su ID.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ingreso_id": {
+                    "type": "integer"
+                  },
+                  "fieldsToUpdate": {
+                    "type": "object",
+                    "additionalProperties": true
+                  }
+                },
+                "required": [
+                  "ingreso_id",
+                  "fieldsToUpdate"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ingreso actualizado exitosamente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Se ha actualizado el ingreso."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error al actualizar el ingreso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Error al actualizar el ingreso."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ingresos/{ingreso_id}": {
+      "parameters": [
+        {
+          "name": "ingreso_id",
+          "in": "path",
+          "description": "ID del ingreso",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "example": 21
+          }
+        }
+      ],
+      "delete": {
+        "tags": [
+          "ingresos"
+        ],
+        "summary": "Eliminar ingreso",
+        "description": "Elimina un ingreso por su ID.",
+        "responses": {
+          "200": {
+            "description": "Ingreso eliminado exitosamente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error al eliminar el ingreso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Error al eliminar el ingreso."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stats/ultimosservicio": {
+      "get": {
+        "tags": [
+          "stats"
+        ],
+        "summary": "Obtener estadísticas de los últimos 3 años del servicio de geriatría",
+        "description": "Obtiene todas las estadísticas del servicio de geriatría del hospital de los últimos 3 años (2022-2024).",
+        "responses": {
+          "200": {
+            "description": "Estadísticas obtenidas exitosamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "year": {
+                        "type": "integer",
+                        "example": 2022
+                      },
+                      "edadmedia": {
+                        "type": "integer",
+                        "example": 80.5
+                      },
+                      "estanciamedia": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 4.25
+                      },
+                      "totalingresos": {
+                        "type": "number",
+                        "example": 80
+                      },
+                      "porcentajehombres": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 40.5
+                      },
+                      "porcentajemujeres": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 50.5
+                      },
+                      "porcentajeitu": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 40.5
+                      },
+                      "porcentajeicc": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 48.5
+                      },
+                      "porcentajeifeccabd": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 25.56
+                      },
+                      "porcentajeotro": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 20.5
+                      },
+                      "porcentajeneumonia": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 30.22
+                      }
+                    },
+                    "example": [
+                      {
+                        "year": 2022,
+                        "totalingresos": 150,
+                        "edadmedia": 80.5,
+                        "estanciamedia": 5.6,
+                        "porcentajehombres": 45.2,
+                        "porcentajemujeres": 54.8,
+                        "porcentajeneumonia": 2.25,
+                        "porcentajeotro": 30.56,
+                        "porcentajeicc": 40.5,
+                        "porcentajeitu": 30.2,
+                        "porcentajeifeccabd": 0
+                      },
+                      {
+                        "year": 2023,
+                        "totalingresos": 150,
+                        "edadmedia": 80.5,
+                        "estanciamedia": 5.6,
+                        "porcentajehombres": 45.2,
+                        "porcentajemujeres": 54.8,
+                        "porcentajeneumonia": 2.25,
+                        "porcentajeotro": 30.56,
+                        "porcentajeicc": 40.5,
+                        "porcentajeitu": 30.2,
+                        "porcentajeifeccabd": 0
+                      },
+                      {
+                        "year": 2024,
+                        "totalingresos": 150,
+                        "edadmedia": 80.5,
+                        "estanciamedia": 5.6,
+                        "porcentajehombres": 45.2,
+                        "porcentajemujeres": 54.8,
+                        "porcentajeneumonia": 2.25,
+                        "porcentajeotro": 30.56,
+                        "porcentajeicc": 40.5,
+                        "porcentajeitu": 30.2,
+                        "porcentajeifeccabd": 0
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno del servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Error al cargar estadísticas generales de los últimos 3 años."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stats/statsservicio": {
+      "get": {
+        "tags": [
+          "stats"
+        ],
+        "summary": "Obtener estadísticas generales",
+        "description": "Obtiene las estadísticas generales del servicio de geriatría.",
+        "responses": {
+          "200": {
+            "description": "Estadísticas generales obtenidas exitosamente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "edadmedia": {
+                      "type": "integer",
+                      "example": 80.5
+                    },
+                    "estanciamedia": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 4.25
+                    },
+                    "totalingresos": {
+                      "type": "number",
+                      "example": 80
+                    },
+                    "porcentajehombres": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 40.5
+                    },
+                    "porcentajemujeres": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 50.5
+                    },
+                    "porcentajeitu": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 40.5
+                    },
+                    "porcentajeicc": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 48.5
+                    },
+                    "porcentajeifeccabd": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 25.56
+                    },
+                    "porcentajeotro": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 20.5
+                    },
+                    "porcentajeneumonia": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 30.22
+                    }
+                  },
+                  "example": {
+                    "totalingresos": 150,
+                    "edadmedia": 80.5,
+                    "estanciamedia": 5.6,
+                    "porcentajehombres": 45.2,
+                    "porcentajemujeres": 54.8,
+                    "porcentajeneumonia": 2.25,
+                    "porcentajeotro": 30.56,
+                    "porcentajeicc": 40.5,
+                    "porcentajeitu": 30.2,
+                    "porcentajeifeccabd": 0
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error al obtener las estadísticas generales.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Error al cargar las estadísticas."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stats/{email}": {
+      "get": {
+        "tags": [
+          "stats"
+        ],
+        "summary": "Obtener estadísticas de un médico por email",
+        "description": "Obtiene las estadísticas generales de un médico por su email.",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Estadísticas del médico obtenidas exitosamente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "edadmedia": {
+                      "type": "integer",
+                      "example": 80.5
+                    },
+                    "estanciamedia": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 4.25
+                    },
+                    "totalingresos": {
+                      "type": "number",
+                      "example": 80
+                    },
+                    "porcentajehombres": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 40.5
+                    },
+                    "porcentajemujeres": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 50.5
+                    },
+                    "porcentajeitu": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 40.5
+                    },
+                    "porcentajeicc": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 48.5
+                    },
+                    "porcentajeifeccabd": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 25.56
+                    },
+                    "porcentajeotro": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 20.5
+                    },
+                    "porcentajeneumonia": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 30.22
+                    }
+                  },
+                  "example": {
+                    "totalingresos": 150,
+                    "edadmedia": 80.5,
+                    "estanciamedia": 5.6,
+                    "porcentajehombres": 45.2,
+                    "porcentajemujeres": 54.8,
+                    "porcentajeneumonia": 2.25,
+                    "porcentajeotro": 30.56,
+                    "porcentajeicc": 40.5,
+                    "porcentajeitu": 30.2,
+                    "porcentajeifeccabd": 0
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error al obtener las estadísticas del médico.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Error al cargar las estadísticas."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stats/ultimos/{email}": {
+      "get": {
+        "tags": [
+          "stats"
+        ],
+        "summary": "Obtener estadísticas de los últimos 3 años de un médico",
+        "description": "Obtiene las estadísticas de un médico de los últimos 3 años por separado en base a su email.",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Estadísticas de los últimos 3 años obtenidas exitosamente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "year": {
+                        "type": "integer",
+                        "example": 2022
+                      },
+                      "edadmedia": {
+                        "type": "integer",
+                        "example": 80.5
+                      },
+                      "estanciamedia": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 4.25
+                      },
+                      "totalingresos": {
+                        "type": "number",
+                        "example": 80
+                      },
+                      "porcentajehombres": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 40.5
+                      },
+                      "porcentajemujeres": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 50.5
+                      },
+                      "porcentajeitu": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 40.5
+                      },
+                      "porcentajeicc": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 48.5
+                      },
+                      "porcentajeifeccabd": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 25.56
+                      },
+                      "porcentajeotro": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 20.5
+                      },
+                      "porcentajeneumonia": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 30.22
+                      }
+                    },
+                    "example": [
+                      {
+                        "year": 2022,
+                        "totalingresos": 150,
+                        "edadmedia": 80.5,
+                        "estanciamedia": 5.6,
+                        "porcentajehombres": 45.2,
+                        "porcentajemujeres": 54.8,
+                        "porcentajeneumonia": 2.25,
+                        "porcentajeotro": 30.56,
+                        "porcentajeicc": 40.5,
+                        "porcentajeitu": 30.2,
+                        "porcentajeifeccabd": 0
+                      },
+                      {
+                        "year": 2023,
+                        "totalingresos": 150,
+                        "edadmedia": 80.5,
+                        "estanciamedia": 5.6,
+                        "porcentajehombres": 45.2,
+                        "porcentajemujeres": 54.8,
+                        "porcentajeneumonia": 2.25,
+                        "porcentajeotro": 30.56,
+                        "porcentajeicc": 40.5,
+                        "porcentajeitu": 30.2,
+                        "porcentajeifeccabd": 0
+                      },
+                      {
+                        "year": 2024,
+                        "totalingresos": 150,
+                        "edadmedia": 80.5,
+                        "estanciamedia": 5.6,
+                        "porcentajehombres": 45.2,
+                        "porcentajemujeres": 54.8,
+                        "porcentajeneumonia": 2.25,
+                        "porcentajeotro": 30.56,
+                        "porcentajeicc": 40.5,
+                        "porcentajeitu": 30.2,
+                        "porcentajeifeccabd": 0
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error al obtener las estadísticas de los últimos 3 años.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Error al cargar las estadísticas de los últimos 3 años."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

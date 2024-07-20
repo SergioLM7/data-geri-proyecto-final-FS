@@ -176,7 +176,7 @@ const MyStats = ({ handleLogout }) => {
   return <>
     <Header />
     <NavUser handleLogout={handleLogout} />
-    <section className="my-stats">
+    <section className="stats">
       <h2>My Stats</h2>
       {searching ? (
         <DNA

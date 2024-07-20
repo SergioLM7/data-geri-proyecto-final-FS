@@ -151,7 +151,7 @@ const StatsGenerales = ({ handleLogout }) => {
   return <>
     <Header />
     <NavUser handleLogout={handleLogout} />
-    <section className="my-stats">
+    <section className="stats">
       <h2>Estadísticas del servicio</h2>
       {searching ? (
         <DNA

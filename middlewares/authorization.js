@@ -4,9 +4,9 @@ require('dotenv').config();
 
 const authenticateToken = async (req, res, next) => {
   const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
+  const token = authHeader && authHeader.split(' ')[1]; 
   
-  console.log('Estoy accediendo al middleware. Token:', token);
+  console.log('Estoy accediendo al middleware');
 
   if (!token) {
     return res.status(401).json({ message: 'Acceso no autorizado. Token no proporcionado.' });
@@ -14,10 +14,7 @@ const authenticateToken = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log('Este es el JWT decodificado', decoded)
     const medico = await Medicos.findOne({ where: { email: decoded.email } });
-    
-    console.log('El medico encontrado', medico);
     
     if (!medico) {
       return res.status(404).json({ message: 'Médico no encontrado.' });
