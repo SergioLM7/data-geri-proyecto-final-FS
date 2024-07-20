@@ -3,9 +3,7 @@ import Header from '../../Header/Header';
 import NavUser from '../../NavUser/NavUser';
 import SearchIngresos from "./SearchIngresos/SearchIngresos";
 import RegistrarIngreso from './RegistrarIngreso/RegistrarIngreso';
-import BarthelBot from './BarthelBot/BarthelBot';
-
-
+import BarthelBot from '../BarthelBot/BarthelBot';
 
 
 const Home = ({ handleLogout }) => {
@@ -26,11 +24,17 @@ const Home = ({ handleLogout }) => {
     <Header />
     <NavUser handleLogout={handleLogout} />
     <section>
-      <h1>Esta es la home del usuario logueado</h1>
+      <h2>Gestiona los ingresos</h2>
       <SearchIngresos />
       <button onClick={openModal}>Registrar Ingreso</button>
       {ModalOpen && <RegistrarIngreso onClose={closeModal} />}
     </section>
+    <div>
+      <button onClick={() => setShowBot(!showBot)}>
+        {showBot ? 'Cerrar' : 'Abrir'} Evaluación de Barthel
+      </button>
+      {showBot && <BarthelBot />}
+    </div>
   </>
 };
 

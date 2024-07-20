@@ -1,0 +1,39 @@
+.bot-container {
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  .message {
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    max-width: 80%;
+  }
+  
+  .bot-message {
+    background-color: #f0f0f0;
+    margin-right: auto;
+  }
+  
+  .user-message {
+    background-color: #e3f2fd;
+    margin-left: auto;
+  }
+  
+  .option-button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+  }

@@ -27,8 +27,8 @@ const App = () => {
             </SetIsSubmitting.Provider>
           </ConfirmationMessage.Provider>
         </MensajeError.Provider>
-        <Footer />
       </BrowserRouter>
+      <Footer />
     </>
   )
 }
