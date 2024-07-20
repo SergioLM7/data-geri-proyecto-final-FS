@@ -8,11 +8,13 @@ const ingresoValidator = [
     body('nombre_paciente')
         .isString().withMessage('Nombre del paciente debe ser una cadena de texto')
         .isLength({ min: 2, max: 70 }).withMessage('Nombre del paciente debe tener entre 2 y 70 caracteres')
-        .matches(/^[A-Za-zÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÄËÏÖÜäëïöüÿÇçÑñ]+$/i).withMessage('Nombre del paciente solo puede contener letras'),
+        .matches(/^[A-Za-zÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÄËÏÖÜäëïöüÿÇçÑñ\s'-]+$/i
+        ).withMessage('Nombre del paciente solo puede contener letras'),
     body('apellido_paciente')
         .isString().withMessage('Apellido del paciente debe ser una cadena de texto')
         .isLength({ min: 2, max: 70 }).withMessage('Apellido del paciente debe tener entre 2 y 70 caracteres')
-        .matches(/^[A-Za-zÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÄËÏÖÜäëïöüÿÇçÑñ]+$/i).withMessage('Apellido del paciente solo puede contener letras'),
+        .matches(/^[A-Za-zÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÄËÏÖÜäëïöüÿÇçÑñ\s'-]+$/i
+        ).withMessage('Apellido del paciente solo puede contener letras'),
     body('sexo')
         .isIn(['Hombre', 'Mujer']).withMessage('Sexo debe ser Hombre o Mujer'),
     body('edad_paciente')

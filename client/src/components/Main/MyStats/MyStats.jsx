@@ -66,7 +66,6 @@ const MyStats = ({ handleLogout }) => {
     if (token) {
       try {
         const decodedToken = jwtDecode(token);
-        console.log(decodedToken)
         return decodedToken.email;
       } catch (err) {
         console.error('Error al decodificar el token', err);

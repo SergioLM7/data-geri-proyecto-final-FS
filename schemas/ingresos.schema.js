@@ -35,7 +35,10 @@ const Ingreso = sequelize.define('Ingreso', {
             len: [2, 70],
             notNull: { msg: 'Nombre del paciente es necesario' },
             notEmpty: { msg: 'Nombre del paciente no puede estar vacío' },
-            isAlpha: { msg: 'Nombre del paciente solo puede contener letras' },
+            matches: {
+                args: [/^[A-Za-zÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÄËÏÖÜäëïöüÿÇçÑñ\s'-]+$/i],
+                msg: 'Nombre del paciente solo puede contener letras, espacios, apóstrofos y guiones'
+            }
         }
     },
     apellido_paciente: {
@@ -45,7 +48,10 @@ const Ingreso = sequelize.define('Ingreso', {
             len: [2, 70], 
             notNull: { msg: 'Apellido del paciente es necesario' },
             notEmpty: { msg: 'Apellido del paciente no puede estar vacío' },
-            isAlpha: { msg: 'Apellido del paciente solo puede contener letras' },
+            matches: {
+                args: [/^[A-Za-zÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÄËÏÖÜäëïöüÿÇçÑñ\s'-]+$/i],
+                msg: 'Nombre del paciente solo puede contener letras, espacios, apóstrofos y guiones'
+            }
         }
     },
     sexo: {

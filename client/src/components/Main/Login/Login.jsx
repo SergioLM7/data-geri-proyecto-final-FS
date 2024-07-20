@@ -23,7 +23,7 @@ const Login = ({ handleLogin, handleLogout }) => {
         email: email,
         password_hash: password_hash
       });
-      console.log(response);
+   
       const token = response.data;
       handleLogin(token);
       setError(null);

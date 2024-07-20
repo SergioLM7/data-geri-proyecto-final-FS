@@ -15,7 +15,10 @@ const Medico = sequelize.define('Medico', {
             len: [2, 70],
             notNull: { msg: 'Nombre del médico es necesario' },
             notEmpty: { msg: 'Nombre del médico no puede estar vacío' },
-            isAlpha: { msg: 'Nombre del médico solo puede contener letras' },
+            matches: {
+                args: [/^[A-Za-zÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÄËÏÖÜäëïöüÿÇçÑñ\s'-]+$/i],
+                msg: 'Nombre del paciente solo puede contener letras, espacios, apóstrofos y guiones'
+            }
         }
     },
     apellido_medico: {
@@ -25,7 +28,10 @@ const Medico = sequelize.define('Medico', {
             len: [2, 70],
             notNull: { msg: 'Apellido del médico es necesario' },
             notEmpty: { msg: 'Apellido del médico no puede estar vacío' },
-            isAlpha: { msg: 'Apellido del médico solo puede contener letras' },
+            matches: {
+                args: [/^[A-Za-zÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÄËÏÖÜäëïöüÿÇçÑñ\s'-]+$/i],
+                msg: 'Nombre del paciente solo puede contener letras, espacios, apóstrofos y guiones'
+            }
         }
     },
     email: {
@@ -46,12 +52,12 @@ const Medico = sequelize.define('Medico', {
         }
     },
     password_hash: {
-        type: DataTypes.STRING(20),
+        type: DataTypes.STRING(200),
         allowNull: false,
         validate: {
             len: {
-                args: [4, 20],
-                msg: 'La contraseña debe tener entre 4 y 20 caracteres'
+                args: [4, 200],
+                msg: 'La contraseña hasheada debe tener entre 4 y 200 caracteres'
             },
             notNull: { msg: 'La contraseña es necesaria' },
             notEmpty: { msg: 'La contraseña no puede estar vacía' }
