@@ -62,13 +62,13 @@ const StatsGenerales = ({ handleLogout }) => {
     setSearching(true);
 
     try {
-      const res = await axios.get(`https://data-geri.onrender.com/api/stats/statsservicio`);
+      const res = await axios.get(`https://data-geri.onrender.com/api/stats/statsservicio/`);
       console.log(res);
 
       if (res) {
         setStats([res.data[0]]);
         setError('');
-        const res2 = await axios.get(`https://data-geri.onrender.com/api/stats/ultimosservicio`);
+        const res2 = await axios.get(`https://data-geri.onrender.com/api/stats/ultimosservicio/`);
         console.log(res2);
 
         if (res2) {
