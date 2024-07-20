@@ -6,6 +6,15 @@ const queryMedicoValidator = [
         .isLength({ min: 6, max: 100 }).withMessage('El email debe tener entre 6 y 100 caracteres'),
 ];
 
+const loginValidator = [
+    body('email')
+        .isEmail().withMessage('Debe proporcionar una dirección de correo electrónico válida')
+        .isLength({ min: 6, max: 100 }).withMessage('El email debe tener entre 6 y 100 caracteres'),
+    body('password_hash')
+        .isString().withMessage('La contraseña debe ser una cadena de texto')
+        .isLength({ min: 4, max: 20 }).withMessage('La contraseña debe tener entre 4 y 20 caracteres'),
+];
+
 const medicoBodyValidator = [
     body('nombre_medico')
         .isString().withMessage('Nombre del médico debe ser una cadena de texto')
@@ -31,5 +40,6 @@ const medicoBodyValidator = [
 
 module.exports = {
     medicoBodyValidator,
-    queryMedicoValidator
+    queryMedicoValidator,
+    loginValidator
 };
