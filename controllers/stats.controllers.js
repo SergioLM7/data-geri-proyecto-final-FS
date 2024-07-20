@@ -29,7 +29,29 @@ const getStatsMedicoTresUltimos = async (req, res) => {
     }
 };
 
+const getStatsGenerales = async (req, res) => {
+    try {
+        const servicio = await statsServices.statsGeneralesServicio();
+        res.status(200).json(servicio);
+    } catch (error) {
+        console.error('Error al cargar las estadísticas generales del servicio.', error);
+        res.status(500).json({ message: error.message || 'Error al cargar estadísticas.' });
+    }
+};
+
+const getStatsUltimosTres = async (req, res) => {
+    try {
+        const stats = await statsServices.statsGeneralesUltimosTres();
+        res.status(200).json(stats);
+    } catch (error) {
+        console.error('Error al cargar las estadísticas de los últimos 3 años.', error);
+        res.status(500).json({ message: error.message || 'Error al cargar estadísticas generales de los últimos 3 años..'  });
+    }
+};
+
 module.exports = {
     getStatsGeneralesMedico,
-    getStatsMedicoTresUltimos
+    getStatsMedicoTresUltimos,
+    getStatsGenerales,
+    getStatsUltimosTres
 };

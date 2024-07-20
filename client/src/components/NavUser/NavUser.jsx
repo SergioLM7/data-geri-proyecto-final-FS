@@ -10,13 +10,10 @@ const NavUser = ({handleLogout}) => {
        <Link to="/home">Home</Link>
       </li>
       <li>
-        Mi perfil
-      </li>
-      <li>
-        Mis ingresos
-      </li>
-      <li>
       <Link to="/mystats">Mis stats</Link>
+      </li>
+      <li>
+      <Link to="/stats">Stats Servicio</Link>
       </li>
       <li onClick={handleLogout}>Log out</li>
     </ul>

@@ -54,11 +54,39 @@ const statsGeneralesMedico = async (email) => {
       throw error;
     }
   };
+
+  const statsGeneralesServicio = async () => {
+    try {
+      const results = await sequelize.query(queries.statsGenerales, {
+        type: sequelize.QueryTypes.SELECT
+      });
+      console.log(results)
+      return results;
+    } catch (error) {
+      console.error('Error executing query:', error);
+      throw error;
+    }
+  };
+
+  const statsGeneralesUltimosTres = async () => {
+    try {
+      const results = await sequelize.query(queries.statsGeneralesUltimosTres, {
+        type: sequelize.QueryTypes.SELECT
+      });
+      console.log(results)
+      return results;
+    } catch (error) {
+      console.error('Error executing query:', error);
+      throw error;
+    }
+  };
   
   module.exports = {
     statsGeneralesMedico,
     statsGeneralesMedicoAno,
-    statsMedicoUltimosTres
+    statsMedicoUltimosTres,
+    statsGeneralesServicio,
+    statsGeneralesUltimosTres
   };
 
 

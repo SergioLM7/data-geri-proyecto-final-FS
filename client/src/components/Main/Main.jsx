@@ -3,6 +3,7 @@ import Login from './Login/Login';
 import HomeUser from './HomeUser/HomeUser';
 import RegisterUser from "./RegisterUser";
 import MyStats from "./MyStats/MyStats";
+import StatsGenerales from "./StatsGenerales/StatsGenerales";
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import axios from 'axios';
@@ -49,7 +50,6 @@ const Main = () => {
         }
       } catch (error) {
         console.error('Error al hacer logout:', error);
-        // Maneja el error aquí (por ejemplo, mostrando un mensaje al usuario)
       }
     } else {
       console.error('No se encontró el token de acceso.');
@@ -70,6 +70,10 @@ const Main = () => {
          <Route
           path="/mystats"
           element={isLoggedIn ? <MyStats handleLogout={handleLogout} /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/stats"
+          element={isLoggedIn ? <StatsGenerales handleLogout={handleLogout} /> : <Navigate to="/" />}
         />
         <Route
           path="/register"
