@@ -4,6 +4,7 @@
  * @namespace Controllers.medicos
  */
 
+const { validationResult } = require('express-validator');
 const services = require('../services/medicos.services');
 
 
@@ -18,6 +19,11 @@ const services = require('../services/medicos.services');
  * @throws {Error} Error al iniciar sesión.
  */
 const loginMedico = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    
     try {
         console.log(req.body);
         const userLogin = await services.loginMedicos(req.body);
@@ -69,6 +75,11 @@ const logoutMedico = async (req, res) => {
  * @throws {Error} Error en la BBDD.
  */
 const getMedicos = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     try {
         const { email } = req.query;
         if (email) {
@@ -94,6 +105,11 @@ const getMedicos = async (req, res) => {
  * @throws {Error} Error al crear el médico.
  */
 const postMedicos = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     try {
         const newMedicos = await services.createMedico(req.body);
         res.status(201).json({
@@ -119,6 +135,11 @@ const postMedicos = async (req, res) => {
  * @throws {Error} Error al editar los campos del médico.
  */
 const editMedico = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     try {
         if (req.body.rol) {
             console.log('voy a editar el rol')

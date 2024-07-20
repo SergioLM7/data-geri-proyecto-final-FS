@@ -1,7 +1,7 @@
 .bot-container {
     width: 300px;
     border: 1px solid #ccc;
-    border-radius: 8px;
+    border-radius: 10px;
     padding: 16px;
     margin: 20px auto;
     font-family: Arial, sans-serif;
@@ -24,6 +24,7 @@
     margin-left: auto;
   }
   
+
   .option-button {
     background-color: #4CAF50;
     border: none;
@@ -35,5 +36,9 @@
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 6px;
+  }
+  
+  .option-button:hover {
+    background-color: #45a049;
   }

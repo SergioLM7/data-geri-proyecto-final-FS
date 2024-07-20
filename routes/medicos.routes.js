@@ -1,14 +1,15 @@
 const express = require('express');
-const medicosControllers = require("../controllers/medicos.controllers");
+const medicosControllers = require('../controllers/medicos.controllers');
+const medicosValidators = require('../middlewares/medicos.validators');
 const router = express.Router();
 const authorization = require('../middlewares/authorization');
 
 
 
-router.get("/", medicosControllers.getMedicos);
-router.post("/", medicosControllers.postMedicos);
-router.post("/login", medicosControllers.loginMedico);
-router.put("/logout", authorization, medicosControllers.logoutMedico);
+router.get('/', medicosValidators.queryMedicoValidator, medicosControllers.getMedicos);
+router.post('/', medicosValidators.medicoBodyValidator, medicosControllers.postMedicos);
+router.post('/login', medicosValidators.medicoBodyValidator, medicosControllers.loginMedico);
+router.put('/logout', authorization, medicosControllers.logoutMedico);
 
 
 module.exports = router;
