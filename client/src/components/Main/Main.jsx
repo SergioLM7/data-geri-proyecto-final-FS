@@ -65,21 +65,21 @@ const Main = () => {
         />
         <Route
           path="/home"
-          element={isLoggedIn ? <HomeUser handleLogout={handleLogout} /> : <Navigate to="https://data-geri-web.onrender.com/" />}
+          element={isLoggedIn ? <HomeUser handleLogout={handleLogout} /> : <Navigate to="/" />}
         />
          <Route
           path="/mystats"
-          element={isLoggedIn ? <MyStats handleLogout={handleLogout} /> : <Navigate to="https://data-geri-web.onrender.com/" />}
+          element={isLoggedIn ? <MyStats handleLogout={handleLogout} /> : <Navigate to="/" />}
         />
         <Route
           path="/stats"
-          element={isLoggedIn ? <StatsGenerales handleLogout={handleLogout} /> : <Navigate to="https://data-geri-web.onrender.com/" />}
+          element={isLoggedIn ? <StatsGenerales handleLogout={handleLogout} /> : <Navigate to="/" />}
         />
         <Route
           path="/register"
           element={<RegisterUser />}
         />
-        <Route path='/*' element={<Navigate to={'https://data-geri-web.onrender.com/'} />} />
+        <Route path='/*' element={<Navigate to={'/'} />} />
       </Routes>
     </main>
   );
