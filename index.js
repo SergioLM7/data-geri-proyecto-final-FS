@@ -25,7 +25,7 @@ app.use(cookieParser());
 
 // Configuración de CORS
 app.use(cors({
-    origin: 'http://localhost:5173', // Permitir solicitudes desde este origen
+    origin: 'https://data-geri-web.onrender.com', // Permitir solicitudes desde este origen
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
