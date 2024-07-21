@@ -86,6 +86,30 @@
               }
             }
           },
+          "400": {
+            "description": "Solicitud incorrecta debido a que alguno de los campos no cumple con lo exigido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "msg": {
+                            "type": "string",
+                            "example": "Apellido del médico debe ser una cadena de texto/ID Colegiado debe ser un número entero"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           "500": {
             "description": "Error al crear el médico.",
             "content": {
@@ -166,6 +190,30 @@
               }
             }
           },
+          "400": {
+            "description": "Solicitud incorrecta debido a que el email proporcionado no cumple con el formato.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "msg": {
+                            "type": "string",
+                            "example": "Debe proporcionar una dirección de correo electrónico válida"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           "500": {
             "description": "Error al obtener los médicos.",
             "content": {
@@ -190,7 +238,7 @@
           "medicos"
         ],
         "summary": "Iniciar sesión",
-        "description": "Inicia sesión con un médico/usuario.",
+        "description": "Inicia sesión con un médico/usuario. Se requieren credenciales válidas.",
         "requestBody": {
           "required": true,
           "content": {
@@ -199,10 +247,13 @@
                 "type": "object",
                 "properties": {
                   "email": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "email",
+                    "example": "example@domain.com"
                   },
                   "password_hash": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "hashed_password"
                   }
                 },
                 "required": [
@@ -222,7 +273,32 @@
                   "type": "object",
                   "properties": {
                     "token": {
-                      "type": "string"
+                      "type": "string",
+                      "example": "your_jwt_token_here"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Solicitud incorrecta debido a credenciales inválidas. Verifique los mensajes de error para más detalles.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "msg": {
+                            "type": "string",
+                            "example": "Debe proporcionar una dirección de correo electrónico válida/La contraseña hasheada debe tener entre 4 y 200 caracteres"
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -230,7 +306,19 @@
             }
           },
           "401": {
-            "description": "Credenciales inválidas."
+            "description": "Credenciales inválidas.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -503,6 +591,30 @@
               }
             }
           },
+          "400": {
+            "description": "Solicitud denegada debido a que alguno de los campos no cumple con los criterios.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "msg": {
+                            "type": "string",
+                            "example": "Apellido del paciente debe tener entre 2 y 70 caracteres / Fecha de ingreso no puede ser futura"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           "500": {
             "description": "Error al crear el ingreso.",
             "content": {
@@ -561,6 +673,30 @@
                     "message": {
                       "type": "string",
                       "example": "Se ha actualizado el ingreso."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Solicitud denegada debido a que alguno de los campos no cumple con los criterios.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "msg": {
+                            "type": "string",
+                            "example": "Apellido del paciente debe tener entre 2 y 70 caracteres / Fecha de ingreso no puede ser futura"
+                          }
+                        }
+                      }
                     }
                   }
                 }
