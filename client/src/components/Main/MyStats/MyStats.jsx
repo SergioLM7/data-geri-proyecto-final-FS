@@ -215,11 +215,11 @@ const MyStats = ({ handleLogout }) => {
    * @type {Object}
    */
   const legendProps = {
-    anchor: 'center',
-    direction: 'column',
+    anchor: 'bottom',
+    direction: 'row',
     justify: false,
     translateX: 0,
-    translateY: 0,
+    translateY: 56,
     itemsSpacing: 0,
     itemWidth: 100,
     itemHeight: 18,
@@ -313,7 +313,7 @@ const MyStats = ({ handleLogout }) => {
               <div className="piechart">
                 <ResponsivePie {...pieChartProps} />
               </div>
-              <h3>Distribución de enfermedades</h3>
+              <h3>Evolución duración del ingreso (2022-2024)</h3>
               <div className="linechart">
                 <ResponsiveLine {...lineChartProps} />
               </div>

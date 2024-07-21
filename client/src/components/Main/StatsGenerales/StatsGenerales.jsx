@@ -159,8 +159,8 @@ const StatsGenerales = ({ handleLogout }) => {
   const lineChartProps = {
     data: dataBars,
     margin: isMobile
-      ? { top: 20, right: 20, bottom: 40, left: 50 }
-      : { top: 50, right: 20, bottom: 50, left: 60 },
+      ? { top: 20, right: 20, bottom: 55, left: 50 }
+      : { top: 50, right: 20, bottom: 55, left: 60 },
     xScale: { type: 'point' },
     yScale: {
       type: 'linear',
@@ -212,12 +212,12 @@ const StatsGenerales = ({ handleLogout }) => {
         <article className="stats-user">
           {stats.length > 0 ? (
             <>
+              <h3>Distribución de enfermedades</h3>
               <div className="piechart">
-                <h3>Distribución de enfermedades</h3>
                 <ResponsivePie {...pieChartProps} />
               </div>
+              <h3>Evolución duración del ingreso (2022-2024)</h3>
               <div className="linechart">
-                <h3>Evolución duración del ingreso (2022-2024)</h3>
                 <ResponsiveLine {...lineChartProps} />
               </div>
             </>
