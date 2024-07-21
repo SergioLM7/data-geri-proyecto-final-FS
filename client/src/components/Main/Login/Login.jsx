@@ -9,17 +9,18 @@ import { DNA } from 'react-loader-spinner';
 
 const Login = ({ handleLogin, handleLogout }) => {
   const { error, setError } = useContext(MensajeError);
-
   const [email, setEmail] = useState('');
   const [password_hash, setPasswordHash] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const URL =import.meta.env.VITE_API_URL;
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
     try {
-      const response = await axios.post('https://data-geri.onrender.com/api/medicos/login/', {
+      const response = await axios.post(`${URL}/api/medicos/login/`, {
         email: email,
         password_hash: password_hash
       });

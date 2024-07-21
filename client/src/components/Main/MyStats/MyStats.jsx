@@ -18,6 +18,8 @@ const MyStats = ({ handleLogout }) => {
   const [searching, setSearching] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
   const isMobile = screenWidth < 640;
+  const URL =import.meta.env.VITE_API_URL;
+
 
   useEffect(() => {
     getStats();
@@ -55,13 +57,13 @@ const MyStats = ({ handleLogout }) => {
     }
 
     try {
-      const res = await axios.get(`https://data-geri.onrender.com/api/stats/${email}`);
+      const res = await axios.get(`${URL}/api/stats/${email}`);
       console.log(res);
 
       if (res) {
         setMyStats([res.data[0]]);
         setError('');
-        const res2 = await axios.get(`https://data-geri.onrender.com/api/stats/ultimos/${email}`);
+        const res2 = await axios.get(`${URL}/api/stats/ultimos/${email}`);
         console.log(res2);
 
         if (res2) {
@@ -172,50 +174,8 @@ const MyStats = ({ handleLogout }) => {
     arcLinkLabelsColor: { from: 'color' },
     arcLabelsSkipAngle: 10,
     arcLabelsTextColor: { from: 'color', modifiers: [['darker', 2]] },
-    defs: [
-      {
-        id: 'dots',
-        type: 'patternDots',
-        background: 'inherit',
-        color: 'rgba(255, 255, 255, 0.3)',
-        size: 4,
-        padding: 1,
-        stagger: true
-      }],
     arcLinkLabel: d => `${d.id} (${d.value}%)`,
     responsive: true,
-    fill: [
-      {
-        match: {
-          id: 'Otros'
-        },
-        id: 'dots'
-      },
-      {
-        match: {
-          id: 'Infec. intraabd.'
-        },
-        id: 'dots'
-      },
-      {
-        match: {
-          id: 'ICC'
-        },
-        id: 'dots'
-      },
-      {
-        match: {
-          id: 'ITU'
-        },
-        id: 'dots'
-      },
-      {
-        match: {
-          id: 'Neumonía'
-        },
-        id: 'lines'
-      }
-    ],
     legends: isMobile ? [] : [legendProps]
   };
 

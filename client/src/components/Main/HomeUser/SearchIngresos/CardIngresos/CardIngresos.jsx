@@ -63,6 +63,8 @@ const CardIngresos = ({
   };
 
   const handleSave = async () => {
+    const URL =import.meta.env.VITE_API_URL;
+
     const updatedFields = {
       ...editFields,
       medico_id: parseInt(editFields.medico_id, 10),
@@ -72,7 +74,7 @@ const CardIngresos = ({
       barthel_basal: parseInt(editFields.barthel_basal, 10)
     };
     try {
-      const response = await axios.put(`https://data-geri.onrender.com/api/ingresos`, {
+      const response = await axios.put(`${URL}/api/ingresos`, {
         ingreso_id,
         fieldsToUpdate: updatedFields
       });
@@ -84,8 +86,10 @@ const CardIngresos = ({
   };
 
   const handleDelete = async () => {
+    const URL =import.meta.env.VITE_API_URL;
+
     try {
-      await axios.delete(`https://data-geri.onrender.com/api/ingresos/${ingreso_id}`);
+      await axios.delete(`${URL}/api/ingresos/${ingreso_id}`);
       onDelete(ingreso_id);
     } catch (error) {
       console.error('Error al eliminar el ingreso', error);

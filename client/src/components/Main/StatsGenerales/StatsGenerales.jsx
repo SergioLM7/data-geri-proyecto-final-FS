@@ -13,6 +13,7 @@ const StatsGenerales = ({ handleLogout }) => {
   const [stats, setStats] = useState([]);
   const [searching, setSearching] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+  const URL =import.meta.env.VITE_API_URL;
 
 
   useEffect(() => {
@@ -32,13 +33,13 @@ const StatsGenerales = ({ handleLogout }) => {
     setSearching(true);
 
     try {
-      const res = await axios.get(`https://data-geri.onrender.com/api/stats/statsservicio/`);
+      const res = await axios.get(`${URL}/api/stats/statsservicio/`);
       console.log(res);
 
       if (res) {
         setStats([res.data[0]]);
         setError('');
-        const res2 = await axios.get(`https://data-geri.onrender.com/api/stats/ultimosservicio/`);
+        const res2 = await axios.get(`${URL}/api/stats/ultimosservicio/`);
         console.log(res2);
 
         if (res2) {
@@ -147,53 +148,11 @@ const StatsGenerales = ({ handleLogout }) => {
     arcLinkLabelsSkipAngle: 10,
     arcLinkLabelsTextColor: "#333333",
     arcLinkLabelsThickness: 2,
-    arcLinkLabelsColor: { from: 'color' },
+    arcLinkLabelsColor: { from: 'color'},
     arcLabelsSkipAngle: 10,
     arcLabelsTextColor: { from: 'color', modifiers: [['darker', 2]] },
-    defs: [
-      {
-        id: 'dots',
-        type: 'patternDots',
-        background: 'inherit',
-        color: 'rgba(255, 255, 255, 0.3)',
-        size: 4,
-        padding: 1,
-        stagger: true
-      }],
     arcLinkLabel: d => `${d.id} (${d.value}%)`,
     responsive: true,
-    fill: [
-      {
-        match: {
-          id: 'Otros'
-        },
-        id: 'dots'
-      },
-      {
-        match: {
-          id: 'Infec. intraabd.'
-        },
-        id: 'dots'
-      },
-      {
-        match: {
-          id: 'ICC'
-        },
-        id: 'dots'
-      },
-      {
-        match: {
-          id: 'ITU'
-        },
-        id: 'dots'
-      },
-      {
-        match: {
-          id: 'Neumonía'
-        },
-        id: 'lines'
-      }
-    ],
     legends: isMobile ? [] : [legendProps]
   };
 

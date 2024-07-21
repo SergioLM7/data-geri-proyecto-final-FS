@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import axios from 'axios';
 import { FaCheckCircle, FaExclamationCircle, FaTimes } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
@@ -11,12 +11,13 @@ const RegistrarIngreso = ({ onClose }) => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const { confirmationMessage, setConfirmationMessage } = useContext(ConfirmationMessage);
   const { isSubmitting, setIsSubmitting } = useContext(SetIsSubmitting);
+  const URL =import.meta.env.VITE_API_URL;
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     setConfirmationMessage('');
     try {
-      const response = await axios.post('https://data-geri.onrender.com/api/ingresos', data);
+      const response = await axios.post(`${URL}/api/ingresos`, data);
       setConfirmationMessage('Ingreso creado');
       setTimeout(() => {
         setIsSubmitting(false);

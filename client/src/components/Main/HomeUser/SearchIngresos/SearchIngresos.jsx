@@ -8,6 +8,8 @@ import { DNA } from 'react-loader-spinner';
 
 
 const SearchIngresos = () => {
+  const URL =import.meta.env.VITE_API_URL;
+
   const { error, setError } = useContext(MensajeError);
   const [ingresoID, setIngresoID] = useState('');
   const [ingresosList, setIngresosList] = useState([]);
@@ -17,8 +19,9 @@ const SearchIngresos = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true); 
+    
     try {
-      const res = await axios.get('https://data-geri.onrender.com/api/ingresos', {
+      const res = await axios.get(`${URL}/api/ingresos`, {
         params: { historia_clinica: ingresoID, limit: 10, offset: 0 }
       });
       const allIngresos = res.data;

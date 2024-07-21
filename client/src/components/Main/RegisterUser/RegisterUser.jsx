@@ -12,11 +12,13 @@ const RegisterUser = () => {
   const { confirmationMessage, setConfirmationMessage } = useContext(ConfirmationMessage);
   const { isSubmitting, setIsSubmitting } = useContext(SetIsSubmitting);
   const navigate = useNavigate();
+  const URL =import.meta.env.VITE_API_URL;
+
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     try {
-      const response = await axios.post('https://data-geri.onrender.com/api/medicos', data);
+      const response = await axios.post(`${URL}/api/medicos`, data);
       console.log(response);
       setConfirmationMessage('Médico/Usuario creado');
       setTimeout(() => {

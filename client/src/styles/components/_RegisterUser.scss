@@ -54,3 +54,14 @@
         }
       }
 }
+
+.confirmation {
+  @include column;
+  justify-content: center;
+  align-content: center;
+
+    &>p {
+      font-weight: bold;
+      font-size: 16px;
+    }
+}
