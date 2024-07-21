@@ -1,7 +1,7 @@
 @import "../utils/variables.scss";
 
 .stats {
-  margin: 10px 0 10px 0;
+  margin: 10px 0 0 0;
   width: 90%;
   @include column;
 
@@ -22,9 +22,9 @@
 }
 
 .piechart {
-  height: 50vh;
+  height: 40vh;
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   &>h3 {
     text-align: center;
   }
