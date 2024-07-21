@@ -1,4 +1,32 @@
-import React, { useState, useEffect, useContext } from "react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: MyStats/MyStats.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: MyStats/MyStats.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect, useContext } from "react";
 import axios from 'axios';
 import { MensajeError } from '../../../context/MensajeError';
 import Header from '../../Header/Header';
@@ -22,7 +50,7 @@ import { ResponsiveLine } from '@nivo/line';
  *   // lógica de cierre de sesión
  * };
  *
- * return <MyStats handleLogout={handleLogout} />;
+ * return &lt;MyStats handleLogout={handleLogout} />;
  * @namespace Components.MyStats
  * 
  * @param {Object} props - Props del componente.
@@ -36,12 +64,12 @@ const MyStats = ({ handleLogout }) => {
   const { error, setError } = useContext(MensajeError);
   /**
    * Estado para almacenar las estadísticas por años de los ingresos del médico en cuestión.
-   * @type {Array<Object>}
+   * @type {Array&lt;Object>}
    */
   const [statsAno, setStatsAno] = useState([]);
   /**
    * Estado para almacenar las estadísticas de ingresos del médico en cuestión.
-   * @type {Array<Object>}
+   * @type {Array&lt;Object>}
    */
   const [myStats, setMyStats] = useState([]);
   /**
@@ -58,7 +86,7 @@ const MyStats = ({ handleLogout }) => {
    * Determina si la pantalla es de tamaño móvil.
    * @type {boolean}
    */
-  const isMobile = screenWidth < 640;
+  const isMobile = screenWidth &lt; 640;
   /**
    * URL base de la API, tomada de las variables de entorno.
    * @type {string}
@@ -147,7 +175,7 @@ const MyStats = ({ handleLogout }) => {
   };
   /**
    * Datos para el gráfico circular.
-   * @type {Array<Object>}
+   * @type {Array&lt;Object>}
    */
   const data = myStats.length > 0 ? [
     {
@@ -183,8 +211,8 @@ const MyStats = ({ handleLogout }) => {
   ] : [];
   /**
    * Formatea los datos para el gráfico de líneas.
-   * @param {Array<Array<Object>>} statsAno - Estadísticas anuales.
-   * @returns {Array<Object>} Datos formateados para el gráfico de líneas.
+   * @param {Array&lt;Array&lt;Object>>} statsAno - Estadísticas anuales.
+   * @returns {Array&lt;Object>} Datos formateados para el gráfico de líneas.
    */
   const formatDataBars = (statsAno) => {
     if (statsAno.length > 0) {
@@ -289,39 +317,62 @@ const MyStats = ({ handleLogout }) => {
     legends: []
   };
 
-  return <>
-    <Header />
-    <NavUser handleLogout={handleLogout} />
-    <section className="stats">
-      <h2>Mis estadísticas</h2>
+  return &lt;>
+    &lt;Header />
+    &lt;NavUser handleLogout={handleLogout} />
+    &lt;section className="stats">
+      &lt;h2>Mis estadísticas&lt;/h2>
       {searching ? (
-        <div className="spinner"><DNA
+        &lt;div className="spinner">&lt;DNA
           visible={true}
           height="150"
           width="150"
           ariaLabel="dna-loading"
           wrapperStyle={{}}
           wrapperClass="dna-wrapper"
-        /></div>
+        />&lt;/div>
       ) : (
-        <article className="stats-user">
+        &lt;article className="stats-user">
           {myStats.length > 0 ? (
-            <>
-              <div className="piechart">
-                <ResponsivePie {...pieChartProps} />
-              </div>
-              <div className="linechart">
-                <ResponsiveLine {...lineChartProps} />
-              </div>
-            </>
+            &lt;>
+              &lt;div className="piechart">
+                &lt;ResponsivePie {...pieChartProps} />
+              &lt;/div>
+              &lt;div className="linechart">
+                &lt;ResponsiveLine {...lineChartProps} />
+              &lt;/div>
+            &lt;/>
           ) : (
-            <p>No hay estadísticas disponibles.</p>
+            &lt;p>No hay estadísticas disponibles.&lt;/p>
           )}
-        </article>
+        &lt;/article>
       )}
-      {error && <p className="error-message">{error}</p>}
-    </section>
-  </>;
+      {error &amp;&amp; &lt;p className="error-message">{error}&lt;/p>}
+    &lt;/section>
+  &lt;/>;
 };
 
 export default MyStats;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Components_BarthelBot.html">Components/BarthelBot</a></li><li><a href="module-Components_MyStats.html">Components/MyStats</a></li></ul><h3>Namespaces</h3><ul><li><a href="Components.BarthelBot.html">BarthelBot</a></li><li><a href="Components.MyStats.html">MyStats</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sun Jul 21 2024 22:02:16 GMT+0200 (hora de verano de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
