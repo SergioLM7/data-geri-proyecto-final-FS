@@ -2,6 +2,7 @@
  * @author Sergio Lillo <Data Geri> 
  * @exports services
  * @namespace Services.medicos
+ * @description Este módulo contiene servicios relacionados con médicos.
  */
 const queries = require('../queries/medicos.queries');
 const Medicos = require('../schemas/medicos.schema');
