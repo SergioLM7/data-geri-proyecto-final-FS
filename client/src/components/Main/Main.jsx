@@ -79,7 +79,7 @@ const Main = () => {
           path="/register"
           element={<RegisterUser />}
         />
-        <Route path='/*' element={<Navigate to={'/'} />} />
+        <Route path='/*' element={<Navigate to={'https://data-geri-web.onrender.com/'} />} />
       </Routes>
     </main>
   );
