@@ -234,7 +234,7 @@ const MyStats = ({ handleLogout }) => {
     data: data,
     margin: isMobile
       ? { top: 20, right: 20, bottom: 20, left: 20 }
-      : { top: 40, right: 80, bottom: 70, left: 80 },
+      : { top: 40, right: 80, bottom: 80, left: 80 },
     innerRadius: 0.5,
     padAngle: 0.7,
     cornerRadius: 3,
@@ -256,8 +256,8 @@ const MyStats = ({ handleLogout }) => {
   const lineChartProps = {
     data: dataBars,
     margin: isMobile
-      ? { top: 20, right: 20, bottom: 30, left: 50 }
-      : { top: 50, right: 20, bottom: 40, left: 60 },
+      ? { top: 20, right: 20, bottom: 55, left: 50 }
+      : { top: 50, right: 20, bottom: 55, left: 60 },
     xScale: { type: 'point' },
     yScale: {
       type: 'linear',
@@ -310,11 +310,9 @@ const MyStats = ({ handleLogout }) => {
           {myStats.length > 0 ? (
             <>
               <div className="piechart">
-              <h3>Distribución de enfermedades</h3>
                 <ResponsivePie {...pieChartProps} />
               </div>
               <div className="linechart">
-              <h3>Evolución duración mis ingresos (2022-2024)</h3>
                 <ResponsiveLine {...lineChartProps} />
               </div>
             </>
