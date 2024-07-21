@@ -1,34 +1,69 @@
-.form-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 17px;
+.login-section {
+  min-height: 30vh;
+  display: flex;
+  margin: 50px 0 50px 0;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  border: solid 3px $honolulu-blue;
+  border-radius: 10px;
+  width: 50vw;
+  align-items: center;
+  background-color: transparent;
+  padding: 20px;
+  gap: 20px;
+  @include shadow ($honolulu-blue);
+
+  .login-form {
+    align-content: center;
 
     label {
-        display: flex;
-        margin-bottom: 8px;
-        font-weight: bold;
-      }
+      display: flex;
+      font-weight: bold;
+      margin: 6px;
+    }
 
-      input {
-        margin-bottom: 12px;
-        border: 1px solid #cccccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        margin: 4px;
-      }
+    input,
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 12px;
+      border: 1px solid $primary-color;
+      border-radius: 4px;
+      box-sizing: border-box;
+      color: black;
+    }
 
-      .button-login {
-        background-color: lightblue;
-        color: white;
-        cursor: pointer;
-        font-size: 15px;
-        border-radius: 4px;
-        padding: 4px;
-  
-        &:hover {
-          background-color: darkblue;
-        }
+    button.button-login {
+      background-color: $blue-green;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 4px;
+      padding: 5px;
+      border: transparent;
+
+
+      &:hover {
+        background-color: $honolulu-blue;
       }
+    }
+
+    p {
+      color: $secondary-color;
+      margin: 0 0 12px;
+      font-size: 0.9rem;
+      font-weight: bolder;
+    }
+
+  }
+
+  .link-register {
+    color: $primary-color;
+    margin: 0 0 12px;
+    font-size: 0.9rem;
+    font-weight: bolder;
+
+  }
+
 }

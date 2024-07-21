@@ -14,3 +14,8 @@
     -moz-box-shadow: 15px 10px 36px 8px $shadow-color;
     box-shadow: 15px 10px 36px 8px $shadow-color;
 }
+
+@mixin row {
+    display: flex;
+    flex-direction: row;
+}

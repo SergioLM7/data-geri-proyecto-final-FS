@@ -127,7 +127,7 @@ const BarthelBot =() => {
         <button className="option-button" onClick={startTest}>Comenzar</button>
       )}
       {currentQuestion >= 0 && currentQuestion < barthelQuestions.length && (
-        <div>
+        <div className='chat-buttons'>
           {barthelQuestions[currentQuestion].options.map((option, index) => (
             <button key={index} className="option-button" onClick={() => handleOptionClick(option.score)}>
               {option.text}

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTrashAlt, faFolderClosed, faSquareXmark } from '@fortawesome/free-solid-svg-icons';
 
 const CardIngresos = ({
   ingreso_id,
@@ -75,7 +77,7 @@ const CardIngresos = ({
         fieldsToUpdate: updatedFields
       });
       setIsEditing(false);
-      onEdit(updatedFields); 
+      onEdit(updatedFields);
     } catch (error) {
       console.error('Error al actualizar el ingreso', error);
     }
@@ -84,7 +86,7 @@ const CardIngresos = ({
   const handleDelete = async () => {
     try {
       await axios.delete(`https://data-geri.onrender.com/api/ingresos/${ingreso_id}`);
-      onDelete(ingreso_id); 
+      onDelete(ingreso_id);
     } catch (error) {
       console.error('Error al eliminar el ingreso', error);
     }
@@ -107,8 +109,8 @@ const CardIngresos = ({
           <td><input type="text" name="diagnostico_principal" value={editFields.diagnostico_principal} onChange={handleInputChange} /></td>
           <td><input type="number" name="barthel_basal" value={editFields.barthel_basal} onChange={handleInputChange} /></td>
           <td>
-            <button onClick={handleSave}>Guardar</button>
-            <button onClick={handleCancel}>Cancelar</button>
+            <FontAwesomeIcon icon={faFolderClosed} onClick={handleSave} />
+            <FontAwesomeIcon icon={faSquareXmark} onClick={handleCancel} />
           </td>
         </>
       ) : (
@@ -126,8 +128,8 @@ const CardIngresos = ({
           <td>{diagnostico_principal}</td>
           <td>{barthel_basal}</td>
           <td>
-            <button onClick={handleEdit}>Editar</button>
-            <button onClick={handleDelete}>Eliminar</button>
+            <FontAwesomeIcon className="fas fa-edit" icon={faEdit} onClick={() => handleEdit()} />
+            <FontAwesomeIcon className="fas fa-trash-alt" icon={faTrashAlt} onClick={() => handleDelete()} />
           </td>
         </>
       )}

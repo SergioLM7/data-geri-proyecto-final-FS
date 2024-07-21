@@ -1,0 +1,56 @@
+@import "../utils/variables.scss";
+@import "../utils/mixins.scss";
+
+.table-div {
+    width: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+        height: 8px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $honolulu-blue;
+        border-radius: 4px;
+      }
+  
+      &::-webkit-scrollbar-track {
+        background-color: #f1f1f1;
+      }
+
+    &>table {
+      table-layout: fixed;
+      width: 100%;
+    
+      th, td {
+        text-align: left;
+        width: 50px;
+        max-width: 500px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        td button {
+            text-overflow: ellipsis;
+        }
+
+        td:hover {
+            white-space: normal;
+            overflow: visible;
+            position: relative;
+            z-index: 1;
+            background-color: white; 
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+          }
+
+
+          td:last-child {
+            white-space: nowrap;
+            min-width: 100px;
+        }
+
+      }
+    }
+
+
+}

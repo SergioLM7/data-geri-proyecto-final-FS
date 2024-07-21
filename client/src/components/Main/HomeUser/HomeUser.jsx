@@ -23,18 +23,18 @@ const Home = ({ handleLogout }) => {
   return <>
     <Header />
     <NavUser handleLogout={handleLogout} />
-    <section>
-      <h2>Gestiona los ingresos</h2>
+    <h2>Gestiona los ingresos</h2>
+    <section className="home-user">
       <SearchIngresos />
       <button onClick={openModal}>Registrar Ingreso</button>
       {ModalOpen && <RegistrarIngreso onClose={closeModal} />}
     </section>
-    <div>
+    <section className="chatbot-section">
       <button onClick={() => setShowBot(!showBot)}>
         {showBot ? 'Cerrar' : 'Abrir'} Evaluación de Barthel
       </button>
       {showBot && <BarthelBot />}
-    </div>
+    </section>
   </>
 };
 

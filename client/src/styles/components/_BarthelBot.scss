@@ -1,31 +1,51 @@
 @import "../utils/variables.scss";
+@import "../utils/mixins.scss";
 
 .bot-container {
-    width: 300px;
+    max-width: 500px;
+    min-width: 300px;
     border: 1px solid #ccc;
     border-radius: 10px;
     padding: 16px;
-    margin: 20px auto;
-    font-family: Arial, sans-serif;
+    margin: 20px;
+    @include column;
+    justify-content: center;
+    align-content: center;
+    @include shadow ($honolulu-blue);
+
+
   }
   
   .message {
     border-radius: 8px;
     padding: 8px 12px;
     margin-bottom: 8px;
-    max-width: 80%;
+    max-width: 90%;
+    text-align: center;
+    align-self: center;
+
   }
   
   .bot-message {
     background-color: #f0f0f0;
-    margin-right: auto;
+    font-family: "Arial";
+    font-weight: bold;
+    text-align: center;
   }
   
   .user-message {
     background-color: #e3f2fd;
     margin-left: auto;
+    max-width: 90%;
+    text-align: center;
+    align-self: center;
   }
   
+  .chat-buttons {
+    @include column;
+    justify-content: center;
+    align-content: center;
+  }
 
   .option-button {
     background-color: $pacific-cyan;
@@ -33,12 +53,13 @@
     color: white;
     padding: 10px 20px;
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 6px;
+    max-width: 90%;
+    text-align: center;
+    align-self: center;
   }
   
   .option-button:hover {

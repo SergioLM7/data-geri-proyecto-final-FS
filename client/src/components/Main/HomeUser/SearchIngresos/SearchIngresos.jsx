@@ -85,22 +85,23 @@ const SearchIngresos = () => {
       </form>
       {error && <p>{error}</p>}
       {ingresosList.length > 0 ? (
+        <div className="table-div">
         <table>
           <thead>
             <tr>
               <th>Ingreso ID</th>
               <th>Médico</th>
-              <th>Historia Clínica</th>
+              <th>Hª Clínica</th>
               <th>Nombre</th>
               <th>Apellido</th>
               <th>Sexo</th>
               <th>Edad</th>
               <th>Fecha Ingreso</th>
               <th>Fecha Alta</th>
-              <th>Duración Ingreso</th>
-              <th>Diagnóstico principal</th>
-              <th>Barthel Ingreso</th>
-              <th>Acciones</th>
+              <th>Duración</th>
+              <th>Diagnóstico</th>
+              <th>Barthel</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -126,6 +127,7 @@ const SearchIngresos = () => {
           )}
           </tbody>
         </table>
+        </div>
       ) : (
         <p></p>
       )}

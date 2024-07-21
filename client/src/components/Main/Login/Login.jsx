@@ -42,9 +42,9 @@ const Login = ({ handleLogin, handleLogout }) => {
 
   return <>
     <Header />
-    <section className="form-section">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit} className="login">
+    <section className="login-section">
+      <h2>¡Bienvenid@!</h2>
+      <form onSubmit={handleSubmit} className="login-form">
         <div>
           <label>Email:</label>
           <input
@@ -66,7 +66,7 @@ const Login = ({ handleLogin, handleLogout }) => {
           />
         </div>
         {error && <p>{error}</p>}
-        <button type="submit" className="button-login">Iniciar sesión</button>
+        <div><button type="submit" className="button-login">Iniciar sesión</button></div>
       </form>
       {isLoading ? (
         <DNA

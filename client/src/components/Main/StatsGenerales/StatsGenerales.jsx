@@ -25,7 +25,7 @@ const StatsGenerales = ({ handleLogout }) => {
     return () => window.removeEventListener('resize', handleResize)
   }, []);
 
-  const isMobile = screenWidth < 600;
+  const isMobile = screenWidth < 640;
 
 
   const getStats = async () => {
@@ -201,7 +201,7 @@ const StatsGenerales = ({ handleLogout }) => {
     data: dataBars,
     margin: isMobile
       ? { top: 20, right: 20, bottom: 40, left: 50 }
-      : { top: 50, right: 110, bottom: 50, left: 60 },
+      : { top: 50, right: 20, bottom: 50, left: 60 },
     xScale: { type: 'point' },
     yScale: {
       type: 'linear',
@@ -241,14 +241,14 @@ const StatsGenerales = ({ handleLogout }) => {
     <section className="stats">
       <h2>Estadísticas del servicio</h2>
       {searching ? (
-        <DNA
+        <div className="spinner"><DNA
           visible={true}
           height="150"
           width="150"
           ariaLabel="dna-loading"
           wrapperStyle={{}}
           wrapperClass="dna-wrapper"
-        />
+        /></div>
       ) : (
         <article className="stats-user">
           {stats.length > 0 ? (

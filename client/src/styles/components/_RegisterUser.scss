@@ -3,15 +3,54 @@
 
 
 .register-medico {
+    min-height: 30vh;
     display: flex;
+    margin: 50px 0 50px 0;
     flex-direction: column;
     justify-content: center;
-    border: solid 5px $honolulu-blue;
+    align-content: center;
+    border: solid 3px $honolulu-blue;
     border-radius: 10px;
     width: 50vw;
     align-items: center;
-    background-color: transparent;
+    background-color: white;
     padding: 20px;
     gap: 20px;
     @include shadow ($honolulu-blue);
+
+
+    &>form {
+        background-color: transparent;
+
+        input, select {
+          width: 100%;
+          padding: 8px;
+          margin-bottom: 12px;
+          border: 1px solid $primary-color;
+          border-radius: 4px;
+          box-sizing: border-box;
+          color: black;
+        }
+    
+        button[type="submit"] {
+          background-color: $blue-green;
+          color: white;
+          cursor: pointer;
+          font-size: 16px;
+          border-radius: 4px;
+          padding: 3px;
+          border: transparent;
+
+          &:hover {
+            background-color: $honolulu-blue;
+          }
+        }
+    
+        p {
+          color: $secondary-color;
+          margin: 0 0 12px;
+          font-size: 0.9rem;
+          font-weight: bolder;
+        }
+      }
 }

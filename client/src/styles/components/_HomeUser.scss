@@ -1,0 +1,117 @@
+@import "../utils/variables.scss";
+@import "../utils/mixins.scss";
+
+h2 {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 10px;
+}
+
+.home-user {
+    min-height: 30vh;
+    @include column;
+    @include centered-content;
+    width: 90%;
+    padding: 20px;
+    gap: 20px;
+
+    &>.search-ingresos {
+        width: 100%;
+        @include column;
+        @include centered-content;
+    }
+
+    .form {
+        gap: 10px;
+        width: 50%;
+        @include column;
+        @include centered-content;
+
+
+        input {
+            max-width: 90%;
+            padding: 8px;
+            margin-bottom: 12px;
+            border: 1px solid $primary-color;
+            border-radius: 4px;
+            box-sizing: border-box;
+            color: black;
+            text-align: center;
+        }
+
+        &>button {
+            background-color: $blue-green;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            padding: 8px;
+            border: transparent;
+            margin-bottom: 12px;
+    
+    
+            &:hover {
+                background-color: $honolulu-blue;
+            }
+    
+        }
+
+    }
+
+    p {
+        color: $secondary-color;
+        margin: 10px 0 12px;
+        font-size: 0.9rem;
+        font-weight: bolder;
+    }
+
+
+    &>button {
+        background-color: $blue-green;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 4px;
+        padding: 8px;
+        border: transparent;
+        margin-bottom: 12px;
+
+
+        &:hover {
+            background-color: $honolulu-blue;
+        }
+
+    }
+
+}
+
+.chatbot-section {
+    min-height: 30vh;
+    display: flex;
+    margin: 50px 0 50px 0;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    width: 90%;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+
+    &>button {
+        background-color: $blue-green;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 4px;
+        padding: 8px;
+        border: transparent;
+        margin-bottom: 12px;
+        
+
+
+        &:hover {
+            background-color: $honolulu-blue;
+        }
+
+    }
+}

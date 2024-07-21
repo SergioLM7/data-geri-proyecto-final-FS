@@ -17,7 +17,7 @@ const MyStats = ({ handleLogout }) => {
   const [myStats, setMyStats] = useState([]);
   const [searching, setSearching] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
-
+  const isMobile = screenWidth < 640;
 
   useEffect(() => {
     getStats();
@@ -29,7 +29,6 @@ const MyStats = ({ handleLogout }) => {
     return () => window.removeEventListener('resize', handleResize)
   }, []);
 
-  const isMobile = screenWidth < 600;
 
   const getEmailCookies = () => {
     const token = Cookies.get('access-token');
@@ -224,7 +223,7 @@ const MyStats = ({ handleLogout }) => {
     data: dataBars,
     margin: isMobile
       ? { top: 20, right: 20, bottom: 40, left: 50 }
-      : { top: 50, right: 110, bottom: 50, left: 60 },
+      : { top: 50, right: 20, bottom: 50, left: 60 },
     xScale: { type: 'point' },
     yScale: {
       type: 'linear',

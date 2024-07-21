@@ -1,27 +1,127 @@
+@import "../utils/variables.scss";
+@import "../utils/mixins.scss";
+
+
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;  
+  overflow-y: auto;
+  padding: 20px;
+  z-index: 999;
+}
+
+.modal-content {
+  width: 70%;
+  max-width: 500px; 
+  position: relative;
+  min-height: 30vh;
+  max-height: calc(100vh - 100px);
+  @include column;
+  @include centered-content;
+  border: solid 3px $honolulu-blue;
+  border-radius: 10px;
+  background-color: white;
+  gap: 20px;
+  margin-top: 150px;
+  @include shadow ($honolulu-blue);
+  overflow: hidden;
+
+  &>h2 {
+    max-width: 90%; 
+    text-align: center;
+    padding: 20px 0; 
+    margin: 0; 
+    flex-shrink: 0
+  }
+
+  &>form {
+    flex-grow: 1; 
+    overflow-y: auto;
+    padding: 0 20px;
     width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    box-sizing: border-box;
+    background-color: transparent;
+    @include column;
+    @include centered-content;
+    margin-bottom: 10px;
+
+    input,
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 12px;
+      border: 1px solid $primary-color;
+      border-radius: 4px;
+      box-sizing: border-box;
+      color: black;
+    }
+
+    button[type="submit"] {
+      background-color: $blue-green;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 4px;
+      padding: 3px;
+      border: transparent;
+      margin-bottom: 10px;
+
+      &:hover {
+        background-color: $honolulu-blue;
+      }
+    }
+
+    p {
+      color: $secondary-color;
+      margin: 0 0 12px;
+      font-size: 0.9rem;
+      font-weight: bolder;
+    }
   }
-  
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  z-index: 1;
+}
+
+
+@media screen and (min-width: $phone-breakpoint) {
   .modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    width: 500px;
-    position: relative;
+    width: 90%;
+    max-width: 500px;
+    
+    &>form {
+      background-color: transparent;
+      @include column;
+      @include centered-content;
+      width: 90%;
+      max-width: 500px;
+
+
+      button[type="submit"] {
+        width: 50%;
+
+      }
+
+    }
   }
-  
-  .close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 24px;
+}
+
+@media screen and (min-width: $ipad-breakpoint) {
+  .modal-content {
+    margin-top: 150px; 
+    max-height: calc(100vh - 120px); 
   }
+}

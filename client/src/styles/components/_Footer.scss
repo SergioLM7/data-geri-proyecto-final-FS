@@ -10,9 +10,19 @@
     text-align: center;
     color: white;
     font-weight: bold;
-    padding: 0.5vh;
+    padding: 1vh;
+    gap: 10px;
 
     &>p {
         align-items: center;
     }
 }
+
+@media (min-width:$phone-breakpoint) {
+    .footer-box {
+    @include row;
+    gap: 10px;
+    font-size: larger;
+    }
+  }
+
