@@ -234,7 +234,7 @@ const MyStats = ({ handleLogout }) => {
     data: data,
     margin: isMobile
       ? { top: 20, right: 20, bottom: 20, left: 20 }
-      : { top: 40, right: 80, bottom: 80, left: 80 },
+      : { top: 40, right: 80, bottom: 70, left: 80 },
     innerRadius: 0.5,
     padAngle: 0.7,
     cornerRadius: 3,
@@ -256,8 +256,8 @@ const MyStats = ({ handleLogout }) => {
   const lineChartProps = {
     data: dataBars,
     margin: isMobile
-      ? { top: 20, right: 20, bottom: 40, left: 50 }
-      : { top: 50, right: 20, bottom: 50, left: 60 },
+      ? { top: 20, right: 20, bottom: 30, left: 50 }
+      : { top: 50, right: 20, bottom: 40, left: 60 },
     xScale: { type: 'point' },
     yScale: {
       type: 'linear',
