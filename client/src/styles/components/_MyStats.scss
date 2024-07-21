@@ -24,11 +24,16 @@
 .piechart {
   height: 50vh;
   width: 100%; 
-
+  &>h3 {
+    text-align: center;
+  }
 }
 .linechart {
   height: 50vh;
   width: 100%;
+  &>h3 {
+    text-align: center;
+  }
 }
 
 @media (min-width: 768px) {
