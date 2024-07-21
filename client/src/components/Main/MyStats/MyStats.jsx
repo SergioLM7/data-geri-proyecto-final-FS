@@ -9,7 +9,9 @@ import { jwtDecode } from 'jwt-decode';
 import { ResponsivePie } from '@nivo/pie';
 import { ResponsiveLine } from '@nivo/line';
 /**
- * @module Components/MyStats
+ * @author Sergio Lillo <Data Geri> 
+ * @exports components
+ * @namespace MyStats
  */
 
 /**
@@ -23,7 +25,7 @@ import { ResponsiveLine } from '@nivo/line';
  * };
  *
  * return <MyStats handleLogout={handleLogout} />;
- * @namespace Components.MyStats
+ * @memberof MyStats
  * 
  * @param {Object} props - Props del componente.
  * @param {Function} props.handleLogout - Función para manejar el cierre de sesión del usuario.

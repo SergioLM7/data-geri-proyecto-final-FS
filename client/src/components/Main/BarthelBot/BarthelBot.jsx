@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 /**
- * @module Components/BarthelBot
+ * @author Sergio Lillo <Data Geri> 
+ * @exports components
+ * @namespace BarthelBot 
  */
-
 const barthelQuestions = [
   {
     question: "Comer",
@@ -94,7 +95,7 @@ const barthelQuestions = [
  * return (
  *   <BarthelBot />
  * );
- * @namespace Components.BarthelBot
+ * @memberof BarthelBot
  */
 const BarthelBot =() => {
   /**
