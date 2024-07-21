@@ -1,12 +1,16 @@
-
+@import '../utils/mixins.scss';
+@import '../utils/variables.scss';
 
 .footer-box {
+    @include column;
+    @include centered-content;
+
     min-height: 10vh;
-    background-color: rgb(70, 70, 233);
+    background-color: $secondary-color;
     text-align: center;
     color: white;
     font-weight: bold;
-    gap: 0.5vh;
+    padding: 0.5vh;
 
     &>p {
         align-items: center;

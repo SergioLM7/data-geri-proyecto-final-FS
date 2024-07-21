@@ -1,5 +1,19 @@
+@import "../utils/variables.scss";
+
 .header {
-    background-color: aqua;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    @include column;
     text-align: center;
+    font-size: larger;
     font-weight: bold;
+    font-style: oblique;
+    background-image: url('/header-image2.jpg');
+    background-size:contain;
+
+    &>a {
+        color: white;
+        text-shadow: -1px 0 $primary-color, 0 2px $primary-color, 2px 0 $primary-color, 0 -1px $primary-color;
+    }
 }

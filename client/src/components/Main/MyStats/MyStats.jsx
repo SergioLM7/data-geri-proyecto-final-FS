@@ -29,37 +29,7 @@ const MyStats = ({ handleLogout }) => {
     return () => window.removeEventListener('resize', handleResize)
   }, []);
 
-  const legendProps = screenWidth <= 460
-    ? {
-      anchor: 'bottom',
-      direction: 'column',
-      justify: false,
-      translateX: 0,
-      translateY: 56,
-      itemsSpacing: 0,
-      itemWidth: 100,
-      itemHeight: 18,
-      itemDirection: 'left-to-right',
-      itemTextColor: '#999',
-      itemOpacity: 1,
-      symbolSize: 18,
-      symbolShape: 'circle',
-    }
-    : {
-      anchor: 'bottom',
-      direction: 'row',
-      justify: false,
-      translateX: 0,
-      translateY: 56,
-      itemsSpacing: 0,
-      itemWidth: 100,
-      itemHeight: 18,
-      itemDirection: 'left-to-right',
-      itemTextColor: '#999',
-      itemOpacity: 1,
-      symbolSize: 18,
-      symbolShape: 'circle',
-    };
+  const isMobile = screenWidth < 600;
 
   const getEmailCookies = () => {
     const token = Cookies.get('access-token');
@@ -99,8 +69,6 @@ const MyStats = ({ handleLogout }) => {
           setStatsAno([res2.data]);
         }
       }
-
-
       setError('');
     } catch (err) {
       console.error('Error al traer las estadísticas de la base de datos', err);
@@ -139,8 +107,8 @@ const MyStats = ({ handleLogout }) => {
       "color": "hsl(264, 70%, 50%)"
     },
     {
-      "id": "Infección-Abd",
-      "label": "Infección abd.",
+      "id": "Infec. intraabd.",
+      "label": "Infec. intraabd.",
       "value": formatNumber(myStats[0].porcentajeinfeccabd),
       "color": "hsl(122, 70%, 50%)"
     },
@@ -171,181 +139,149 @@ const MyStats = ({ handleLogout }) => {
   };
 
   const dataBars = formatDataBars(statsAno);
+  const legendProps = {
+    anchor: 'bottom',
+    direction: 'row',
+    justify: false,
+    translateX: 0,
+    translateY: 56,
+    itemsSpacing: 0,
+    itemWidth: 100,
+    itemHeight: 18,
+    itemDirection: 'left-to-right',
+    itemTextColor: '#333333',
+    itemOpacity: 3,
+    symbolSize: 18,
+    symbolShape: 'diamond',
+  };
+
+  const pieChartProps = {
+    data: data,
+    margin: isMobile
+      ? { top: 20, right: 20, bottom: 20, left: 20 }
+      : { top: 40, right: 80, bottom: 80, left: 80 },
+    innerRadius: 0.5,
+    padAngle: 0.7,
+    cornerRadius: 3,
+    activeOuterRadiusOffset: 8,
+    colors: { scheme: 'blues' },
+    borderWidth: isMobile ? 3 : 6,
+    enableArcLinkLabels: isMobile ? false : true,
+    arcLinkLabelsSkipAngle: 10,
+    arcLinkLabelsTextColor: "#333333",
+    arcLinkLabelsThickness: 2,
+    arcLinkLabelsColor: { from: 'color' },
+    arcLabelsSkipAngle: 10,
+    arcLabelsTextColor: { from: 'color', modifiers: [['darker', 2]] },
+    defs: [
+      {
+        id: 'dots',
+        type: 'patternDots',
+        background: 'inherit',
+        color: 'rgba(255, 255, 255, 0.3)',
+        size: 4,
+        padding: 1,
+        stagger: true
+      }],
+    arcLinkLabel: d => `${d.id} (${d.value}%)`,
+    responsive: true,
+    fill: [
+      {
+        match: {
+          id: 'Otros'
+        },
+        id: 'dots'
+      },
+      {
+        match: {
+          id: 'Infec. intraabd.'
+        },
+        id: 'dots'
+      },
+      {
+        match: {
+          id: 'ICC'
+        },
+        id: 'dots'
+      },
+      {
+        match: {
+          id: 'ITU'
+        },
+        id: 'dots'
+      },
+      {
+        match: {
+          id: 'Neumonía'
+        },
+        id: 'lines'
+      }
+    ],
+    legends: isMobile ? [] : [legendProps]
+  };
+
+  const lineChartProps = {
+    data: dataBars,
+    margin: isMobile
+      ? { top: 20, right: 20, bottom: 40, left: 50 }
+      : { top: 50, right: 110, bottom: 50, left: 60 },
+    xScale: { type: 'point' },
+    yScale: {
+      type: 'linear',
+      min: 'auto',
+      max: 'auto',
+      stacked: true,
+      reverse: false
+    },
+    yFormat: " >-.2r",
+    axisBottom: {
+      tickSize: 5,
+      tickPadding: 5,
+      tickRotation: isMobile ? -45 : 0,
+      legend: 'Años',
+      legendOffset: 36,
+      legendPosition: 'middle',
+      truncateTickAt: 0
+    },
+    axisLeft: {
+      tickSize: 5,
+      tickPadding: 5,
+      tickRotation: 0,
+      legend: 'Ingreso medio (días)',
+      legendOffset: -40,
+      legendPosition: 'middle',
+      truncateTickAt: 0
+    },
+    colors: { scheme: 'category10' },
+    pointSize: isMobile ? 6 : 10,
+    useMesh: true,
+    legends: []
+  };
 
   return <>
     <Header />
     <NavUser handleLogout={handleLogout} />
     <section className="stats">
-      <h2>My Stats</h2>
+      <h2>Mis estadísticas</h2>
       {searching ? (
-        <DNA
+        <div className="spinner"><DNA
           visible={true}
           height="150"
           width="150"
           ariaLabel="dna-loading"
           wrapperStyle={{}}
           wrapperClass="dna-wrapper"
-        />
+        /></div>
       ) : (
         <article className="stats-user">
           {myStats.length > 0 ? (
-            <><ResponsivePie
-              data={data}
-              margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
-              innerRadius={0.5}
-              padAngle={0.7}
-              cornerRadius={3}
-              activeOuterRadiusOffset={8}
-              colors={{ scheme: 'purple_blue_green' }}
-              borderWidth={6}
-              borderColor={{
-                from: 'color',
-                modifiers: [
-                  [
-                    'darker',
-                    '0.2'
-                  ]
-                ]
-              }}
-              arcLinkLabelsSkipAngle={10}
-              arcLinkLabelsTextColor="#333333"
-              arcLinkLabelsThickness={2}
-              arcLinkLabelsColor={{ from: 'color' }}
-              arcLabelsSkipAngle={10}
-              arcLabelsTextColor={{
-                from: 'color',
-                modifiers: [
-                  [
-                    'darker',
-                    2
-                  ]
-                ]
-              }}
-              arcLinkLabel={d => `${d.id} (${d.value}%)`}
-              responsive={true}
-              defs={[
-                {
-                  id: 'dots',
-                  type: 'patternDots',
-                  background: 'inherit',
-                  color: 'rgba(255, 255, 255, 0.3)',
-                  size: 4,
-                  padding: 1,
-                  stagger: true
-                },
-                {
-                  id: 'lines',
-                  type: 'patternLines',
-                  background: 'inherit',
-                  color: 'rgba(255, 255, 255, 0.3)',
-                  rotation: -45,
-                  lineWidth: 6,
-                  spacing: 10
-                }
-              ]}
-              fill={[
-                {
-                  match: {
-                    id: 'ITU'
-                  },
-                  id: 'dots'
-                },
-                {
-                  match: {
-                    id: 'Neumonía'
-                  },
-                  id: 'dots'
-                },
-                {
-                  match: {
-                    id: 'Otros'
-                  },
-                  id: 'dots'
-                },
-                {
-                  match: {
-                    id: 'ICC'
-                  },
-                  id: 'dots'
-                },
-                {
-                  match: {
-                    id: 'Infección-Abd'
-                  },
-                  id: 'dots'
-                },
-              ]}
-              motionConfig="molasses"
-              legends={[legendProps]}
-            />
-              <ResponsiveLine
-                data={dataBars}
-                margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
-                xScale={{ type: 'point' }}
-                yScale={{
-                  type: 'linear',
-                  min: 'auto',
-                  max: 'auto',
-                  stacked: true,
-                  reverse: false
-                }}
-                yFormat=" >-.2r"
-                axisTop={null}
-                axisRight={null}
-                axisBottom={{
-                  tickSize: 5,
-                  tickPadding: 5,
-                  tickRotation: 0,
-                  legend: 'Años',
-                  legendOffset: 36,
-                  legendPosition: 'middle',
-                  truncateTickAt: 0
-                }}
-                axisLeft={{
-                  tickSize: 5,
-                  tickPadding: 5,
-                  tickRotation: 0,
-                  legend: 'Ingreso medio (días)',
-                  legendOffset: -40,
-                  legendPosition: 'middle',
-                  truncateTickAt: 0
-                }}
-                colors={{ scheme: 'category10' }}
-                pointSize={10}
-                pointColor={{ theme: 'background' }}
-                pointBorderWidth={2}
-                pointBorderColor={{ from: 'serieColor' }}
-                pointLabel="data.yFormatted"
-                pointLabelYOffset={-12}
-                enableTouchCrosshair={true}
-                useMesh={true}
-                legends={[
-                  {
-                    anchor: 'bottom-right',
-                    direction: 'column',
-                    justify: false,
-                    translateX: 100,
-                    translateY: 0,
-                    itemsSpacing: 0,
-                    itemDirection: 'left-to-right',
-                    itemWidth: 80,
-                    itemHeight: 20,
-                    itemOpacity: 0.75,
-                    symbolSize: 12,
-                    symbolShape: 'circle',
-                    symbolBorderColor: 'rgba(0, 0, 0, .5)',
-                    effects: [
-                      {
-                        on: 'hover',
-                        style: {
-                          itemBackground: 'rgba(0, 0, 0, .03)',
-                          itemOpacity: 1
-                        }
-                      }
-                    ]
-                  }
-                ]}
-              />
+            <>
+              <div className="piechart">
+                <ResponsivePie {...pieChartProps} />
+              </div>
+              <div className="linechart">
+                <ResponsiveLine {...lineChartProps} />
+              </div>
             </>
           ) : (
             <p>No hay estadísticas disponibles.</p>

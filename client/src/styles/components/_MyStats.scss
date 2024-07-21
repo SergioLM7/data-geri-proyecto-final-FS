@@ -1,12 +1,38 @@
+.stats {
+  margin: 10px 0 10px 0;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
+  &>h2 {
+    text-align: center;
+    font-size: 30px;
+  }
+  &>.spinner {
+    align-self: center;
+    justify-self: center;
+  }
+}
 
 .stats-user {
-    height: 400px;
-    width: 90%;
+  gap: 2rem;
+  width: 100%;
+  align-content: center;
+}
+
+.piechart {
+  height: 50vh;
+  width: 90%; 
+
+}
+.linechart {
+  height: 50vh;
+  width: 90%;
+}
+
+@media (min-width: 768px) {
+  .stats-user {
+    flex-direction: row;
   }
-  
-  @media (min-width: 460) {
-    .stats-user {
-      height: 600px;
-    }
-  }
+}

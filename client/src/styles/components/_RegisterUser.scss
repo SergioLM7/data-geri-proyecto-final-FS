@@ -1,0 +1,17 @@
+@import "../utils/variables.scss";
+@import "../utils/mixins.scss";
+
+
+.register-medico {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: solid 5px $honolulu-blue;
+    border-radius: 10px;
+    width: 50vw;
+    align-items: center;
+    background-color: transparent;
+    padding: 20px;
+    gap: 20px;
+    @include shadow ($honolulu-blue);
+}

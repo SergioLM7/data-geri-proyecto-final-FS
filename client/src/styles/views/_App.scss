@@ -1,0 +1,25 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    background: rgb(0, 146, 255);
+    background: linear-gradient(126deg, rgba(0, 146, 255, 1) 0%, rgb(95, 234, 244) 48%, rgba(0, 146, 255, 1) 100%, rgba(0, 0, 0, 1) 100%);
+    font-family: "Josefin Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 70;
+    font-style: normal;
+}
+
+#root {
+    //Configuración de layout
+    display: flex;
+    flex-direction: column; //Header-Main-Footer formarán una columna
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}

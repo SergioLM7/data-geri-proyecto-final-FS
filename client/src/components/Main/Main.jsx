@@ -57,7 +57,7 @@ const Main = () => {
   };
 
   return (
-    <main>
+    <main className="main">
       <Routes>
         <Route
           path="/"

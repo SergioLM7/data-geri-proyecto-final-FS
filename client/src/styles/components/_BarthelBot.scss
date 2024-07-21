@@ -1,3 +1,5 @@
+@import "../utils/variables.scss";
+
 .bot-container {
     width: 300px;
     border: 1px solid #ccc;
@@ -26,7 +28,7 @@
   
 
   .option-button {
-    background-color: #4CAF50;
+    background-color: $pacific-cyan;
     border: none;
     color: white;
     padding: 10px 20px;
@@ -40,5 +42,5 @@
   }
   
   .option-button:hover {
-    background-color: #45a049;
+    background-color: $secondary-color;
   }

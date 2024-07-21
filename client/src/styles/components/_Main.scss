@@ -1,0 +1,10 @@
+@import "../utils/variables.scss";
+
+.main {
+    margin: 0 auto;
+    @include column;
+    align-items: center;
+    min-height: 90vh; 
+    //padding: 16px 0px;
+    width: 100%;
+}
