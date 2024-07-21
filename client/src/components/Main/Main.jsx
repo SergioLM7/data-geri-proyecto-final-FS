@@ -65,15 +65,15 @@ const Main = () => {
         />
         <Route
           path="/home"
-          element={isLoggedIn ? <HomeUser handleLogout={handleLogout} /> : <Navigate to="/" />}
+          element={isLoggedIn ? <HomeUser handleLogout={handleLogout} /> : <Navigate to="https://data-geri-web.onrender.com/" />}
         />
          <Route
           path="/mystats"
-          element={isLoggedIn ? <MyStats handleLogout={handleLogout} /> : <Navigate to="/" />}
+          element={isLoggedIn ? <MyStats handleLogout={handleLogout} /> : <Navigate to="https://data-geri-web.onrender.com/" />}
         />
         <Route
           path="/stats"
-          element={isLoggedIn ? <StatsGenerales handleLogout={handleLogout} /> : <Navigate to="/" />}
+          element={isLoggedIn ? <StatsGenerales handleLogout={handleLogout} /> : <Navigate to="https://data-geri-web.onrender.com/" />}
         />
         <Route
           path="/register"
