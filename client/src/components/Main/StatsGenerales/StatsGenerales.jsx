@@ -13,7 +13,7 @@ const StatsGenerales = ({ handleLogout }) => {
   const [stats, setStats] = useState([]);
   const [searching, setSearching] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
-  const URL =import.meta.env.VITE_API_URL;
+  const URL = import.meta.env.VITE_API_URL;
 
 
   useEffect(() => {
@@ -148,7 +148,7 @@ const StatsGenerales = ({ handleLogout }) => {
     arcLinkLabelsSkipAngle: 10,
     arcLinkLabelsTextColor: "#333333",
     arcLinkLabelsThickness: 2,
-    arcLinkLabelsColor: { from: 'color'},
+    arcLinkLabelsColor: { from: 'color' },
     arcLabelsSkipAngle: 10,
     arcLabelsTextColor: { from: 'color', modifiers: [['darker', 2]] },
     arcLinkLabel: d => `${d.id} (${d.value}%)`,
@@ -213,9 +213,11 @@ const StatsGenerales = ({ handleLogout }) => {
           {stats.length > 0 ? (
             <>
               <div className="piechart">
+                <h3>Distribución de enfermedades</h3>
                 <ResponsivePie {...pieChartProps} />
               </div>
               <div className="linechart">
+                <h3>Evolución duración del ingreso (2022-2024)</h3>
                 <ResponsiveLine {...lineChartProps} />
               </div>
             </>

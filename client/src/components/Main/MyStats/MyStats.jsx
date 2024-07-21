@@ -310,9 +310,11 @@ const MyStats = ({ handleLogout }) => {
           {myStats.length > 0 ? (
             <>
               <div className="piechart">
+              <h3>Distribución de enfermedades</h3>
                 <ResponsivePie {...pieChartProps} />
               </div>
               <div className="linechart">
+              <h3>Evolución duración mis ingresos (2022-2024)</h3>
                 <ResponsiveLine {...lineChartProps} />
               </div>
             </>
