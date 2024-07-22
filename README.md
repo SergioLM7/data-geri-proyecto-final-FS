@@ -1,5 +1,5 @@
 <a id="readme-top"></a>
-# Pokesearch
+# Data Geri
 <a href="https://data-geri-web.onrender.com/" target="_blank" align="center"/> <img src="https://github.com/SergioLM7/data-geri-proyecto-final-FS/blob/main/client/public/geriatrics-banner.jpg" alt="banner readme"/></a> 
 
 
@@ -96,6 +96,13 @@ Data Geri tiene como objetivo facilitar la recopilación, consulta y edición de
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+
+## Documentación 
+Rutas de la API: [Swagger](https://data-geri.onrender.com/api-docs/)
+<br>
+Funciones del Back: [JSDoc](https://data-geri.onrender.com/api-jsdoc/)
+<br>
+Funciones del Front: [JSDoc](https://data-geri.web.onrender.com/jsondocs/)
 
 <!-- CONTACT -->
 ## Contacto
