@@ -30,7 +30,7 @@ Data Geri tiene como objetivo facilitar la recopilación, consulta y edición de
 
 ### Estructura del proyecto
 
-![](https://github.com/SergioLM7/data-geri-proyecto-final-FS/blob/main/client/public/estructura-proyecto-data-geri.png)
+![](https://github.com/SergioLM7/data-geri-proyecto-final-FS/blob/main/client/public/estructura-proyecto-data-geriOK.png)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
