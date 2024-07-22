@@ -1,6 +1,6 @@
 <a id="readme-top"></a>
-# Data Geri
-<a href="https://data-geri-web.onrender.com/" target="_blank" align="center"/> <img src="https://github.com/SergioLM7/data-geri-proyecto-final-FS/blob/main/client/public/geriatrics-banner.jpg" alt="banner readme"/></a> 
+# 👵🏻👴🏻 Data Geri
+<a href="https://data-geri-web.onrender.com/" target="_blank" align="center"/> <img src="https://github.com/SergioLM7/data-geri-proyecto-final-FS/blob/main/assets/geriatrics-banner.jpg" alt="banner readme"/></a> 
 
 
 <!-- ABOUT THE PROJECT -->
@@ -30,7 +30,7 @@ Data Geri tiene como objetivo facilitar la recopilación, consulta y edición de
 
 ### Estructura del proyecto
 
-![](https://github.com/SergioLM7/data-geri-proyecto-final-FS/blob/main/client/public/estructura-proyecto-data-geriOK.png)
+![](https://github.com/SergioLM7/data-geri-proyecto-final-FS/blob/main/assets/estructura-proyecto-data-geriOK.png)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -40,37 +40,43 @@ Data Geri tiene como objetivo facilitar la recopilación, consulta y edición de
 <br/>
   -Permite el inicio de sesión o el registro de un nuevo médico.
 <br/>
-![](https://github.com/SergioLM7/data-geri-proyecto-final-FS/blob/main/client/public/landing-image.png)
+![](https://github.com/SergioLM7/data-geri-proyecto-final-FS/blob/main/assets/landing-image.png)
 
 **Home del usuario/médico**
 <br/>
   -En la Home del médico contamos con un buscador por nº de historia clínica, la opción de registrar un nuevo ingreso y el chatbot del índice de Barthel.
 <br/>
-![]()
+![](https://github.com/SergioLM7/data-geri-proyecto-final-FS/blob/main/assets/homeuser.gif)
 
 **Buscador**
 <br/>
   -El buscador genera una tabla con todos los ingresos del nº de historia clínica buscado. Desde ella se puede editar cualquier registro/campo y eliminarlo.
 <br/>
-![]()
+![](https://github.com/SergioLM7/data-geri-proyecto-final-FS/blob/main/assets/buscadortabla.gif)
+
+**ChatBot**
+<br/>
+  -El ChatBot permite completar la evaluación del índice de Barthel (mide la dependencia del anciano) a través de la interacción del usuario.
+<br/>
+![](https://github.com/SergioLM7/data-geri-proyecto-final-FS/blob/main/assets/chatbot.gif)
 
 **Registro de ingresos**
 <br/>
   -Desde aquí se pueden crear nuevos ingresos con todos los datos del paciente.
 <br/>
-![]()
+![](https://github.com/SergioLM7/data-geri-proyecto-final-FS/blob/main/assets/registeringreso.gif)
 
 **Mis stats**
 <br/>
   -Muestra las estadísticas de los ingresos que están asociados con el médico logueado.
 <br/>
-![]()
+![](https://github.com/SergioLM7/data-geri-proyecto-final-FS/blob/main/assets/misstats.gif)
 
 **Servicio Stats**
 <br/>
   -Muestra las estadísticas de todos los ingresos del servicio.
 <br/>
-![]()
+![](https://github.com/SergioLM7/data-geri-proyecto-final-FS/blob/main/assets/servicestats.gif)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
