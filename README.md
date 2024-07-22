@@ -34,7 +34,7 @@ Data Geri tiene como objetivo facilitar la recopilación, consulta y edición de
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Usage
+## Uso
 
 **Landing**
 <br/>
