@@ -40,7 +40,7 @@ Data Geri tiene como objetivo facilitar la recopilación, consulta y edición de
 <br/>
   -Permite el inicio de sesión o el registro de un nuevo médico.
 <br/>
-![]()
+![](https://github.com/SergioLM7/data-geri-proyecto-final-FS/blob/main/client/public/landing-image.png)
 
 **Home del usuario/médico**
 <br/>
