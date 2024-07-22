@@ -25,8 +25,6 @@ const ingresoValidator = [
     body('fecha_alta')
         .isISO8601().withMessage('Fecha de alta debe ser una fecha válida')
         .isBefore(new Date().toISOString().split('T')[0]).withMessage('Fecha de alta no puede ser futura'),
-    body('duracion_ingreso')
-        .isInt({ min: 0 }).withMessage('Duración de ingreso debe ser un número entero positivo'),
     body('diagnostico_principal')
         .isString().withMessage('Diagnóstico Principal debe ser una cadena de texto')
         .isLength({ min: 2, max: 100 }).withMessage('Diagnóstico Principal debe tener entre 2 y 100 caracteres'),
