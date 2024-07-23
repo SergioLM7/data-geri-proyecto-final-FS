@@ -26,8 +26,9 @@ const Main = () => {
     setIsLoggedIn(true);
     Cookies.set('access-token', token, {
       expires: 1 / 24,
-      sameSite: 'None',
-      secure: true
+      path: '/',
+      secure: true,
+      sameSite: 'None'
     });
   };
 

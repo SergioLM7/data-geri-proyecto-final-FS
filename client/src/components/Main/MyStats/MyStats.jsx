@@ -91,7 +91,11 @@ const MyStats = ({ handleLogout }) => {
    * @returns {string|null} El email del usuario o null si ocurre un error.
    */
   const getEmailCookies = () => {
+    console.log('Todas las cookies:', Cookies.get()); // Esto mostrará todas las cookies
+
     const token = Cookies.get('access-token');
+    console.log('Token obtenido:', token);
+
     if (token) {
       try {
         const decodedToken = jwtDecode(token);
