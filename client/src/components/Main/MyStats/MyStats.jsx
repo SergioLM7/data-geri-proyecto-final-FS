@@ -93,7 +93,11 @@ const MyStats = ({ handleLogout }) => {
   const getEmailCookies = () => {
     const token = Cookies.get('access-token');
     console.log('Token obtenido:', token);
-
+    if (!token) {
+      console.log('Token no encontrado en cookies, intentando con localStorage');
+      token = localStorage.getItem('access-token');
+    }
+    
     if (token) {
       try {
         const decodedToken = jwtDecode(token);
@@ -103,16 +107,9 @@ const MyStats = ({ handleLogout }) => {
         setError('Error al obtener el email del usuario.');
         return null;
       }
-    } else {
-      console.log('Token no encontrado en cookies, intentando con localStorage');
-      token = localStorage.getItem('access-token');
-      const decodedToken = jwtDecode(token);
-      if (!decodedToken) {
-        console.error('No se encontró el token de acceso.');
-        setError('No se encontró el token de autenticación.');
-      }
-      return decodedToken.email;
     }
+    setError('No se encontró el token de autenticación.');
+    return null;
   };
   /**
    * Obtiene las estadísticas del usuario y las estadísticas anuales desde la API con dos llamadas a Axios.
