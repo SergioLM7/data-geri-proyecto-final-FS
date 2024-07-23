@@ -58,7 +58,11 @@ const Main = () => {
         console.error('Error al hacer logout:', error);
       }
     } else {
-      console.error('No se encontró el token de acceso.');
+        console.log('Token no encontrado en cookies, intentando con localStorage');
+        token = localStorage.getItem('access-token');
+        if (!token) {
+          console.error('No se encontró el token de acceso.');
+        }
     }
   };
 
