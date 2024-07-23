@@ -91,13 +91,13 @@ const MyStats = ({ handleLogout }) => {
    * @returns {string|null} El email del usuario o null si ocurre un error.
    */
   const getEmailCookies = () => {
-    const token = Cookies.get('access-token');
+    let token = Cookies.get('access-token');
     console.log('Token obtenido:', token);
     if (!token) {
       console.log('Token no encontrado en cookies, intentando con localStorage');
       token = localStorage.getItem('access-token');
     }
-    
+
     if (token) {
       try {
         const decodedToken = jwtDecode(token);

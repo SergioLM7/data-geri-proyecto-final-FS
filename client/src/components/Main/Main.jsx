@@ -50,7 +50,7 @@ const Main = () => {
 
         if (response.status === 200) {
           Cookies.remove('access-token');
-          localStorage.removeItem(localStorage.getItem('access-token'))
+          localStorage.removeItem('access-token');
           setIsLoggedIn(false);
           navigate('/');
         } else {
