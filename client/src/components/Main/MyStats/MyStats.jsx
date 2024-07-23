@@ -8,6 +8,9 @@ import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import { ResponsivePie } from '@nivo/pie';
 import { ResponsiveLine } from '@nivo/line';
+axios.defaults.withCredentials = true;
+
+
 /**
  * @author Sergio Lillo <Data Geri> 
  * @exports components

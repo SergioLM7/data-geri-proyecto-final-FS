@@ -4,6 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import Header from '../../Header/Header';
 import { MensajeError } from '../../../context/MensajeError';
 import { DNA } from 'react-loader-spinner';
+axios.defaults.withCredentials = true;
 
 
 

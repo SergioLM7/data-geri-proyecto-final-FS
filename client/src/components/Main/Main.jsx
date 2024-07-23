@@ -25,7 +25,9 @@ const Main = () => {
   const handleLogin = (token) => {
     setIsLoggedIn(true);
     Cookies.set('access-token', token, {
-      expires: 1 / 24
+      expires: 1 / 24,
+      sameSite: 'None',
+      secure: true
     });
   };
 
