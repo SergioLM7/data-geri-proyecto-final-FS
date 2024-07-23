@@ -19,17 +19,20 @@ const Main = () => {
     const token = Cookies.get('access-token');
     if (token) {
       setIsLoggedIn(true);
+      navigate('/home');
     }
   }, []);
 
   const handleLogin = (token) => {
-    setIsLoggedIn(true);
     Cookies.set('access-token', token, {
       expires: 1 / 24,
       path: '/',
       secure: true,
       sameSite: 'None'
     });
+    localStorage.setItem('access-token', token); 
+    setIsLoggedIn(true);
+
   };
 
   const handleLogout = async () => {
