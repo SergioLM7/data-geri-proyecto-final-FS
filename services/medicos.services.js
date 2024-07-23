@@ -28,8 +28,9 @@ const loginMedicos = async (entry) => {
     console.log(entry)
     try {
         const medicoLogin = await Medicos.findOne({ where: { email } });
+        console.log(medicoLogin)
 
-        if (!medicoLogin || !medicoLogin.is_active) {
+        if (!medicoLogin || medicoLogin.is_active === false) {
             throw new Error('Este usuario ya no está activo.');
         }
 
