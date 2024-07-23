@@ -31,13 +31,16 @@ const Main = () => {
       sameSite: 'None'
     });
     localStorage.setItem('access-token', token); 
-    console.log(localStorage);
+    alert(localStorage);
+    alert(Cookies.get('access-token'));
+
     setIsLoggedIn(true);
 
   };
 
   const handleLogout = async () => {
     const token = Cookies.get('access-token')||localStorage.getItem('access-token') ;
+    alert(token);
     if (token) {
       try {
         const response = await axios.put('https://data-geri.onrender.com/api/medicos/logout/', {}, {
@@ -59,12 +62,6 @@ const Main = () => {
       } catch (error) {
         console.error('Error al hacer logout:', error);
       }
-    } else {
-        console.log('Token no encontrado en cookies, intentando con localStorage');
-        token = localStorage.getItem('access-token');
-        if (!token) {
-          console.error('No se encontró el token de acceso.');
-        }
     }
   };
 
