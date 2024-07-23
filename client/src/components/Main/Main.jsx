@@ -81,6 +81,10 @@ const Main = () => {
           path="/register"
           element={<RegisterUser />}
         />
+        <Route
+          path="/jsondocs"
+          element={<Navigate to={'/jsondocs'} />}
+        />
         <Route path='/*' element={<Navigate to={'/'} />} />
       </Routes>
     </main>
