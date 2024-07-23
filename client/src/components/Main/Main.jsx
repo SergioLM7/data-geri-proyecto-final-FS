@@ -30,17 +30,16 @@ const Main = () => {
       secure: true,
       sameSite: 'None'
     });
-    localStorage.setItem('access-token', token); 
-    alert(localStorage);
+    localStorage.setItem('access-token', token);
     alert(Cookies.get('access-token'));
+    alert(localStorage);
 
     setIsLoggedIn(true);
 
   };
 
   const handleLogout = async () => {
-    const token = Cookies.get('access-token')||localStorage.getItem('access-token') ;
-    alert(token);
+    const token = Cookies.get('access-token') || localStorage.getItem('access-token');
     if (token) {
       try {
         const response = await axios.put('https://data-geri.onrender.com/api/medicos/logout/', {}, {
@@ -49,8 +48,6 @@ const Main = () => {
           }
         });
 
-        console.log('Respuesta del servidor:', response.data);
-
         if (response.status === 200) {
           Cookies.remove('access-token');
           localStorage.removeItem('access-token');
@@ -58,9 +55,15 @@ const Main = () => {
           navigate('/');
         } else {
           console.error('Error en la respuesta del servidor:', response);
+          Cookies.remove('access-token');
+          localStorage.removeItem('access-token');
         }
       } catch (error) {
         console.error('Error al hacer logout:', error);
+        Cookies.remove('access-token');
+        localStorage.removeItem('access-token');
+        navigate('/');
+
       }
     }
   };
@@ -76,7 +79,7 @@ const Main = () => {
           path="/home"
           element={isLoggedIn ? <HomeUser handleLogout={handleLogout} /> : <Navigate to="/" />}
         />
-         <Route
+        <Route
           path="/mystats"
           element={isLoggedIn ? <MyStats handleLogout={handleLogout} /> : <Navigate to="/" />}
         />
