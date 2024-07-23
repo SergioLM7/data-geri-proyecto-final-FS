@@ -16,7 +16,7 @@ const Main = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = Cookies.get('access-token');
+    const token = Cookies.get('access-token') || localStorage.getItem('access-token');
     if (token) {
       setIsLoggedIn(true);
       navigate('/home');
@@ -31,12 +31,13 @@ const Main = () => {
       sameSite: 'None'
     });
     localStorage.setItem('access-token', token); 
+    console.log(localStorage);
     setIsLoggedIn(true);
 
   };
 
   const handleLogout = async () => {
-    const token = Cookies.get('access-token');
+    const token = Cookies.get('access-token')||localStorage.getItem('access-token') ;
     if (token) {
       try {
         const response = await axios.put('https://data-geri.onrender.com/api/medicos/logout/', {}, {
@@ -49,6 +50,7 @@ const Main = () => {
 
         if (response.status === 200) {
           Cookies.remove('access-token');
+          localStorage.removeItem(localStorage.getItem('access-token'))
           setIsLoggedIn(false);
           navigate('/');
         } else {
