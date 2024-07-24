@@ -32,8 +32,8 @@ const Main = () => {
       sameSite: 'None'
     });
     localStorage.setItem('access-token', token);
-    alert(Cookies.get('access-token'));
-    alert(localStorage);
+    //alert(Cookies.get('access-token'));
+    //alert(localStorage);
 
     setIsLoggedIn(true);
 
