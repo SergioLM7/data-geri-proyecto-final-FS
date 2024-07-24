@@ -7,7 +7,6 @@ import StatsGenerales from "./StatsGenerales/StatsGenerales";
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import axios from 'axios';
-import { jwtDecode } from "jwt-decode";
 axios.defaults.withCredentials = true;
 
 
@@ -18,14 +17,7 @@ const Main = () => {
 
   useEffect(() => {
     const token = Cookies.get('access-token') || localStorage.getItem('access-token');
-    const decodedToken = jwtDecode(token);
-    if (decodedToken.exp * 1000 < Date.now()) {
-      Cookies.remove('access-token');
-      localStorage.removeItem('access-token');
-      setIsLoggedIn(false);
-      navigate('/');
-    }
-
+    
     if (token) {
       setIsLoggedIn(true);
       navigate('/home');
