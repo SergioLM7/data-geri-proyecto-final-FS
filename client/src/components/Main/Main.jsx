@@ -17,6 +17,14 @@ const Main = () => {
 
   useEffect(() => {
     const token = Cookies.get('access-token') || localStorage.getItem('access-token');
+    const decodedToken = jwtDecode(token);
+    if (decodedToken.exp * 1000 < Date.now()) {
+      Cookies.remove('access-token');
+      localStorage.removeItem('access-token');
+      setIsLoggedIn(false);
+      navigate('/');
+    }
+
     if (token) {
       setIsLoggedIn(true);
       navigate('/home');
