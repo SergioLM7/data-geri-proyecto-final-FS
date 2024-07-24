@@ -7,6 +7,7 @@ import StatsGenerales from "./StatsGenerales/StatsGenerales";
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import { jwtDecode } from "jwt-decode";
 axios.defaults.withCredentials = true;
 
 
