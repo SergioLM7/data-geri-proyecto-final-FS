@@ -26,10 +26,9 @@ const Login = ({ handleLogin, handleLogout }) => {
         password_hash: password_hash
       });
 
-      console.log(response.status)
-   
+      //console.log(response.status);
       const token = response.data;
-      console.log(token);
+      //console.log(token);
       
       handleLogin(token);
       setError(null);

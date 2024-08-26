@@ -25,7 +25,7 @@ require('dotenv').config();
  */
 const loginMedicos = async (entry) => {
     const { email, password_hash } = entry;
-    console.log(entry)
+    //console.log(entry)
     try {
         const medicoLogin = await Medicos.findOne({ where: { email } });
         console.log(medicoLogin)

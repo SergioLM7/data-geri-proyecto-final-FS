@@ -92,7 +92,7 @@ const MyStats = ({ handleLogout }) => {
    */
   const getEmailCookies = () => {
     let token = Cookies.get('access-token');
-    console.log('Token obtenido:', token);
+    //console.log('Token obtenido:', token);
     if (!token) {
       console.log('Token no encontrado en cookies, intentando con localStorage');
       token = localStorage.getItem('access-token');
@@ -103,7 +103,7 @@ const MyStats = ({ handleLogout }) => {
         const decodedToken = jwtDecode(token);
         return decodedToken.email;
       } catch (err) {
-        console.error('Error al decodificar el token', err);
+        //console.error('Error al decodificar el token', err);
         setError('Error al obtener el email del usuario.');
         return null;
       }
@@ -123,13 +123,13 @@ const MyStats = ({ handleLogout }) => {
     }
     try {
       const res = await axios.get(`${URL}/api/stats/${email}`);
-      console.log(res);
+      //console.log(res);
 
       if (res) {
         setMyStats([res.data[0]]);
         setError('');
         const res2 = await axios.get(`${URL}/api/stats/ultimos/${email}`);
-        console.log(res2);
+        //console.log(res2);
 
         if (res2) {
           setStatsAno([res2.data]);
@@ -137,7 +137,7 @@ const MyStats = ({ handleLogout }) => {
       }
       setError('');
     } catch (err) {
-      console.error('Error al traer las estadísticas de la base de datos', err);
+      //console.error('Error al traer las estadísticas de la base de datos', err);
       setMyStats([]);
       setStatsAno([]);
       setError('Error al traer las estadísticas de la base de datos. Inténtalo de nuevo.');
