@@ -6,13 +6,14 @@
 <!-- ABOUT THE PROJECT -->
 ## ¿Qué es Data Geri?
 
-**Enlace**: https://data-geri-web.onrender.com/
+**Enlace**: https://data-geri-web.onrender.com/ 
+<br>(Usuario de prueba juana@sevilla.com / 12345a)
 
 Data Geri tiene como objetivo facilitar la recopilación, consulta y edición de los datos de ingresos de un servicio de geriatría de un hospital. Para ello, cuenta con una base de datos unificada y normalizada desde la cual se pueden generar estadísticas útiles para los médicos en su día a día. Además, dispone de un sencillo chatbot que permite evaluar el índice de Barthel (mide la dependencia de un adulto mayor), muy relevante para el día a día de un geriatra. Al tratarse de una intranet, cuenta con un sistema de autenticación usuario/contraseña para que solo puedan acceder a ella los miembros del servicio. En una misma aplicación web, es posible crear un nuevo ingreso, modificar/eliminar uno pasado, consultar las estadísticas de todos los ingresos del médico logueado y las de todo el servicio.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Built With
+### Tecnologías/Herramientas
 
 * <img src="https://github.com/devicons/devicon/blob/master/icons/react/react-original-wordmark.svg" title="React" alt="React" width="40" height="40"/>&nbsp;
 * <img src="https://github.com/devicons/devicon/blob/master/icons/sequelize/sequelize-plain-wordmark.svg" title="Sequelize" alt="Sequelize" width="40" height="40"/>&nbsp;
@@ -95,7 +96,7 @@ Data Geri tiene como objetivo facilitar la recopilación, consulta y edición de
    ```sh
    npm install
    ```
-3. Ejecuta cliente y servidor pro separado
+3. Ejecuta cliente y servidor por separado
    ```sh
    npm run dev
    ```
@@ -108,7 +109,7 @@ Rutas de la API: [Swagger](https://data-geri.onrender.com/api-docs/)
 <br>
 Funciones del Back: [JSDoc](https://data-geri.onrender.com/api-jsdoc/)
 <br>
-Funciones del Front: [JSDoc](https://data-geri.web.onrender.com/jsondocs/)
+Funciones del Front: [JSDoc](https://data-geri-web.onrender.com/jsondocs/)
 
 <!-- CONTACT -->
 ## Contacto
@@ -127,5 +128,6 @@ Funciones del Front: [JSDoc](https://data-geri.web.onrender.com/jsondocs/)
 * [Nivo](https://nivo.rocks)
 * [React chatbot kit](https://fredrikoseberg.github.io/react-chatbot-kit-docs/)
 * [CSS Gradient](https://cssgradient.io)
+* [Online WebFonts](https://www.onlinewebfonts.com/icon/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
