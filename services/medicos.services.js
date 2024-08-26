@@ -31,7 +31,7 @@ const loginMedicos = async (entry) => {
         console.log(medicoLogin)
 
         if (!medicoLogin || medicoLogin.is_active === false) {
-            throw new Error('Este usuario ya no está activo.');
+            throw new Error('Este usuario ya no está activo o no existe.');
         }
 
         const isPasswordValid = await bcrypt.compare(password_hash, medicoLogin.password_hash);
@@ -49,6 +49,7 @@ const loginMedicos = async (entry) => {
         return token;
     } catch (error) {
         console.error('No se ha podido iniciar sesión.', error);
+        throw new Error('Error en las credenciales.');
     }
 };
 

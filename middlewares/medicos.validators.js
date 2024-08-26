@@ -12,7 +12,7 @@ const loginValidator = [
         .isLength({ min: 6, max: 100 }).withMessage('El email debe tener entre 6 y 100 caracteres'),
     body('password_hash')
         .isString().withMessage('La contraseña debe ser una cadena de texto')
-        .isLength({ min: 4, max: 20 }).withMessage('La contraseña hasheada debe tener entre 4 y 200 caracteres'),
+        .isLength({ min: 4, max: 200 }).withMessage('La contraseña hasheada debe tener entre 4 y 200 caracteres'),
 ];
 
 const medicoBodyValidator = [
